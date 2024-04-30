@@ -13,34 +13,11 @@ import org.axonframework.eventsourcing.annotation.EventSourcingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * ProductAggregate is essentially a DDD AggregateRoot (from the DDD concept). In event-sourced
- * systems, Aggregates are often stored and retreived using a 'Repository'. In the
- * simplest terms, Aggregates are the sum of their applied 'Events'.
- * <p/>
- * The Repository stores the aggregate's Events in an 'Event Store'. When an Aggregate
- * is re-loaded by the repository, the Repository re-applies all the stored events
- * to the aggregate thereby re-creating the logical state of the Aggregate.
- * <p/>
- * The ProductAggregate Aggregate can handle and react to 'Commands', and when it reacts
- * to these com.soagrowers.product.commands it creates and 'applies' Events that represent the logical changes
- * to be made. These Events are also handled by the ProductAggregate.
- * <p/>
- * Axon takes care of much of this via the CommandBus, EventBus and Repository.
- * <p/>
- * Axon delivers com.soagrowers.product.commands placed on the bus to the Aggregate. Axon supports the 'applying' of
- * Events to the Aggregate, and the handling of those events by the aggregate or any other
- * configured EventHandlers.
- */
+
 public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProductAggregate.class);
 
-    /**
-     * Aggregates that are managed by Axon must have a unique identifier.
-     * Strategies similar to GUID are often used. The annotation 'AggregateIdentifier'
-     * identifies the id field as such.
-     */
     @AggregateIdentifier
     private String id;
     private String name;
