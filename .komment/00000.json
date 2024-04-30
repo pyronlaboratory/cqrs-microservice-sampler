@@ -1,0 +1,159 @@
+[
+  {
+    "name": "ProductRestControllerParamValidityTest.java",
+    "path": "command-side/src/test/java/com/soagrowers/productcommand/ProductRestControllerParamValidityTest.java",
+    "content": {
+      "structured": {
+        "description": "A ProductRestController class that handles product-related requests in an axon framework. It includes tests for successful and failed add product requests, as well as bad request parameters. The controller uses the Axon Framework's CommandGateway to send commands to the application and receives responses from it.",
+        "diagram": "digraph G {\n    label=\"com.soagrowers.productcommand.ProductRestControllerParamValidityTest\"\n    bgcolor=\"#151719\"\n    fontcolor=\"#ECEDED\"\n    splines=ortho\n    fontname=\"Courier New\"\n    edge [color=\"#26de81\"]\n    node [style=filled,color=\"#717D86\", shape=rectangle, fontname=\"Courier New\"];\n    \n}\n",
+        "items": [
+          {
+            "id": "5c89eb93-894c-6a8d-fd46-b6a2446ddf18",
+            "ancestors": [],
+            "type": "function",
+            "description": "tests various scenarios for adding products to the server. It includes tests for good request parameters, assertion errors, and bad request parameters. The class sets up mock dependencies using Mockito Annotations and verifies the responses of the CommandGateway interface using verify() method.",
+            "name": "ProductRestControllerParamValidityTest",
+            "location": {
+              "start": 23,
+              "insert": 20,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 19,
+                "end": 22
+              }
+            },
+            "item_type": "class",
+            "length": 75,
+            "docLength": 3
+          },
+          {
+            "id": "79371627-06cc-5995-a243-cc475619deab",
+            "ancestors": [
+              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+            ],
+            "type": "function",
+            "description": "sets up various components and configurations for testing purposes, including initializing MockitoAnnotations and setting Asserts to true, creating a new instance of `ProductRestController`, and providing a mock instance of `MockHttpServletResponse`.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Before\npublic void setup() {\n    MockitoAnnotations.initMocks(this);\n    Asserts.INSTANCE.setAssertsTo(true);\n    controller = new ProductRestController();\n    mockHttpServletResponse = new MockHttpServletResponse();\n}\n",
+              "description": ""
+            },
+            "name": "setup",
+            "location": {
+              "start": 31,
+              "insert": 31,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 7,
+            "docLength": null
+          },
+          {
+            "id": "2ee2918d-82bc-ba9e-b540-a6a04fda33ca",
+            "ancestors": [
+              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+            ],
+            "type": "function",
+            "description": "tests the `add` method of a controller by providing valid request parameters and verifying that the expected response is returned.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testAddWithGoodRequestParams() {\n        // Arrange\n        controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n        when(gateway.sendAndWait(any())).thenReturn(null);\n\n        //Act\n        controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n        //Assert\n        verify(gateway).sendAndWait(any());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_CREATED);\n    }\n",
+              "description": ""
+            },
+            "name": "testAddWithGoodRequestParams",
+            "location": {
+              "start": 39,
+              "insert": 39,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 13,
+            "docLength": null
+          },
+          {
+            "id": "4bb4868d-93e9-11a1-2f44-a0040b8d199d",
+            "ancestors": [
+              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+            ],
+            "type": "function",
+            "description": "tests the `add` method of a controller by mocking the gateway's `sendAndWait` method to throw an `AssertionError`. The method verifies that the gateway's `sendAndWait` was called with the correct arguments and asserts that the response status code is `HttpServletResponse.SC_BAD_REQUEST`.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testFailedAddWithAssertionError() {\n        // Arrange\n        controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n        when(gateway.sendAndWait(any())).thenThrow(AssertionError.class);\n\n        //Act\n        controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n        //Assert\n        verify(gateway).sendAndWait(any());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n    }\n",
+              "description": "\nThis test method creates a controller with a mocked commandGateway, and sets up the mock to throw an AssertionError when sendAndWait is called. It then calls add on the controller with some random parameters, and verifies that the gateway's sendAndWait method was indeed called. Finally, it asserts that the response status code is 400 (Bad Request)."
+            },
+            "name": "testFailedAddWithAssertionError",
+            "location": {
+              "start": 53,
+              "insert": 53,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 13,
+            "docLength": null
+          },
+          {
+            "id": "8b107181-30f8-47a5-f744-4060b4ca0a7c",
+            "ancestors": [
+              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+            ],
+            "type": "function",
+            "description": "tests the Add Product endpoint of a controller by throwing a `CommandExecutionException` when sending a request to the gateway.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testFailedAddWithCommandExecutionException() {\n        // Arrange\n        controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n        when(gateway.sendAndWait(any())).thenThrow(CommandExecutionException.class);\n\n        //Act\n        controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n        //Assert\n        verify(gateway).sendAndWait(any());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n    }\n",
+              "description": "\nThe test is testing that when the command execution exception is thrown, it is caught by the try-catch block and the response status will be set to bad request."
+            },
+            "name": "testFailedAddWithCommandExecutionException",
+            "location": {
+              "start": 67,
+              "insert": 67,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 13,
+            "docLength": null
+          },
+          {
+            "id": "c753c011-ceb8-2f84-714f-9b8da211a3ea",
+            "ancestors": [
+              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+            ],
+            "type": "function",
+            "description": "tests the `add` method of a controller by providing invalid input parameters and verifying the resulting HTTP status code is `SC_BAD_REQUEST`.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testAddWithBadRequestParams() {\n        // Arrange\n        UUID id = UUID.randomUUID();\n\n        // Act\n        controller.add(null, null, mockHttpServletResponse);\n\n        // Assert\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        // Arrange\n        String name = \"Test Add Product\";\n\n        // Act\n        controller.add(id, null, mockHttpServletResponse);\n\n        // Assert\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        // Arrange\n        String name = \"\";\n\n        // Act\n        controller.add(id, name, mockHttpServletResponse);\n\n        // Assert\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        // Arrange\n        id = \"\";\n        String name = \"Test Add Product\";\n\n        // Act\n        controller.add(id, name, mockHttpServletResponse);\n\n        // Assert\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n    }\n}\n",
+              "description": ""
+            },
+            "name": "testAddWithBadRequestParams",
+            "location": {
+              "start": 81,
+              "insert": 81,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 16,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  }
+]
