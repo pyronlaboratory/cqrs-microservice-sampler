@@ -1,10 +1,6 @@
 package com.soagrowers.productcommand.commands;
-
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 
-/**
- * Created by Ben on 07/08/2015.
- */
 public class AddProductCommand {
 
     @TargetAggregateIdentifier
