@@ -86,5 +86,93 @@
         ]
       }
     }
+  },
+  {
+    "name": "AddProductCommand.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/commands/AddProductCommand.java",
+    "content": {
+      "structured": {
+        "description": "A class called AddProductCommand, which is used to add a product to an aggregate entity. The class has fields for the product's ID and name, and provides methods for retrieving the product's ID and name. The class also uses the Axon framework's @TargetAggregateIdentifier annotation to specify the aggregate identifier for the product.",
+        "items": [
+          {
+            "id": "7ea9661b-3f8d-bd90-0242-c1b51dd8bca5",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a Java class that defines a command to add a product to an aggregate identifier. The class has two instance variables: id and name, which are used to identify the product being added. The class also has two methods: getId() and getName(), which return the value of the id and name respectively.",
+            "name": "AddProductCommand",
+            "location": {
+              "start": 4,
+              "insert": 4,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 19,
+            "docLength": null
+          },
+          {
+            "id": "24b72c53-b467-d183-4d47-f3c9a4f34303",
+            "ancestors": [
+              "7ea9661b-3f8d-bd90-0242-c1b51dd8bca5"
+            ],
+            "type": "function",
+            "description": "retrieves the `id` field of an object and returns its value as a string.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the value of the `id` field.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "AddProductCommand command = new AddProductCommand(\"id\", \"name\");\nString productId = command.getId();\nSystem.out.println(productId); // Outputs \"id\"\n",
+              "description": ""
+            },
+            "name": "getId",
+            "location": {
+              "start": 15,
+              "insert": 15,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "736bcb4a-a55a-39a3-3943-8f962e3bb6fa",
+            "ancestors": [
+              "7ea9661b-3f8d-bd90-0242-c1b51dd8bca5"
+            ],
+            "type": "function",
+            "description": "retrieves a string variable named 'name'.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the name of the object.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "AddProductCommand addProduct = new AddProductCommand(\"123\", \"iphone\");\nString productName = addProduct.getName();\nSystem.out.println(productName); // Outputs: iphone\n",
+              "description": ""
+            },
+            "name": "getName",
+            "location": {
+              "start": 19,
+              "insert": 19,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
   }
 ]
