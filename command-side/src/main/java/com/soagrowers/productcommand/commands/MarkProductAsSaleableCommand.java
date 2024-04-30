@@ -7,11 +7,6 @@ import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
  */
 public class MarkProductAsSaleableCommand {
 
-    /**
-     * How does Axon know which Aggregate to Mark as completed? It uses
-     * the TargetAggregateIdentifier annotation so that it can get the
-     * correct one based on the Id in the annotated field.
-     */
     @TargetAggregateIdentifier
     private final String id;
 
