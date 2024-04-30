@@ -1,0 +1,90 @@
+[
+  {
+    "name": "WebCreateTodoCommand.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/commands/WebCreateTodoCommand.java",
+    "content": {
+      "structured": {
+        "description": "A class `WebCreateTodoCommand` that represents a command for creating a new todo item on a web application. The class has two instance fields: `id` and `description`, which are used to store the unique identifier and text description of the todo item, respectively. The class also has two methods: `getId()` and `getDescription()`, which return the values of `id` and `description`, respectively.",
+        "items": [
+          {
+            "id": "d40c773b-4d02-9088-e747-9018fbc84bd7",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a Java object that represents a command for creating a new to-do item. It has two private fields: `id` and `description`, which are set in the constructor when the command is created. The `getId()` and `getDescription()` methods return the values of these fields.",
+            "name": "WebCreateTodoCommand",
+            "location": {
+              "start": 3,
+              "insert": 3,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 18,
+            "docLength": null
+          },
+          {
+            "id": "6d76d637-52ab-7fb6-d54b-a3a2e4dbcb0f",
+            "ancestors": [
+              "d40c773b-4d02-9088-e747-9018fbc84bd7"
+            ],
+            "type": "function",
+            "description": "returns the `id` field of an object.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representation of the `id` variable.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "public class Main {\n    public static void main(String[] args) {\n        WebCreateTodoCommand command = new WebCreateTodoCommand(\"12345\", \"Learn Java\");\n        System.out.println(command.getId()); // Output: 12345\n    }\n}\n",
+              "description": ""
+            },
+            "name": "getId",
+            "location": {
+              "start": 13,
+              "insert": 13,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "8d6a1c4f-c325-698b-4f45-19fb9ece1db9",
+            "ancestors": [
+              "d40c773b-4d02-9088-e747-9018fbc84bd7"
+            ],
+            "type": "function",
+            "description": "returns a string representing the description associated with an object.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the function's description.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "WebCreateTodoCommand command = new WebCreateTodoCommand(\"1234\", \"Buy milk\");\nString description = command.getDescription(); // returns \"Buy milk\"\n",
+              "description": ""
+            },
+            "name": "getDescription",
+            "location": {
+              "start": 17,
+              "insert": 17,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  }
+]
