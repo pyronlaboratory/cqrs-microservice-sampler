@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1",
-    "updated_at": "2024-05-03T14:36:28.169Z",
+    "updated_at": "2024-05-03T15:43:21.937Z",
     "created_at": "2024-04-30T15:20:02.432Z",
     "pipelines": []
   },
@@ -36,7 +36,8 @@
       "query-side/src/main/java/com/soagrowers/productquery/domain/Product.java",
       "query-side/src/main/java/com/soagrowers/productquery/handlers/EventLoggingHandler.java",
       "query-side/src/main/java/com/soagrowers/productquery/handlers/ProductViewEventHandler.java",
-      "query-side/src/main/java/com/soagrowers/productquery/repository/ProductRepository.java"
+      "query-side/src/main/java/com/soagrowers/productquery/repository/ProductRepository.java",
+      "command-side/src/main/java/com/soagrowers/productcommand/handlers/EventLoggingHandler.java"
     ]
   ]
 }

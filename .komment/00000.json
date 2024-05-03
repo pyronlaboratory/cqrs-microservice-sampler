@@ -160,51 +160,40 @@
     "path": "discovery-service/src/main/java/com/soagrowers/DiscoveryServiceApplication.java",
     "content": {
       "structured": {
-        "description": "A Spring Boot application that enables Eureka server functionality and starts an instance of the `DiscoveryService` class. The `main` method launches the application with the `SpringApplication.run()` method, passing in the class name and command-line arguments.",
+        "description": "",
         "items": [
           {
-            "id": "7b4e2944-eb9b-91b1-b843-9750d9996ea8",
+            "id": "61fbd2e4-39ba-45a5-90e7-4851e824fdaa",
             "ancestors": [],
             "type": "function",
-            "description": "is an Spring Boot application that enables Eureka server functionality and provides the main entry point for the application.",
-            "name": "DiscoveryServiceApplication",
+            "name": "main",
             "location": {
-              "start": 7,
-              "insert": 7,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
+              "offset": "\t",
+              "indent": 1,
+              "insert": 11,
+              "start": 11
             },
-            "item_type": "class",
-            "length": 8,
-            "docLength": null
-          },
-          {
-            "id": "c0e8d9e1-f7f5-28bb-a141-7dee4962ab8f",
-            "ancestors": [
-              "7b4e2944-eb9b-91b1-b843-9750d9996ea8"
-            ],
-            "type": "function",
-            "description": "starts the discovery service application by running the `SpringApplication.run()` method with the `DiscoveryServiceApplication` class as its argument and the `args` array as its parameter.",
+            "returns": false,
             "params": [
               {
                 "name": "args",
-                "type_name": "String[]",
-                "description": "1 or more command line arguments passed to the `SpringApplication.run()` method when invoking the `main()` function.\n\n* It is an array of strings representing command-line arguments passed to the application.\n* The length of the array `args` can vary depending on the number and types of arguments provided by the user.\n* Each element in the array can hold a different value, such as a command-line option or parameter.",
-                "complex_type": true
+                "type": "String[]"
               }
             ],
-            "name": "main",
-            "location": {
-              "start": 11,
-              "insert": 11,
-              "offset": "\t",
-              "indent": 1,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "Runs the `DiscoveryServiceApplication` and starts its execution.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String[]",
+                  "description": "1 or more command-line arguments passed to the `SpringApplication.run()` method when executing the `DiscoveryServiceApplication`."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -246,141 +235,40 @@
     "path": "command-side/src/main/java/com/soagrowers/productcommand/Application.java",
     "content": {
       "structured": {
-        "description": "An application with several components:\n\n* A Spring Boot Application that enables Eureka client functionality for service discovery and registration.\n* A REST controller for retrieving a list of service instances by application name using DiscoveryClient.\n* Another REST controller for retrieving a message stored in the application's configuration using a Value annotation.",
+        "description": "",
         "items": [
           {
-            "id": "d25ede1b-be3e-5f89-fc4a-98f9f34779b1",
+            "id": "c2af88a0-4e1c-4e60-a5b9-954030d3d700",
             "ancestors": [],
             "type": "function",
-            "description": "is a Spring Boot application that enables Eureka client functionality and provides a REST controller for service instances. The main method starts the application context using SpringApplication.",
-            "name": "Application",
-            "location": {
-              "start": 20,
-              "insert": 17,
-              "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 16,
-                "end": 19
-              }
-            },
-            "item_type": "class",
-            "length": 8,
-            "docLength": 3
-          },
-          {
-            "id": "ff3fec73-3aaf-2983-f249-921e62bc79f1",
-            "ancestors": [
-              "d25ede1b-be3e-5f89-fc4a-98f9f34779b1"
-            ],
-            "type": "function",
-            "description": "runs a SpringApplication and starts the application.",
-            "params": [],
             "name": "main",
             "location": {
-              "start": 24,
+              "offset": " ",
+              "indent": 4,
               "insert": 24,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 24
             },
-            "item_type": "method",
+            "returns": false,
+            "params": [
+              {
+                "name": "args",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "a3a3ad85-62ad-52b2-f142-6adea3581cc1",
-            "ancestors": [],
-            "type": "function",
-            "description": "is a RESTful controller that provides access to service instances by application name. It uses the DiscoveryClient to retrieve a list of service instances associated with a given application name, and returns them in a List format.",
-            "name": "ServiceInstanceRestController",
-            "location": {
-              "start": 29,
-              "insert": 29,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 14,
-            "docLength": null
-          },
-          {
-            "id": "53fc3a55-3cbe-2797-fc40-adeed1f26c6c",
-            "ancestors": [
-              "a3a3ad85-62ad-52b2-f142-6adea3581cc1"
-            ],
-            "type": "function",
-            "description": "retrieves a list of service instances associated with a given application name using the Discovery API provided by the `discoveryClient`.",
-            "params": [],
-            "returns": {
-              "type_name": "ListServiceInstance",
-              "description": "a list of Service Instances associated with the specified Application Name.\n\nThe function returns a list of ServiceInstance objects representing the instances of services associated with the given application name. Each instance is described by its ID, display name, and health status. The list provides information about the number of instances available and their current state.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Autowired\nprivate DiscoveryClient discoveryClient;\n\n@Value(\"${spring.application.name}\")\nprivate String appName;\n\nList<ServiceInstance> instances = this.discoveryClient.getInstances(appName);\n",
-              "description": "\nThe method serviceInstancesByApplicationName returns a list of ServiceInstance that match the application name provided, in this case the value of the spring.application.name property."
-            },
-            "name": "serviceInstancesByApplicationName",
-            "location": {
-              "start": 38,
-              "insert": 38,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "660dc711-f099-4ab5-cc42-0185e9f7245e",
-            "ancestors": [],
-            "type": "function",
-            "description": "is a Spring Boot REST controller that provides a String message through a GET request. The message is stored in a Spring property file and can be retrieved by sending a request to the `/message` endpoint.",
-            "name": "MessageRestController",
-            "location": {
-              "start": 45,
-              "insert": 45,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 12,
-            "docLength": null
-          },
-          {
-            "id": "46e7e78e-7bc7-41b5-584d-432ecd2742e5",
-            "ancestors": [
-              "660dc711-f099-4ab5-cc42-0185e9f7245e"
-            ],
-            "type": "function",
-            "description": "retrieves and returns a predefined string message.",
-            "params": [],
-            "returns": {
-              "type_name": "String",
-              "description": "a string containing the message value.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "@RequestMapping(\"/message\")\n    String getMessage() {\n        return this.message;\n    }\n\n    public static void main(String[] args) {\n        SpringApplication.run(Application.class, args);\n        MessageRestController controller = new MessageRestController();\n        String message = controller.getMessage();\n        System.out.println(message);\n    }\n",
-              "description": "\nThe above code will return a string of the value stored in the variable `message`. The `getMessage` method is called on the `MessageRestController` class, and then the returned value is printed to the console using `System.out.println`."
-            },
-            "name": "getMessage",
-            "location": {
-              "start": 52,
-              "insert": 52,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
+            "comment": {
+              "description": "Runs an application using the SpringApplication class, passing it the class name and command-line arguments as input.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String",
+                  "description": "0 or more command line arguments passed to the `SpringApplication.run()` method when invoking the application."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -391,71 +279,58 @@
     "path": "command-side/src/main/java/com/soagrowers/productcommand/ProductRestController.java",
     "content": {
       "structured": {
-        "description": "A REST controller for managing products, specifically adding new products to a database using the Axon Framework's command-handling architecture. The controller handles POST requests to the `/products` endpoint and sends the commands to the `commandGateway` for processing. If the command execution fails, the controller returns a `SC_BAD_REQUEST` status code with a detailed error message.",
+        "description": "",
         "items": [
           {
-            "id": "4e7da722-09a5-258e-844a-6786d7af35bf",
+            "id": "0a93e72e-a1a7-4ab6-add4-904a6ceda418",
             "ancestors": [],
             "type": "function",
-            "description": "is responsible for handling HTTP POST requests to the /products endpoint, where users can add new products. The controller uses the CommandGateway to send and wait for the AddProductCommand, which adds the product to the database. If any errors occur during the command execution, the controller handles them and sets the appropriate response status code.",
-            "name": "ProductRestController",
+            "name": "add",
             "location": {
-              "start": 19,
-              "insert": 16,
               "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 15,
-                "end": 18
-              }
+              "indent": 4,
+              "insert": 28,
+              "start": 28
             },
-            "item_type": "class",
-            "length": 40,
-            "docLength": 3
-          },
-          {
-            "id": "3e98245a-2b2f-a18a-0f49-bad2af055e1d",
-            "ancestors": [
-              "4e7da722-09a5-258e-844a-6786d7af35bf"
-            ],
-            "type": "function",
-            "description": "handles a POST request to add a product to the database, validating input parameters and sending a command to the gateway to add the product. If any validation errors occur or if the command execution fails, it returns an appropriate response.",
+            "returns": false,
             "params": [
               {
                 "name": "id",
-                "type_name": "String",
-                "description": "product ID which is used to identify the product being added.",
-                "complex_type": false
+                "type": "String"
               },
               {
                 "name": "name",
-                "type_name": "String",
-                "description": "name of the product being added and is required to be provided by the user for the addition to be successful.",
-                "complex_type": false
+                "type": "String"
               },
               {
                 "name": "response",
-                "type_name": "HttpServletResponse",
-                "description": "HTTP response object, which is used to set the status code and provide additional information to the client in case of an error or success.\n\n* `response`: A `HttpServletResponse` object that provides information about the HTTP request and response. It has various properties such as status code, headers, and query strings.\n* `setStatus(statusCode)`: Sets the status code of the response to the specified value. The status code is a three-digit code that indicates the result of the request. For example, 200 means OK, while 404 means Not Found.\n* `headers`: A collection of headers associated with the response. Each header has a key-value pair that provides additional information about the response.\n* `queryStrings`: An array of query strings associated with the response. Each query string is a string that contains a set of keywords separated by the '=' character, and each keyword has a value associated with it.\n\nIn this function, the `response` object is used to set the status code and headers of the response. The `queryStrings` property is not used in this specific function.",
-                "complex_type": true
+                "type": "HttpServletResponse"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "// Example 1: Adding a product with valid parameters\nString id = \"Product01\";\nString name = \"My Product\";\nHttpServletResponse response = new HttpServletResponse();\nadd(id, name, response);\nLOG.info(\"Added Product [{}] '{}'\", id, name);\nassertEquals(response.getStatus(), HttpServletResponse.SC_CREATED);\n\n// Example 2: Adding a product with invalid parameters (empty ID)\nString id = \"\";\nString name = \"My Product\";\nHttpServletResponse response = new HttpServletResponse();\nadd(id, name, response);\nLOG.warn(\"Add Request failed - empty params?. [{}] '{}'\", id, name);\nassertEquals(response.getStatus(), HttpServletResponse.SC_BAD_REQUEST);\n\n// Example 3: Adding a product with invalid parameters (empty Name)\nString id = \"Product01\";\nString name = \"\";\nHttpServletResponse response = new HttpServletResponse();\nadd(id, name, response);\nLOG.warn(\"Add Request failed - empty params?. [{}] '{}'\", id, name);\nassertEquals(response.getStatus(), HttpServletResponse.SC_BAD_REQUEST);\n\n// Example 4: Adding a product with a duplicate ID (ConcurrencyException)\nString id = \"Product01\";\nString name = \"My Product\";\nHttpServletResponse response = new HttpServletResponse();\nadd(id, name, response);\nLOG.warn(\"Add Command FAILED with Message: {}\", cex.getMessage());\nassertEquals(response.getStatus(), HttpServletResponse.SC_BAD_REQUEST);\n",
-              "description": ""
-            },
-            "name": "add",
-            "location": {
-              "start": 28,
-              "insert": 28,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 30,
-            "docLength": null
+            "comment": {
+              "description": "Handles a POST request to the `/add/{id}` endpoint, adds a product with the given ID and name using the `AddProductCommand`, and sends a response indicating whether the addition was successful or not.",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "String",
+                  "description": "unique identifier for the product to be added, which is used to check for duplicates and update the database accordingly."
+                },
+                {
+                  "name": "name",
+                  "type": "String",
+                  "description": "name of the product being added, which is mandatory and will be sent to the command gateway for processing."
+                },
+                {
+                  "name": "response",
+                  "type": "HttpServletResponse",
+                  "description": "HTTP response object, which is updated with the appropriate status code and message to notify the client of the result of the add product request."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -466,281 +341,173 @@
     "path": "command-side/src/main/java/com/soagrowers/productcommand/aggregates/ProductAggregate.java",
     "content": {
       "structured": {
-        "description": "An aggregate root class called ProductAggregate that manages the life cycle of a product. It includes constructors for creating new instances and command-handling methods for handling add, mark saleable, and mark unsaleable commands. Additionally, it includes event sourcing handlers for on(ProductAddedEvent, ProductSaleableEvent, ProductUnsaleableEvent) events. The code also defines a repository interface for storing the aggregate's events in an event store.",
+        "description": "",
         "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productcommand.aggregates.ProductAggregate Pages: 1 -->\n<svg width=\"254pt\" height=\"93pt\"\n viewBox=\"0.00 0.00 254.00 93.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 89)\">\n<title>com.soagrowers.productcommand.aggregates.ProductAggregate</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"246,-30 0,-30 0,0 246,0 246,-30\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productcommand.aggregates.</text>\n<text text-anchor=\"middle\" x=\"123\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAggregate</text>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"213,-85 33,-85 33,-66 213,-66 213,-85\"/>\n<text text-anchor=\"middle\" x=\"123\" y=\"-73\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractAnnotatedAggregateRoot</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M123,-55.65C123,-47.36 123,-37.78 123,-30.11\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"119.5,-55.87 123,-65.87 126.5,-55.87 119.5,-55.87\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
         "items": [
           {
-            "id": "4b877bd0-adac-3793-f54f-2acb66d7af7d",
+            "id": "c43106a6-8647-43ac-8610-1e81a80d2fae",
             "ancestors": [],
             "type": "function",
-            "description": "in Axon handles the management of products, including their unique identifier, name, and saleability status. The class has three constructors: one for the default instance, one for handling the AddProductCommand, and one for handling the MarkProductAsSaleableCommand and MarkProductAsUnsaleableCommand. Additionally, there are event handlers for ProductAddedEvent, ProductSaleableEvent, and ProductUnsaleableEvent to update the product's state based on events raised by the application.",
-            "name": "ProductAggregate",
-            "location": {
-              "start": 35,
-              "insert": 16,
-              "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 15,
-                "end": 34
-              }
-            },
-            "item_type": "class",
-            "length": 99,
-            "docLength": 19
-          },
-          {
-            "id": "c3e006d1-4dd9-4097-5747-405395f2e526",
-            "ancestors": [
-              "4b877bd0-adac-3793-f54f-2acb66d7af7d"
-            ],
-            "type": "function",
-            "description": "marks a product as saleable based on its current state. If the product is not saleable, it applies an event to make it saleable. Otherwise, it throws an exception indicating that the product is already saleable.",
-            "params": [
-              {
-                "name": "command",
-                "type_name": "MarkProductAsSaleableCommand",
-                "description": "MarkProductAsSaleableCommand object that triggered the function execution, providing the necessary context for the function to perform its actions.\n\nThe `MarkProductAsSaleableCommand` has an `id` field that represents the product ID.",
-                "complex_type": true
-              }
-            ],
-            "usage": {
-              "language": "java",
-              "code": "@CommandHandler\n    public void markSaleable(MarkProductAsSaleableCommand command) {\n        LOG.debug(\"Command: 'MarkProductAsSaleableCommand' received.\");\n        if (!this.isSaleable()) {\n            apply(new ProductSaleableEvent(id));\n        } else {\n            throw new IllegalStateException(\"This ProductAggregate (\" + this.getId() + \") is already Saleable.\");\n        }\n    }\n",
-              "description": ""
-            },
             "name": "markSaleable",
             "location": {
-              "start": 75,
-              "insert": 75,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 75,
+              "start": 75
             },
-            "item_type": "method",
-            "length": 9,
-            "docLength": null
-          },
-          {
-            "id": "e2e4cfd7-e92f-2e93-1446-aaa7701a0965",
-            "ancestors": [
-              "4b877bd0-adac-3793-f54f-2acb66d7af7d"
-            ],
-            "type": "function",
-            "description": "marks a product as unsaleable based on its saleability status, throwing an illegal state exception if it is already off-sale.",
+            "returns": false,
             "params": [
               {
                 "name": "command",
-                "type_name": "MarkProductAsUnsaleableCommand",
-                "description": "`MarkProductAsUnsaleableCommand` message that triggers the function execution.\n\n* The function first logs a message in the debug log stating that the `MarkProductAsUnsaleableCommand` command has been received.\n* If the product is saleable, a new `ProductUnsaleableEvent` object is created and applied to the product using the `apply()` method.\n* If the product is already off-sale, an `IllegalStateException` is thrown with the message \"This ProductAggregate ( id ) is already off-sale.\"",
-                "complex_type": true
+                "type": "MarkProductAsSaleableCommand"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "MarkProductAsUnsaleableCommand markProductAsUnsaleableCommand = new MarkProductAsUnsaleableCommand(productId);\n// Execute the command using a CommandGateway, CommandBus or any other means of executing commands\n",
-              "description": ""
-            },
+            "skip": false,
+            "docLength": null,
+            "length": 9,
+            "comment": {
+              "description": "Determines if a product can be marked as saleable and applies the appropriate event based on the product's current state.",
+              "params": [
+                {
+                  "name": "command",
+                  "type": "MarkProductAsSaleableCommand",
+                  "description": "`MarkProductAsSaleableCommand`, which triggers the function to either make the product saleable or report an error if the product is already saleable."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "aef3428d-d820-422b-8037-aea42c7f4d5a",
+            "ancestors": [],
+            "type": "function",
             "name": "markUnsaleable",
             "location": {
-              "start": 85,
+              "offset": " ",
+              "indent": 4,
               "insert": 85,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 85
             },
-            "item_type": "method",
+            "returns": false,
+            "params": [
+              {
+                "name": "command",
+                "type": "MarkProductAsUnsaleableCommand"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
             "length": 9,
-            "docLength": null
+            "comment": {
+              "description": "Takes a `MarkProductAsUnsaleableCommand` object as input and marks a product as unsaleable if it is currently saleable, or throws an illegal state exception if it is already off-sale.",
+              "params": [
+                {
+                  "name": "command",
+                  "type": "MarkProductAsUnsaleableCommand",
+                  "description": "`MarkProductAsUnsaleableCommand` that triggers the function to mark a product as unsaleable if it is currently saleable, or raise an illegal state exception if it is already off-sale."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "da1ea59f-f276-348c-3f4b-7bafd86f894e",
-            "ancestors": [
-              "4b877bd0-adac-3793-f54f-2acb66d7af7d"
-            ],
+            "id": "b8159917-1f31-45e9-bef0-aa95cf7f59f5",
+            "ancestors": [],
             "type": "function",
-            "description": "at `@EventSourcingHandler` processes a `ProductAddedEvent` by assigning the event's `id` and `name` to instance variables, then logs a debug message with the event's ID and name.",
-            "params": [
-              {
-                "name": "event",
-                "type_name": "ProductAddedEvent",
-                "description": "`ProductAddedEvent` that triggered the event handler, providing the event's ID and name for further processing.\n\n* `id`: A unique identifier for the event, represented by an integer value.\n* `name`: The name of the product added, represented by a string value.",
-                "complex_type": true
-              }
-            ],
-            "usage": {
-              "language": "java",
-              "code": "@EventSourcingHandler\n    public void on(ProductAddedEvent event) {\n        this.id = event.getId();\n        this.name = event.getName();\n        LOG.debug(\"Applied: 'ProductAddedEvent' [{}] '{}'\", event.getId(), event.getName());\n    }\n",
-              "description": ""
-            },
             "name": "on",
             "location": {
-              "start": 103,
+              "offset": " ",
+              "indent": 4,
               "insert": 95,
-              "offset": " ",
-              "indent": 4,
-              "comment": {
-                "start": 94,
-                "end": 102
-              }
+              "start": 103
             },
-            "item_type": "method",
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductAddedEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": 8,
             "length": 6,
-            "docLength": 8
+            "comment": {
+              "description": "At `@EventSourcingHandler` takes a `ProductAddedEvent` object and updates the fields `id` and `name` based on the values in the event, then logs a debug message indicating the event type and updated field values.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductAddedEvent",
+                  "description": "`ProductAddedEvent` object passed to the handler, and its fields (`id` and `name`) are assigned the corresponding values from the event object."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "51a841fb-e644-ac91-474e-7ae3dceeb126",
-            "ancestors": [
-              "4b877bd0-adac-3793-f54f-2acb66d7af7d"
-            ],
+            "id": "fd5c34c1-5c31-44ef-8876-545ac1085f00",
+            "ancestors": [],
             "type": "function",
-            "description": "updates the `isSaleable` field of an object and logs a message with the ID of the received `ProductSaleableEvent`.",
-            "params": [
-              {
-                "name": "event",
-                "type_name": "ProductSaleableEvent",
-                "description": "`ProductSaleableEvent` that triggered the event handler method.\n\n* `isSaleable`: A boolean variable representing whether the product is saleable or not. It is set to `true` by this function.",
-                "complex_type": true
-              }
-            ],
-            "usage": {
-              "language": "java",
-              "code": "@EventSourcingHandler\n    public void on(ProductSaleableEvent event) {\n        this.isSaleable = true;\n        LOG.debug(\"Applied: 'ProductSaleableEvent' [{}]\", event.getId());\n}\n",
-              "description": ""
-            },
             "name": "on",
             "location": {
-              "start": 110,
+              "offset": " ",
+              "indent": 4,
               "insert": 110,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 110
             },
-            "item_type": "method",
-            "length": 5,
-            "docLength": null
-          },
-          {
-            "id": "3d851589-71b3-7dbd-f747-6243ff4fa1dc",
-            "ancestors": [
-              "4b877bd0-adac-3793-f54f-2acb66d7af7d"
-            ],
-            "type": "function",
-            "description": "updates the `isSaleable` field of the object to `false` when a `ProductUnsaleableEvent` occurs, and logs the event ID with a debug message.",
+            "returns": false,
             "params": [
               {
                 "name": "event",
-                "type_name": "ProductUnsaleableEvent",
-                "description": "`ProductUnsaleableEvent` object that is being handled by the `on()` method.\n\n* `isSaleable`: A boolean indicating whether the product is saleable or not.\n* `LOG`: An instance of the `Logger` class used for debugging purposes.",
-                "complex_type": true
+                "type": "ProductSaleableEvent"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "@EventSourcingHandler\npublic void on(ProductUnsaleableEvent event) {\nthis.isSaleable = false;\nLOG.debug(\"Applied: 'ProductUnsaleableEvent' [{}]\", event.getId());\n}\n",
-              "description": ""
-            },
+            "skip": false,
+            "docLength": null,
+            "length": 5,
+            "comment": {
+              "description": "Updates a component's `isSaleable` property to `true` after receiving a `ProductSaleableEvent`. It also logs the event ID using `LOG.debug()`.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductSaleableEvent",
+                  "description": "`ProductSaleableEvent` event object passed to the function, allowing the function to access and process its data."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "66552a77-e1da-426d-bfb4-6c7b0f9cb285",
+            "ancestors": [],
+            "type": "function",
             "name": "on",
             "location": {
-              "start": 116,
+              "offset": " ",
+              "indent": 4,
               "insert": 116,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 116
             },
-            "item_type": "method",
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductUnsaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
             "length": 5,
-            "docLength": null
-          },
-          {
-            "id": "11e72f4f-48a3-51a7-204e-eb4ceb0383eb",
-            "ancestors": [
-              "4b877bd0-adac-3793-f54f-2acb66d7af7d"
-            ],
-            "type": "function",
-            "description": "returns the `id` field of an object.",
-            "params": [],
-            "returns": {
-              "type_name": "String",
-              "description": "a string representing the value of the `id` field.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "ProductAggregate product = new ProductAggregate();\nString id = product.getId();\n",
-              "description": ""
-            },
-            "name": "getId",
-            "location": {
-              "start": 122,
-              "insert": 122,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "bd78e23f-6112-bdbc-ef42-99e502ff582f",
-            "ancestors": [
-              "4b877bd0-adac-3793-f54f-2acb66d7af7d"
-            ],
-            "type": "function",
-            "description": "retrieves a string representing the name of an object.",
-            "params": [],
-            "returns": {
-              "type_name": "String",
-              "description": "a string representing the name of the object.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "String name = productAggregate.getName();\n",
-              "description": ""
-            },
-            "name": "getName",
-            "location": {
-              "start": 126,
-              "insert": 126,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "fd5aa744-467e-e5be-ae48-d3d271928645",
-            "ancestors": [
-              "4b877bd0-adac-3793-f54f-2acb66d7af7d"
-            ],
-            "type": "function",
-            "description": "determines if an item is saleable based on a predefined condition.",
-            "params": [],
-            "returns": {
-              "type_name": "boolean",
-              "description": "a boolean value indicating whether the item is saleable or not.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "ProductAggregate product = new ProductAggregate();\nAddProductCommand command = new AddProductCommand(\"123456789\", \"Coffee\");\nproduct.markAsSaleable(command);\nMarkProductAsUnsaleableCommand command = new MarkProductAsUnsaleableCommand(\"123456789\");\nproduct.markAsUnsaleable(command);\n",
-              "description": ""
-            },
-            "name": "isSaleable",
-            "location": {
-              "start": 130,
-              "insert": 130,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "For `@EventSourcingHandler` sets the value of `isSaleable` to `false` when it receives a `ProductUnsaleableEvent`.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductUnsaleableEvent",
+                  "description": "ProductUnsaleableEvent object that triggered the function."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -1233,185 +1000,172 @@
     "path": "common-things/src/main/java/com/soagrowers/utils/Asserts.java",
     "content": {
       "structured": {
-        "description": "An enumeration class called `Asserts` that provides several methods for asserting conditions in a program. The class uses logging and error handling mechanisms to report violations of the assertions. The methods include `isTrue`, `isFalse`, `isNotEmpty`, and `areNotEmpty`, which are used to check the truth or falsehood of a statement, the emptiness of an object, and the non-emptiness of a list of objects, respectively. Additionally, there is a `setAssertsTo` method that enables or disables the asserts functionality, and an `isAssertsOn` method that returns the current state of the asserts functionality.",
+        "description": "",
         "items": [
           {
-            "id": "207747b5-83b5-55b5-eb42-b9c91b21416e",
+            "id": "782e531e-60a6-408d-9c84-e3a237885261",
             "ancestors": [],
             "type": "function",
-            "description": "checks if a given boolean value is true or false. If it's not true, an AssertionError is thrown with a message logged to the logger.",
+            "name": "isTrue",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 32,
+              "start": 32
+            },
+            "returns": false,
             "params": [
               {
                 "name": "trueism",
-                "type_name": "boolean",
-                "description": "boolean value that is compared to `active` and `false` in the if statement, triggering the warning and error message when it is false.",
-                "complex_type": false
+                "type": "boolean"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "Asserts.active = true;\nAsserts.isTrue(false); // Throws AssertionError, NOT_TRUE\nAsserts.active = false;\nAsserts.isTrue(true); // Does nothing\n",
-              "description": ""
-            },
-            "name": "isTrue",
-            "location": {
-              "start": 32,
-              "insert": 32,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 6,
-            "docLength": null
+            "comment": {
+              "description": "Checks if a provided boolean value is true or false. If it's false, it logs a warning message and throws an `AssertionError`.",
+              "params": [
+                {
+                  "name": "trueism",
+                  "type": "boolean",
+                  "description": "boolean value that is being checked against the active state of the function, with an error message and throw of AssertionError occurring if it is not true."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "865dda59-d74c-1cb0-2b4d-812edf60cf53",
+            "id": "bb1eb442-93c2-46b2-a975-b9e4e9801f53",
             "ancestors": [],
             "type": "function",
-            "description": "checks whether a given boolean value is true or false. If the value is true, an error message is logged and an AssertionError is thrown.",
+            "name": "isFalse",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 39,
+              "start": 39
+            },
+            "returns": false,
             "params": [
               {
                 "name": "falsehood",
-                "type_name": "boolean",
-                "description": "boolean value that is being tested, with a specific focus on whether it is true or false.",
-                "complex_type": false
+                "type": "boolean"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "Asserts.setAssertsTo(true);\nisFalse(false);\n",
-              "description": ""
-            },
-            "name": "isFalse",
-            "location": {
-              "start": 39,
-              "insert": 39,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 6,
-            "docLength": null
+            "comment": {
+              "description": "Checks whether a given boolean value is true or false, and raises an `AssertionError` if it is not false.",
+              "params": [
+                {
+                  "name": "falsehood",
+                  "type": "boolean",
+                  "description": "boolean value that is checked against the active status of the function, with any value other than `true` causing an AssertionError to be thrown."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "e93e48a5-182e-fcaa-fc41-f54fa4ea4c59",
+            "id": "17ed4517-6986-4588-a4df-09c8c9ab1a85",
             "ancestors": [],
             "type": "function",
-            "description": "checks if an object is not null and is not a list or a string that is empty. If it finds any issues, it logs an error message and throws an exception.",
+            "name": "isNotEmpty",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 46,
+              "start": 46
+            },
+            "returns": false,
             "params": [
               {
                 "name": "object",
-                "type_name": "Object",
-                "description": "object that is being checked for certain properties, such as being non-null and having a class that is assignable to List or String.\n\n* If `active` is true, then `object` represents an object that may be assigned to a List or String type.\n* The `Class` of `object` can be any subclass of Object, indicating its potential assignment to various types.\n* If `null != object`, then the input is not null and has a non-null value.\n* If `List.class.isAssignableFrom(object.getClass())`, then `object` is a List that may be assigned to the method.\n* If `String.class.isAssignableFrom(object.getClass())`, then `object` is a String that may be assigned to the method.\n* If `(String) object == EMPTY_STRING`, then `object` is a String with value equal to the `EMPTY_STRING` constant.",
-                "complex_type": true
+                "type": "Object"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "Asserts.isNotEmpty(object)\n",
-              "description": "\nThis method will check if the object passed in as a parameter is not null and is not an empty string, it will throw a new instance of AssertionError if either of those conditions are met. This method can also be used to check if an array or list is not empty by passing in the array or list as a parameter."
-            },
-            "name": "isNotEmpty",
-            "location": {
-              "start": 46,
-              "insert": 46,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 22,
-            "docLength": null
+            "comment": {
+              "description": "Checks if an object is not null, not a list, and not the empty string. If any of these conditions are true, it logs an error message and throws an exception.",
+              "params": [
+                {
+                  "name": "object",
+                  "type": "Object",
+                  "description": "argument that is passed to the `isNotEmpty` method, which is used to check if it is not empty."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "e8f02fe5-40c0-7289-0e43-600c4fbdcab0",
+            "id": "602565ab-345a-48f0-8fb3-e4da5fc551d6",
             "ancestors": [],
             "type": "function",
-            "description": "checks whether a list of objects is not empty by iterating over its elements and calling a nested function `isNotEmpty` on each object.",
+            "name": "areNotEmpty",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 69,
+              "start": 69
+            },
+            "returns": false,
             "params": [
               {
                 "name": "objects",
-                "type_name": "List<Object>",
-                "description": "list of objects that are being checked for emptiness by the `areNotEmpty()` method.\n\nThe function takes a list of objects as an input, which can have any combination of attributes and methods. The list may contain duplicate elements or have other structural properties that can be important for the function's operation.",
-                "complex_type": true
+                "type": "List<Object>"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "public class Example {\n    public static void main(String[] args) {\n        List<Object> objects = new ArrayList<>();\n        objects.add(\"hello\");\n        objects.add(1);\n        objects.add(new Date());\n\n        Asserts.instance.areNotEmpty(objects); // This method will check if the list contains any null or empty elements and throw an AssertionError if it finds one.\n    }\n}\n",
-              "description": "\nIn this example, the areNotEmpty method is called with a list containing three elements: \"hello\", 1, and a new Date object. The method checks each element in the list for null or empty values using the isNotEmpty method and throws an AssertionError if it finds any."
-            },
-            "name": "areNotEmpty",
-            "location": {
-              "start": 69,
-              "insert": 69,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 7,
-            "docLength": null
+            "comment": {
+              "description": "Verifies if a list of objects is not empty by iterating over its elements and calling the `isNotEmpty` function on each one.",
+              "params": [
+                {
+                  "name": "objects",
+                  "type": "List<Object>",
+                  "description": "List of objects to check for emptiness."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "650664b9-f679-63a9-554f-125b0a9ff0ca",
+            "id": "21cb1677-dc96-4eaa-83cc-c05d66f7a86e",
             "ancestors": [],
             "type": "function",
-            "description": "checks whether the `active` flag is set to `true`. If it is, the function returns `true`, otherwise it returns `false`.",
-            "params": [],
-            "returns": {
-              "type_name": "boolean",
-              "description": "a boolean value indicating whether the `active` property is true.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "public boolean isAssertsOn() {\n        return active;\n    }\n",
-              "description": "\nThis method returns a boolean indicating whether the Asserts are turned on or not. It can be used to check if the asserts are enabled, for example, during development or testing, and then turn them off when deploying the code in production."
-            },
-            "name": "isAssertsOn",
+            "name": "setAssertsTo",
             "location": {
-              "start": 77,
-              "insert": 77,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 81,
+              "start": 81
             },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "9e7b0da3-eba9-b283-7346-75028b373443",
-            "ancestors": [],
-            "type": "function",
-            "description": "sets the active status of the `Asserts` to the provided `boolean` value, affecting the output of any subsequent `assert` statements.",
+            "returns": false,
             "params": [
               {
                 "name": "asserts",
-                "type_name": "boolean",
-                "description": "state of the active assertions in the code.",
-                "complex_type": false
+                "type": "boolean"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "public class Main {\n    public static void main(String[] args) {\n        Asserts.setAssertsTo(true);\n    }\n}\n",
-              "description": ""
-            },
-            "name": "setAssertsTo",
-            "location": {
-              "start": 81,
-              "insert": 81,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "Sets the value of `Asserts.active` to the inputted `asserts` parameter.",
+              "params": [
+                {
+                  "name": "asserts",
+                  "type": "boolean",
+                  "description": "active state of the Asserts system, determining whether it should be enabled or disabled."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -1578,51 +1332,40 @@
     "path": "config-service/src/main/java/com/soagrowers/ConfigServiceApplication.java",
     "content": {
       "structured": {
-        "description": "A Spring Boot application that enables config server functionality through the `EnableConfigServer` annotation. The application class extends `SpringBootApplication`, and the `main` method starts the application by running it with the given command-line arguments.",
+        "description": "",
         "items": [
           {
-            "id": "353fb69f-edeb-57ab-9d45-e21838efeb86",
+            "id": "8612baae-f273-4a54-a726-98863d3266d0",
             "ancestors": [],
             "type": "function",
-            "description": "is a Spring Boot application that enables config server functionality and provides a main method for launching the application.",
-            "name": "ConfigServiceApplication",
+            "name": "main",
             "location": {
-              "start": 7,
-              "insert": 7,
               "offset": " ",
-              "indent": 0,
-              "comment": null
+              "indent": 4,
+              "insert": 11,
+              "start": 11
             },
-            "item_type": "class",
-            "length": 8,
-            "docLength": null
-          },
-          {
-            "id": "8f0561f4-e3eb-f39a-ce4c-f3743b2cc5ff",
-            "ancestors": [
-              "353fb69f-edeb-57ab-9d45-e21838efeb86"
-            ],
-            "type": "function",
-            "description": "runs a Spring Application, passing the `ConfigServiceApplication` class as an argument to the `SpringApplication.run()` method, which configures and starts the application.",
+            "returns": false,
             "params": [
               {
                 "name": "args",
-                "type_name": "String[]",
-                "description": "1 or more command-line arguments passed to the `SpringApplication.run()` method when invoking the application.\n\n* The function takes an array of strings called `args` as input.\n* Depending on the context, this array may contain any combination of command-line arguments passed to the program when it was run.\n* Each string in the `args` array represents a separate argument provided by the user at runtime.",
-                "complex_type": true
+                "type": "String[]"
               }
             ],
-            "name": "main",
-            "location": {
-              "start": 11,
-              "insert": 11,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "Starts the configuration service application by running it using the `SpringApplication.run()` method, passing the class and command-line arguments as arguments.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String[]",
+                  "description": "command-line arguments passed to the SpringApplication when it is run."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -1633,81 +1376,40 @@
     "path": "gateway-service/src/main/java/com/soagrowers/GatewayServiceApplication.java",
     "content": {
       "structured": {
-        "description": "A Spring Boot application that enables the Zuul reverse proxy feature and sets up a simple logging pre-filter. The `SimpleLoggingPreFilter` class is created and injected as a bean, allowing it to log incoming requests. The `main` method starts the application using the `SpringApplication` class.",
+        "description": "",
         "items": [
           {
-            "id": "be79cc34-087e-07af-5948-7a7b2689f59c",
+            "id": "bf3c931c-104c-4d9a-bcaf-26021b679bbb",
             "ancestors": [],
             "type": "function",
-            "description": "is a Spring Boot application that enables Zuul proxy functionality and defines a simple logging pre-filter. The application acts as a reverse proxy, forwarding requests to other services based on routes.",
-            "name": "GatewayServiceApplication",
+            "name": "main",
             "location": {
-              "start": 9,
-              "insert": 9,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 13,
-            "docLength": null
-          },
-          {
-            "id": "357b0368-dd84-c1a7-7040-87d4ca910cb0",
-            "ancestors": [
-              "be79cc34-087e-07af-5948-7a7b2689f59c"
-            ],
-            "type": "function",
-            "description": "creates a `SimpleLoggingPreFilter` instance, which logs incoming requests and responses for debugging purposes.",
-            "params": [],
-            "returns": {
-              "type_name": "SimpleLoggingPreFilter",
-              "description": "a `SimpleLoggingPreFilter` instance.\n\nThe `SimpleLoggingPreFilter` class is a pre-filter that logs incoming requests and responses to the application's log. The filter is created using the `@Bean` annotation. It does not have any attributes or properties explicitly defined.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\n    public SimpleLoggingPreFilter simplePreFilter() {\n        return new SimpleLoggingPreFilter();\n    }\n",
-              "description": ""
-            },
-            "name": "simplePreFilter",
-            "location": {
-              "start": 13,
-              "insert": 13,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 18,
+              "start": 18
             },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "6b569ed7-d139-f892-cb48-b87bfca2c11b",
-            "ancestors": [
-              "be79cc34-087e-07af-5948-7a7b2689f59c"
-            ],
-            "type": "function",
-            "description": "runs a Spring application, specifically the `GatewayServiceApplication`, by calling the `SpringApplication.run()` method and passing it the class and argument array.",
+            "returns": false,
             "params": [
               {
                 "name": "args",
-                "type_name": "String[]",
-                "description": "command-line arguments passed to the application when it is launched.\n\n* `args`: an array of String objects representing command-line arguments passed to the application.",
-                "complex_type": true
+                "type": "String[]"
               }
             ],
-            "name": "main",
-            "location": {
-              "start": 18,
-              "insert": 18,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "Initializes and runs a Spring application instance for the `GatewayServiceApplication`.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String[]",
+                  "description": "1 or more command line arguments passed to the `SpringApplication.run()` method when executing the `GatewayServiceApplication`."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -2494,141 +2196,40 @@
     "path": "query-side/src/main/java/com/soagrowers/productquery/Application.java",
     "content": {
       "structured": {
-        "description": "A Spring Boot application with Eureka client enabled, entity scanning for domain classes, and REST controllers for service instances and message retrieval. The application main method starts the spring application using the `SpringApplication.run()` method, and the `discoveryClient` class provides RESTful access to service instances by application name. The `MessageRestController` class provides a GET request endpoint for retrieving a message with the value set through the `@Value` annotation.",
+        "description": "",
         "items": [
           {
-            "id": "ca503022-8a64-d293-6740-14687b0546f1",
+            "id": "b2736ebb-966f-4f56-a61d-db8be1aabc40",
             "ancestors": [],
             "type": "function",
-            "description": "is a Spring Boot application that enables Eureka client functionality and scans the domain package for entity configuration. It also includes a REST controller for retrieving service instances by application name and a message REST controller for retrieving a fixed message.",
-            "name": "Application",
-            "location": {
-              "start": 22,
-              "insert": 18,
-              "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 17,
-                "end": 20
-              }
-            },
-            "item_type": "class",
-            "length": 9,
-            "docLength": 3
-          },
-          {
-            "id": "de751f60-a9f4-4ba4-aa43-e0de052c05e7",
-            "ancestors": [
-              "ca503022-8a64-d293-6740-14687b0546f1"
-            ],
-            "type": "function",
-            "description": "starts a Spring application by running the `Application` class using `SpringApplication.run`.",
-            "params": [],
             "name": "main",
             "location": {
-              "start": 27,
+              "offset": " ",
+              "indent": 4,
               "insert": 27,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 27
             },
-            "item_type": "method",
+            "returns": false,
+            "params": [
+              {
+                "name": "args",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "6dc8fa2f-a215-44bb-8046-60dbcf58f809",
-            "ancestors": [],
-            "type": "function",
-            "description": "is a RESTful controller that retrieves a list of ServiceInstances associated with a specific application name using the DiscoveryClient. The controller method serviceInstancesByApplicationName() takes no arguments and returns a list of ServiceInstances.",
-            "name": "ServiceInstanceRestController",
-            "location": {
-              "start": 32,
-              "insert": 32,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 14,
-            "docLength": null
-          },
-          {
-            "id": "557b79b7-f45d-f9b1-394b-4df5e557ecf6",
-            "ancestors": [
-              "6dc8fa2f-a215-44bb-8046-60dbcf58f809"
-            ],
-            "type": "function",
-            "description": "retrieves a list of service instances associated with a specified application name using the Discovery Client API.",
-            "params": [],
-            "returns": {
-              "type_name": "ListServiceInstance",
-              "description": "a list of ServiceInstances associated with the specified application name.\n\n* List<ServiceInstance>: The function returns a list of service instances for a given application name.\n* ServiceInstance: Each element in the list represents a service instance, which contains information about the instance, such as its ID, hostname, and status.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Autowired DiscoveryClient discoveryClient;\n@Value(\"${spring.application.name}\") private String appName;\n\nList<ServiceInstance> instances = discoveryClient.getInstances(appName);\n",
-              "description": "\nThis code will return a list of Service Instance objects, which can then be used to access information about each instance such as the instance id, hostname, and port number."
-            },
-            "name": "serviceInstancesByApplicationName",
-            "location": {
-              "start": 41,
-              "insert": 41,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "93fcd025-3433-9488-b94d-d101e163768c",
-            "ancestors": [],
-            "type": "function",
-            "description": "is a RESTful controller that provides a `getMessage()` function that retrieves a predefined message based on a Spring Boot application's configuration file.",
-            "name": "MessageRestController",
-            "location": {
-              "start": 47,
-              "insert": 47,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 12,
-            "docLength": null
-          },
-          {
-            "id": "fe276d82-238c-76b3-b64e-8d69eed2b844",
-            "ancestors": [
-              "93fcd025-3433-9488-b94d-d101e163768c"
-            ],
-            "type": "function",
-            "description": "retrieves and returns a predefined string message.",
-            "params": [],
-            "returns": {
-              "type_name": "String",
-              "description": "a string containing the message \"Hello, World!\".",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "import org.springframework.web.bind.annotation.RestController;\nimport org.springframework.web.bind.annotation.RequestMapping;\n\n@RestController\nclass Example {\n    @Autowired\n    private MessageRestController messageRestController;\n\n    @RequestMapping(\"/example\")\n    public String example() {\n        return this.messageRestController.getMessage();\n    }\n}\n",
-              "description": ""
-            },
-            "name": "getMessage",
-            "location": {
-              "start": 54,
-              "insert": 54,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
+            "comment": {
+              "description": "Runs an application using the Spring Application runner, passing the class `Application` and any command-line arguments to it.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String",
+                  "description": "0 or more command line arguments passed to the `SpringApplication.run()` method when invoking the application."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -2639,221 +2240,79 @@
     "path": "query-side/src/main/java/com/soagrowers/productquery/configuration/AxonConfiguration.java",
     "content": {
       "structured": {
-        "description": "An Axon configuration class that sets up an AMQP event handling system using Spring AMQP framework. It includes various annotations and configuration classes to define connection factory, transaction manager, unique queue name, and terminal name. Additionally, it provides a Jackson serializer for Axon JSON serialization and sets up a simple cluster and event bus using the Spring AMQP consumer configuration.",
+        "description": "",
         "items": [
           {
-            "id": "bc6b67c1-0975-89a1-b742-ce17850e5713",
+            "id": "b4d38012-a147-47e1-a210-d894a5ca48d3",
             "ancestors": [],
             "type": "function",
-            "description": "defines various configurations for an AMQP event bus, including connection factory, transaction manager, and queue name. It also provides methods to create a SimpleCluster, SpringAMQPConsumerConfiguration, and EventBusTerminal, as well as an EventBus instance.",
-            "name": "AxonConfiguration",
+            "name": "simpleCluster",
             "location": {
-              "start": 19,
-              "insert": 16,
-              "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 15,
-                "end": 18
-              }
-            },
-            "item_type": "class",
-            "length": 77,
-            "docLength": 3
-          },
-          {
-            "id": "22806e5c-09c7-6194-d24a-e2e613614c4b",
-            "ancestors": [
-              "bc6b67c1-0975-89a1-b742-ce17850e5713"
-            ],
-            "type": "function",
-            "description": "returns a Jackson serializer for JSON data.",
-            "params": [],
-            "returns": {
-              "type_name": "instance",
-              "description": "a Jackson Serializer instance for JSON serialization.\n\n* `JacksonSerializer`: The class that implements the serialization functionality using Jackson library.\n* `new`: The operator used to create a new instance of the `JacksonSerializer` class.\n\nTherefore, the output is a newly created instance of the `JacksonSerializer` class.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\n    JacksonSerializer axonJsonSerializer() {\n        return new JacksonSerializer();\n    }\n",
-              "description": ""
-            },
-            "name": "axonJsonSerializer",
-            "location": {
-              "start": 48,
-              "insert": 48,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 70,
+              "start": 70
             },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "d856967c-db29-ecb0-bf46-0768cc364a55",
-            "ancestors": [
-              "bc6b67c1-0975-89a1-b742-ce17850e5713"
-            ],
-            "type": "function",
-            "description": "creates a new `ListenerContainerLifecycleManager` instance, sets its `connectionFactory` property to a provided value, and returns the instance.",
-            "params": [],
-            "returns": {
-              "type_name": "ListenerContainerLifecycleManager",
-              "description": "a `ListenerContainerLifecycleManager` instance with a set `connectionFactory`.\n\n* `ListenerContainerLifecycleManager`: This is the class that represents a container for managing listeners. It provides methods to register, unregister, and check if a listener is registered.\n* `setConnectionFactory()`: This method sets the connection factory used by the listener container lifecycle manager. The connection factory is responsible for creating connections to the database.\n\nOverall, this function returns a `ListenerContainerLifecycleManager` object that can be used to manage listeners in a Spring Boot application.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\n    ListenerContainerLifecycleManager listenerContainerLifecycleManager() {\n        ListenerContainerLifecycleManager listenerContainerLifecycleManager = new ListenerContainerLifecycleManager();\n        listenerContainerLifecycleManager.setConnectionFactory(connectionFactory);\n        return listenerContainerLifecycleManager;\n    }\n",
-              "description": ""
-            },
-            "name": "listenerContainerLifecycleManager",
-            "location": {
-              "start": 53,
-              "insert": 53,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 6,
-            "docLength": null
-          },
-          {
-            "id": "6d9fcaf9-22f8-ac92-dc44-54781c798425",
-            "ancestors": [
-              "bc6b67c1-0975-89a1-b742-ce17850e5713"
-            ],
-            "type": "function",
-            "description": "creates a Spring AMQP consumer configuration with settings for message size, transaction manager, and queue name.",
-            "params": [],
-            "returns": {
-              "type_name": "SpringAMQPConsumerConfiguration",
-              "description": "a Spring AMQP consumer configuration object with settings for transaction size, transaction manager, and queue name.\n\n* `setTxSize(10)` sets the transaction size limit for the consumer. This value determines how much data can be consumed before a new transaction is started.\n* `setTransactionManager(transactionManager)` specifies the transaction manager to be used by the consumer. This is an important configuration option as it determines how transactions are managed and rolled back in case of failure.\n* `setQueueName(uniqueQueueName)` sets the name of the queue that the consumer will subscribe to. This value is used to identify the queue and differentiate it from other queues in the same broker.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\n    SpringAMQPConsumerConfiguration springAMQPConsumerConfiguration() {\n        SpringAMQPConsumerConfiguration amqpConsumerConfiguration = new SpringAMQPConsumerConfiguration();\n        amqpConsumerConfiguration.setTxSize(10);\n        amqpConsumerConfiguration.setTransactionManager(transactionManager);\n        amqpConsumerConfiguration.setQueueName(uniqueQueueName);\n        return amqpConsumerConfiguration;\n    }\n",
-              "description": ""
-            },
-            "name": "springAMQPConsumerConfiguration",
-            "location": {
-              "start": 60,
-              "insert": 60,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 8,
-            "docLength": null
-          },
-          {
-            "id": "ca764205-72b7-3597-604a-5775c135958b",
-            "ancestors": [
-              "bc6b67c1-0975-89a1-b742-ce17850e5713"
-            ],
-            "type": "function",
-            "description": "creates a new `SimpleCluster` instance and sets the `AMQP_CONFIG_KEY` property of its metadata with the provided `SpringAMQPConsumerConfiguration`.",
+            "returns": "SimpleCluster",
             "params": [
               {
                 "name": "springAMQPConsumerConfiguration",
-                "type_name": "SpringAMQPConsumerConfiguration",
-                "description": "configuration for an AMQP consumer in Spring, which is used to customize the behavior of the AMQP consumer within the SimpleCluster framework.\n\n1. AMQP_CONFIG_KEY: This is a property that sets the configuration for an AMQP consumer in the Spring framework.\n2. UniqueQueueName: This is a string representing the name of the unique queue to be created for the consumer.",
-                "complex_type": true
+                "type": "SpringAMQPConsumerConfiguration"
               }
             ],
-            "returns": {
-              "type_name": "SimpleCluster",
-              "description": "a new SimpleCluster instance with an AMQP configuration property set.\n\n* The `SimpleCluster` object represents a cluster of AMQP consumers that can handle messages from an AMQP queue.\n* The `uniqueQueueName` property is set to a unique identifier for the queue, which is used to distinguish it from other queues in the cluster.\n* The `MetaData` property is set to a map of configuration properties for the consumer, which are obtained from the `springAMQPConsumerConfiguration` parameter passed to the function. These properties can be used to customize the behavior of the consumer.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\n    SimpleCluster simpleCluster(SpringAMQPConsumerConfiguration springAMQPConsumerConfiguration) {\n        SimpleCluster simpleCluster = new SimpleCluster(uniqueQueueName);\n        simpleCluster.getMetaData().setProperty(AMQP_CONFIG_KEY, springAMQPConsumerConfiguration);\n        return simpleCluster;\n    }\n",
-              "description": ""
-            },
-            "name": "simpleCluster",
-            "location": {
-              "start": 70,
-              "insert": 70,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 6,
-            "docLength": null
+            "comment": {
+              "description": "Creates a new `SimpleCluster` instance with a unique queue name and sets the AMQP configuration property using the provided `SpringAMQPConsumerConfiguration`.",
+              "params": [
+                {
+                  "name": "springAMQPConsumerConfiguration",
+                  "type": "SpringAMQPConsumerConfiguration",
+                  "description": "AMQP consumer configuration for the SimpleCluster instance created by the `simpleCluster()` method."
+                }
+              ],
+              "returns": {
+                "type": "SimpleCluster",
+                "description": "a Simple Cluster object with the specified queue name and AMQP configuration properties."
+              }
+            }
           },
           {
-            "id": "74e0371e-a536-cca8-6744-fd68eb85a4d6",
-            "ancestors": [
-              "bc6b67c1-0975-89a1-b742-ce17850e5713"
-            ],
+            "id": "c3594cea-ad49-4eb1-80b3-6c8c03df800a",
+            "ancestors": [],
             "type": "function",
-            "description": "creates an instance of `SpringAMQPTerminal`, setting various properties and returning it.",
-            "params": [],
-            "returns": {
-              "type_name": "SpringAMQPTerminal",
-              "description": "a Spring AMQP terminal instance configured with various properties and settings.\n\n* The `SpringAMQPTerminal` object represents a Spring AMQP terminal, which provides an interface for sending and receiving messages through an AMQP broker.\n* The `setConnectionFactory` method sets the connection factory used to connect to the AMQP broker.\n* The `setSerializer` methods sets the serializer used to serialize messages before sending them through the broker. The default is `axonJsonSerializer`, which uses JSON to serialize messages.\n* The `setExchangeName` method sets the name of the exchange on which the terminal will send and receive messages.\n* The `setListenerContainerLifecycleManager` method sets the listener container lifecycle manager, which manages the creation and destruction of message listeners.\n* The `durable` property indicates whether the terminal is durable or not, meaning whether the messages sent through it will be persisted in case of a failure.\n* The `transactional` property indicates whether the terminal is transactional or not, meaning whether the messages sent through it will be part of a larger transaction.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\n    EventBusTerminal terminal() {\n        SpringAMQPTerminal terminal = new SpringAMQPTerminal();\n        // Connection factory is set to a connection factory created earlier.\n        terminal.setConnectionFactory(connectionFactory);\n        // The serializer is set to axonJsonSerializer, which is also created in this class.\n        terminal.setSerializer(axonJsonSerializer());\n        // The name of the exchange is set to the variable terminalName.\n        terminal.setExchangeName(terminalName);\n        // The listenerContainerLifecycleManager is set to a listenerContainerLifecycleManager created earlier.\n        terminal.setListenerContainerLifecycleManager(listenerContainerLifecycleManager());\n        // The exchange is set as durable, meaning it will survive even if the server restarts. \n        terminal.setDurable(true);\n        // The transactional attribute is set to true, making the event bus transactional.\n        terminal.setTransactional(true);\n        return terminal;\n    }\n",
-              "description": ""
-            },
-            "name": "terminal",
+            "name": "eventBus",
             "location": {
-              "start": 77,
-              "insert": 77,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 90,
+              "start": 90
             },
-            "item_type": "method",
-            "length": 12,
-            "docLength": null
-          },
-          {
-            "id": "1f7d72c5-c453-8299-8641-f01a618561bb",
-            "ancestors": [
-              "bc6b67c1-0975-89a1-b742-ce17850e5713"
-            ],
-            "type": "function",
-            "description": "creates an EventBus instance by combining a custom cluster selector with the default terminal. The resulting EventBus enables the transmission of events between different components in a clustered environment.",
+            "returns": "EventBus",
             "params": [
               {
                 "name": "simpleCluster",
-                "type_name": "SimpleCluster",
-                "description": "cluster manager for which the event bus is to be created\n\n* `SimpleCluster`: This class is the base class for all clusters in the application. It contains various attributes such as `id`, `name`, `type`, and `nodes`.\n* `DefaultClusterSelector`: This class implements the `ClusterSelector` interface, which defines the methods for selecting a cluster based on the input parameters.\n* `terminal()`: This method returns a terminal object, which is used to indicate the end of the stream in the `EventBus` implementation.",
-                "complex_type": true
+                "type": "SimpleCluster"
               }
             ],
-            "returns": {
-              "type_name": "EventBus",
-              "description": "a ClusteringEventBus instance, which is used to handle events related to cluster management.\n\n* `SimpleCluster`: This is an argument passed to the function, which represents the cluster configuration for the event bus.\n* `ClusteringEventBus`: This is the type of event bus returned by the function, which is a custom implementation of an event bus that uses a default cluster selector and terminator.\n* `DefaultClusterSelector`: This is another argument passed to the function, which represents the default cluster selector used by the event bus.\n* `terminal()`: This is a method called internally within the function to generate the event bus. It returns a terminal object, which is an implementation detail not intended for external use.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\nEventBus eventBus(SimpleCluster simpleCluster) {\n  return new ClusteringEventBus(new DefaultClusterSelector(simpleCluster), terminal());\n}\n",
-              "description": ""
-            },
-            "name": "eventBus",
-            "location": {
-              "start": 90,
-              "insert": 90,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 4,
-            "docLength": null
+            "comment": {
+              "description": "Generates a clustering event bus for passing events between services in a microservices architecture, based on a specified cluster selector and terminal state.",
+              "params": [
+                {
+                  "name": "simpleCluster",
+                  "type": "SimpleCluster",
+                  "description": "cluster configuration for which event bus instances are generated."
+                }
+              ],
+              "returns": {
+                "type": "EventBus",
+                "description": "a clustering event bus instance."
+              }
+            }
           }
         ]
       }
@@ -2864,228 +2323,115 @@
     "path": "query-side/src/main/java/com/soagrowers/productquery/configuration/RabbitConfiguration.java",
     "content": {
       "structured": {
-        "description": "A RabbitMQ configuration class that sets up a RabbitMQ exchange, queue, and binding. The class uses the Spring Boot Annotation-Driven configuration framework and requires other beans to be defined before it can be used. The configuration creates an event bus exchange, declares a unique queue name based on an index value, and defines a fanout exchange for routing messages to multiple queues.",
+        "description": "",
         "items": [
           {
-            "id": "33d29d24-e70b-2b90-3640-44e48bafe9c5",
+            "id": "57e60f9e-b0b6-4fe7-a5a3-a6e5c3cde44c",
             "ancestors": [],
             "type": "function",
-            "description": "is a Spring configuration class that sets up a RabbitMQ environment for an application. It defines various properties and beans related to RabbitMQ, such as the hostname, username, password, exchange name, queue name, and index. The class also provides methods for creating queues and exchanges, as well as declaring bindings between them. Overall, the class sets up a basic RabbitMQ environment for an application to use.",
-            "name": "RabbitConfiguration",
-            "location": {
-              "start": 18,
-              "insert": 15,
-              "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 14,
-                "end": 17
-              }
-            },
-            "item_type": "class",
-            "length": 61,
-            "docLength": 3
-          },
-          {
-            "id": "3beb0721-d745-c9a6-8b4d-19a30397b5b4",
-            "ancestors": [
-              "33d29d24-e70b-2b90-3640-44e48bafe9c5"
-            ],
-            "type": "function",
-            "description": "generates a unique name for a queue by combining the given queue name with an incremental index number, resulting in a distinct identifier for each queue.",
-            "params": [],
-            "returns": {
-              "type_name": "String",
-              "description": "a string representation of a unique queue name, constructed by combining the original queue name and an incrementing index number.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\n    public String uniqueQueueName() {\n        return queueName + \".\" + index;\n    }\n    \n    @Autowired\n    private RabbitAdmin rabbitAdmin; //This will be injected by Spring\n  \n    @PostConstruct\n    public void init() {\n        rabbitAdmin.declareExchange(eventBusExchange()); //Declare the exchange in rabbitMQ using this method \n        rabbitAdmin.declareQueue(eventStream(uniqueQueueName())); //Declare the queue using this method \n        rabbitAdmin.declareBinding(binding(uniqueQueueName())); // Declare the binding between the queue and the exchange using this method \n    }\n",
-              "description": ""
-            },
-            "name": "uniqueQueueName",
-            "location": {
-              "start": 40,
-              "insert": 40,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "dbe359b0-c4a2-1995-664f-28e33668e4fa",
-            "ancestors": [
-              "33d29d24-e70b-2b90-3640-44e48bafe9c5"
-            ],
-            "type": "function",
-            "description": "creates a new `Queue` instance with a specified unique name, allowing for message storage and retrieval.",
-            "params": [
-              {
-                "name": "uniqueQueueName",
-                "type_name": "String",
-                "description": "name of the queue that is being created.",
-                "complex_type": false
-              }
-            ],
-            "returns": {
-              "type_name": "Queue",
-              "description": "a `Queue` object with the specified unique name and properties.\n\nThe function returns a `Queue` object with a unique name provided as input. The `false` argument in the constructor indicates that the queue is not durable, meaning messages will be lost if the node where the queue is located fails. Additionally, the `false` argument for the `autoStart` property means that the queue will not start automatically when the node boots up. Finally, the `true` argument for the `cancellationHandled` property indicates that cancellations are handled correctly.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "import org.springframework.context.annotation.Bean;\n\npublic class ExampleClass {\n    @Bean\n    public Queue eventStream(String uniqueQueueName) {\n        return new Queue(uniqueQueueName, false, false, true);\n    }\n}\n",
-              "description": "\nIn this example, the method `eventStream()` is annotated with `@Bean`, indicating that it should be used as a Spring Bean. The method takes a single input argument of type `String`, which is called `uniqueQueueName`.\n\nTo use this method in a Spring application context, you would need to define a bean for the class `ExampleClass` and then call the method on an instance of that class to get the desired output. For example:\n"
-            },
             "name": "eventStream",
             "location": {
-              "start": 45,
+              "offset": " ",
+              "indent": 4,
               "insert": 45,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 45
             },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "5d0d75dc-e7ec-829e-2044-79957e2253a1",
-            "ancestors": [
-              "33d29d24-e70b-2b90-3640-44e48bafe9c5"
-            ],
-            "type": "function",
-            "description": "creates a new `FanoutExchange` instance with the specified `exchangeName`, set to `true` for fanout routing and set to `false` for non-fanout routing.",
-            "params": [],
-            "returns": {
-              "type_name": "FanoutExchange",
-              "description": "a new `FanoutExchange` instance with the specified name and parameters.\n\nThe `FanoutExchange` object returned by the function has an `exchangeName` property that specifies the name of the exchange.\nThe `true` value for the `isFanout` property indicates that the exchange is a fanout exchange.\nThe `false` value for the `isTemporary` property means that the exchange is not temporary.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\nFanoutExchange eventBusExchange() {\nreturn new FanoutExchange(exchangeName, true, false);\n}\n",
-              "description": ""
-            },
-            "name": "eventBusExchange",
-            "location": {
-              "start": 50,
-              "insert": 50,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "1aac36cc-595a-09b4-1d42-a0c4bf8ee220",
-            "ancestors": [
-              "33d29d24-e70b-2b90-3640-44e48bafe9c5"
-            ],
-            "type": "function",
-            "description": "creates a binding for a queue with a unique name, specifying the destination type as `QUEUE`, the exchange name, and the wildcard character `*.*`.",
+            "returns": "Queue",
             "params": [
               {
                 "name": "uniqueQueueName",
-                "type_name": "String",
-                "description": "name of the queue to which messages will be bound.",
-                "complex_type": false
+                "type": "String"
               }
             ],
-            "returns": {
-              "type_name": "Binding",
-              "description": "a binding definition that sets up a queue with the specified name and destination type.\n\n* `uniqueQueueName`: The unique name of the queue to which the binding is created.\n* `Binding.DestinationType.QUEUE`: The type of destination, in this case, a queue.\n* `exchangeName`: The name of the exchange where the binding is created.\n* ` \"*.*\"`: The routing key pattern for the binding, indicating that the message should be routed to any queue with the same name as the original message.\n* `null`: The value of the `routingKey` attribute is null, indicating that no specific routing key is specified.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\npublic Binding getBinding(String uniqueQueueName) {\n    return new Binding(uniqueQueueName, Binding.DestinationType.QUEUE, exchangeName, \"*.*\", null);\n}\n",
-              "description": ""
-            },
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Creates a new queue named based on a given string and configures its properties for a non-durable and non-transitive store, with an auto-acknowledge mechanism for messages.",
+              "params": [
+                {
+                  "name": "uniqueQueueName",
+                  "type": "String",
+                  "description": "name of the queue that is to be created."
+                }
+              ],
+              "returns": {
+                "type": "Queue",
+                "description": "a queue with the specified name."
+              }
+            }
+          },
+          {
+            "id": "f96a1a43-c46d-4b4e-bace-9dfcfea9ffdd",
+            "ancestors": [],
+            "type": "function",
             "name": "binding",
             "location": {
-              "start": 55,
+              "offset": " ",
+              "indent": 4,
               "insert": 55,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 55
             },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "30cae458-20bc-2dbc-0942-723780eca79e",
-            "ancestors": [
-              "33d29d24-e70b-2b90-3640-44e48bafe9c5"
-            ],
-            "type": "function",
-            "description": "creates a `CachingConnectionFactory` instance with customized configuration for a database connection, storing it for later use.",
-            "params": [],
-            "returns": {
-              "type_name": "ConnectionFactory",
-              "description": "a caching ConnectionFactory instance configured with the specified hostname, username, and password.\n\n* The `CachingConnectionFactory` object created is of type `hostname`.\n* The `setUsername()` and `setPassword()` methods are called on the object to set the values of the `username` and `password` attributes, respectively.\n\nOverall, the function returns a `CachingConnectionFactory` object with the specified `hostname`, `username`, and `password` properties.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(hostname);\ncachingConnectionFactory.setUsername(username);\ncachingConnectionFactory.setPassword(password);\nreturn cachingConnectionFactory;\n",
-              "description": ""
-            },
-            "name": "connectionFactory",
-            "location": {
-              "start": 60,
-              "insert": 60,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 7,
-            "docLength": null
-          },
-          {
-            "id": "2686852f-5724-de8b-6f45-53afeddd87ab",
-            "ancestors": [
-              "33d29d24-e70b-2b90-3640-44e48bafe9c5"
-            ],
-            "type": "function",
-            "description": "creates a new `RabbitAdmin` instance, sets auto-startup to true, declares an exchange, queue, and binding using the provided unique queue name.",
+            "returns": "Binding",
             "params": [
               {
                 "name": "uniqueQueueName",
-                "type_name": "String",
-                "description": "name of a unique queue that is declared and managed by the `RabbitAdmin` instance generated by the function.",
-                "complex_type": false
+                "type": "String"
               }
             ],
-            "returns": {
-              "type_name": "RabbitAdmin",
-              "description": "a `RabbitAdmin` instance that sets up and manages RabbitMQ exchanges, queues, and bindings.\n\n1. `RabbitAdmin rabbitAdmin`: This is the instance of the `RabbitAdmin` class that is returned by the function. It represents a RabbitMQ administrator that can be used to manage queues, exchanges, and other rabbitmq resources.\n2. `connectionFactory()`: This is a method that returns a connection factory object, which is used to connect to the RabbitMQ server. The connection factory object is responsible for creating and managing connections to the RabbitMQ server.\n3. `setAutoStartup(true)`: This method sets whether the RabbitMQ administrator should automatically start up when the application starts.\n4. `declareExchange(eventBusExchange())`: This method declares an exchange with the specified name, which is used to route messages between queues and exchanges.\n5. `declareQueue(eventStream(uniqueQueueName))`: This method declares a queue with the specified name, which is used to store messages that are consumed by a consumer.\n6. `declareBinding(binding(uniqueQueueName))`: This method declares a binding between a queue and an exchange, which specifies how messages are routed from the queue to the exchange.\n\nOverall, the `rabbitAdmin` function provides a way to manage RabbitMQ resources in a Java application, including creating and managing queues, exchanges, and bindings.",
-              "complex_type": true
-            },
-            "usage": {
-              "language": "java",
-              "code": "@Bean\n    @Required\n    RabbitAdmin rabbitAdmin(String uniqueQueueName) {\n        RabbitAdmin admin = new RabbitAdmin(connectionFactory());\n        admin.setAutoStartup(true);\n        admin.declareExchange(eventBusExchange());\n        admin.declareQueue(eventStream(uniqueQueueName));\n        admin.declareBinding(binding(uniqueQueueName));\n        return admin;\n    }\n",
-              "description": "\nThe method will take the unique queue name as an input and it will create a new RabbitAdmin instance with the connection factory. Then it will set the auto startup to true, declare the exchange and queue, and declare the binding. Finally, the method will return the created rabbit admin."
-            },
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Creates a binding that directs messages from any exchange to a queue with the specified name.",
+              "params": [
+                {
+                  "name": "uniqueQueueName",
+                  "type": "String",
+                  "description": "name of the queue to which the binding will be created."
+                }
+              ],
+              "returns": {
+                "type": "Binding",
+                "description": "a binding definition for a queue with the given name."
+              }
+            }
+          },
+          {
+            "id": "2ea7854a-1d1a-45bc-8a19-df2663c88154",
+            "ancestors": [],
+            "type": "function",
             "name": "rabbitAdmin",
             "location": {
-              "start": 68,
-              "insert": 68,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 68,
+              "start": 68
             },
-            "item_type": "method",
+            "returns": "RabbitAdmin",
+            "params": [
+              {
+                "name": "uniqueQueueName",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
             "length": 10,
-            "docLength": null
+            "comment": {
+              "description": "Creates a new instance of RabbitAdmin, sets its auto-startup to true, declares an exchange and two queues using the unique queue name, and returns the instance.",
+              "params": [
+                {
+                  "name": "uniqueQueueName",
+                  "type": "String",
+                  "description": "name of a queue that is being declared and used by the `RabbitAdmin`."
+                }
+              ],
+              "returns": {
+                "type": "RabbitAdmin",
+                "description": "a RabbitAdmin object with the declared exchanges, queues, and bindings."
+              }
+            }
           }
         ]
       }
@@ -3096,213 +2442,106 @@
     "path": "query-side/src/main/java/com/soagrowers/productquery/domain/Product.java",
     "content": {
       "structured": {
-        "description": "An entity called `Product` with attributes `id`, `name`, and `saleable`. The class also provides constructors and methods for setting and retrieving these attributes. The `@Entity` annotation indicates that this class is a part of a larger Java Persistence API (JPA) project, and the `@Id` annotation identifies the `id` attribute as the primary key for the entity.",
+        "description": "",
         "items": [
           {
-            "id": "ab9dc456-f03c-12b7-5b42-bb311e734a6f",
+            "id": "d707eaea-c147-4559-bb9c-c55579ae0e87",
             "ancestors": [],
             "type": "function",
-            "description": "is an entity in Java, representing a product with an ID, name, and saleability flag. The class has constructor and getter/setter methods for each field.",
-            "name": "Product",
+            "name": "setId",
             "location": {
-              "start": 12,
-              "insert": 9,
-              "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 8,
-                "end": 11
-              }
-            },
-            "item_type": "class",
-            "length": 42,
-            "docLength": 3
-          },
-          {
-            "id": "91a7ceb8-a900-2eac-ac44-1dbc6347dbc0",
-            "ancestors": [
-              "ab9dc456-f03c-12b7-5b42-bb311e734a6f"
-            ],
-            "type": "function",
-            "description": "retrieves the `id` field value associated with an object instance and returns it as a string.",
-            "params": [],
-            "returns": {
-              "type_name": "String",
-              "description": "a string representing the `id` variable.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "Product product = new Product(\"123456\", \"product name\", true);\nString id = product.getId(); // This will return \"123456\" as the ID of the product.\n",
-              "description": ""
-            },
-            "name": "getId",
-            "location": {
-              "start": 30,
-              "insert": 30,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 34,
+              "start": 34
             },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "dea43c6f-e6df-769c-df45-3b9024f69bdd",
-            "ancestors": [
-              "ab9dc456-f03c-12b7-5b42-bb311e734a6f"
-            ],
-            "type": "function",
-            "description": "sets the `id` field of an object to a given `String` value.",
+            "returns": false,
             "params": [
               {
                 "name": "id",
-                "type_name": "String",
-                "description": "value that will be assigned to the `id` field of the class instance being modified by the function.",
-                "complex_type": false
+                "type": "String"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "Product product = new Product();\nproduct.setId(\"1\");\n",
-              "description": ""
-            },
-            "name": "setId",
-            "location": {
-              "start": 34,
-              "insert": 34,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "Sets the value of its class member variable `id`.",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "String",
+                  "description": "new value of the class instance variable `id`."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "d57af240-de23-a190-194e-0edd7058f55e",
-            "ancestors": [
-              "ab9dc456-f03c-12b7-5b42-bb311e734a6f"
-            ],
+            "id": "da567194-40bd-487c-8eae-f5daa3939485",
+            "ancestors": [],
             "type": "function",
-            "description": "returns a string representing the name of an object.",
-            "params": [],
-            "returns": {
-              "type_name": "String",
-              "description": "a string representing the name of an object.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "Product product = new Product(\"123\", \"name\", false);\nSystem.out.println(product.getName()); \n",
-              "description": ""
-            },
-            "name": "getName",
+            "name": "setName",
             "location": {
-              "start": 38,
-              "insert": 38,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 42,
+              "start": 42
             },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "55652aac-06fd-ae92-1146-d5fe09229ae2",
-            "ancestors": [
-              "ab9dc456-f03c-12b7-5b42-bb311e734a6f"
-            ],
-            "type": "function",
-            "description": "sets the value of the class instance variable `name`.",
+            "returns": false,
             "params": [
               {
                 "name": "name",
-                "type_name": "String",
-                "description": "new value of the `name` field for the object being modified by the `setName()` method.",
-                "complex_type": false
+                "type": "String"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "Product product = new Product(\"123\", \"iPhone 12 Pro\", true);\nproduct.setName(\"Apple Watch Series 8\");\n",
-              "description": "\nThe variable product is created by setting its id, name, and saleable attributes to their corresponding values using the constructor. The method setName is then called on the instance of the product object with a new name as an argument (\"Apple Watch Series 8\"). After this operation, the name attribute of the product instance will be changed to \"Apple Watch Series 8\"."
-            },
-            "name": "setName",
-            "location": {
-              "start": 42,
-              "insert": 42,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "Sets the value of the class's `name` field to the input parameter passed by the caller.",
+              "params": [
+                {
+                  "name": "name",
+                  "type": "String",
+                  "description": "new value of the object's `name` field."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "3070fd63-4d85-8fbb-7942-0c0d8940d6b9",
-            "ancestors": [
-              "ab9dc456-f03c-12b7-5b42-bb311e734a6f"
-            ],
+            "id": "bbd47381-f490-48da-9b25-ab2f132323ca",
+            "ancestors": [],
             "type": "function",
-            "description": "evaluates to `true` if the object being passed as a parameter is `saleable`, and `false` otherwise.",
-            "params": [],
-            "returns": {
-              "type_name": "boolean",
-              "description": "a boolean value indicating whether an item is saleable or not.",
-              "complex_type": false
-            },
-            "usage": {
-              "language": "java",
-              "code": "Product p = new Product(\"id\", \"name\", true);\nSystem.out.println(p.isSaleable()); //outputs: true\n",
-              "description": ""
-            },
-            "name": "isSaleable",
+            "name": "setSaleable",
             "location": {
-              "start": 46,
-              "insert": 46,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 50,
+              "start": 50
             },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "4cf22577-5890-9d9f-8a47-922735ccb6a2",
-            "ancestors": [
-              "ab9dc456-f03c-12b7-5b42-bb311e734a6f"
-            ],
-            "type": "function",
-            "description": "updates the `saleable` field of the current object by assigning a new boolean value.",
+            "returns": false,
             "params": [
               {
                 "name": "saleable",
-                "type_name": "boolean",
-                "description": "Boolean value that determines whether an object is saleable or not, which is then stored in the `this.saleable` field.",
-                "complex_type": false
+                "type": "boolean"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "// set saleability to false\nproduct.setSaleable(false);\n",
-              "description": ""
-            },
-            "name": "setSaleable",
-            "location": {
-              "start": 50,
-              "insert": 50,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "Sets the instance field `saleable` to the provided boolean value, ensuring the field's state is consistent with the passed argument.",
+              "params": [
+                {
+                  "name": "saleable",
+                  "type": "boolean",
+                  "description": "boolean value of whether the object is saleable or not, and by setting it to `true`, the method marks the object as saleable."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -3313,124 +2552,107 @@
     "path": "query-side/src/main/java/com/soagrowers/productquery/handlers/EventLoggingHandler.java",
     "content": {
       "structured": {
-        "description": "An EventLoggingHandler class that handles events generated by ProductEvents. It uses Spring Framework's @Value annotation to retrieve a value from a properties file and logs messages to the SLF4J logger with the event details, including the event class name, id, and name. The class also has three event handlers for ProductAddedEvent, ProductSaleableEvent, and ProductUnsaleableEvent.",
+        "description": "",
         "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productevents.events.AbstractEvent Pages: 1 -->\n<svg width=\"572pt\" height=\"134pt\"\n viewBox=\"0.00 0.00 572.00 134.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 130)\">\n<title>com.soagrowers.productevents.events.AbstractEvent</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"319,-78 110,-78 110,-48 319,-48 319,-78\"/>\n<text text-anchor=\"start\" x=\"118\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"214.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractEvent</text>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductAddedEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-126 355,-126 355,-96 564,-96 564,-126\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-114\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-103\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAddedEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node3 -->\n<g id=\"edge2_Node000001_Node000003\" class=\"edge\">\n<title>Node1&#45;&gt;Node3</title>\n<g id=\"a_edge2_Node000001_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-80.03C328.09,-85.24 356.9,-90.93 382.55,-96\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"302.21,-76.56 291.72,-78.06 300.85,-83.43 302.21,-76.56\"/>\n</a>\n</g>\n</g>\n<!-- Node4 -->\n<g id=\"Node000004\" class=\"node\">\n<title>Node4</title>\n<g id=\"a_Node000004\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductSaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-78 355,-78 355,-48 564,-48 564,-78\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductSaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node4 -->\n<g id=\"edge3_Node000001_Node000004\" class=\"edge\">\n<title>Node1&#45;&gt;Node4</title>\n<g id=\"a_edge3_Node000001_Node000004\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M329.48,-63C337.9,-63 346.36,-63 354.7,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"329.26,-59.5 319.26,-63 329.26,-66.5 329.26,-59.5\"/>\n</a>\n</g>\n</g>\n<!-- Node5 -->\n<g id=\"Node000005\" class=\"node\">\n<title>Node5</title>\n<g id=\"a_Node000005\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductUnsaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-30 355,-30 355,0 564,0 564,-30\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductUnsaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node5 -->\n<g id=\"edge4_Node000001_Node000005\" class=\"edge\">\n<title>Node1&#45;&gt;Node5</title>\n<g id=\"a_edge4_Node000001_Node000005\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-45.97C328.09,-40.76 356.9,-35.07 382.55,-30\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"300.85,-42.57 291.72,-47.94 302.21,-49.44 300.85,-42.57\"/>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"74,-72.5 0,-72.5 0,-53.5 74,-53.5 74,-72.5\"/>\n<text text-anchor=\"middle\" x=\"37\" y=\"-60.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Serializable</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M84.49,-63C92.48,-63 101.06,-63 109.86,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"84.36,-59.5 74.36,-63 84.36,-66.5 84.36,-59.5\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
         "items": [
           {
-            "id": "80c24f72-60cd-dfa9-3541-efaa9c8c3121",
+            "id": "5f990fe6-0788-4ae2-a192-c0f42ec7b905",
             "ancestors": [],
             "type": "function",
-            "description": "is a Spring-based component that handles various product-related events such as ProductAddedEvent, ProductSaleableEvent, and ProductUnsaleableEvent. The class logs the event details, including the instance ID, event class name, and event ID, using the SLF4J logger.",
-            "name": "EventLoggingHandler",
-            "location": {
-              "start": 17,
-              "insert": 12,
-              "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 11,
-                "end": 16
-              }
-            },
-            "item_type": "class",
-            "length": 23,
-            "docLength": 5
-          },
-          {
-            "id": "fa63f950-74e5-9b9a-f742-81b320dd6f28",
-            "ancestors": [
-              "80c24f72-60cd-dfa9-3541-efaa9c8c3121"
-            ],
-            "type": "function",
-            "description": "logs information to the log when a `ProductAddedEvent` is triggered.",
-            "params": [
-              {
-                "name": "event",
-                "type_name": "ProductAddedEvent",
-                "description": "ProductAddedEvent that triggered the function execution, providing the class name and ID of the event, as well as the event name.\n\n* `indexId`: An integer representing the index of the event in the handling method's argument list.\n* `event.getClass().getSimpleName()`: The simple name of the class that `event` belongs to.\n* `event.getId()`: An integer representing the unique identifier of the event.\n* `event.getName()`: A string representing the human-readable name of the event.",
-                "complex_type": true
-              }
-            ],
-            "usage": {
-              "language": "java",
-              "code": "@EventHandler \npublic void handle(ProductAddedEvent event) {\nLOG.debug(\"Instance:[{}] Event:{} Id:{} Name:'{}'\", indexId, event.getClass().getSimpleName(), event.getId(), event.getName());\n}\n",
-              "description": "\nIn this example, the handle method would be called with a ProductAddedEvent object as an argument. When called, it will extract the index id, class name of the event, and id and name of the product from the event. Then it logs these values to the debug level using the LoggerFactory.getLogger(EventLoggingHandler.class) method."
-            },
             "name": "handle",
             "location": {
-              "start": 25,
+              "offset": " ",
+              "indent": 4,
               "insert": 25,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 25
             },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "33eb2a98-3788-76a5-504f-49a5c1a2e857",
-            "ancestors": [
-              "80c24f72-60cd-dfa9-3541-efaa9c8c3121"
-            ],
-            "type": "function",
-            "description": "within the `@EventHandler` annotation listens to the `ProductSaleableEvent` and logs the event details, including the instance ID and event class name.",
+            "returns": false,
             "params": [
               {
                 "name": "event",
-                "type_name": "ProductSaleableEvent",
-                "description": "ProductSaleableEvent object that was generated by an event listener and is passed to the `handle()` method for processing.\n\n* `indexId`: A unique identifier for this event instance.\n* `event`: The type of event being handled (e.g., \"ProductSaleableEvent\").\n* `id`: A specific ID assigned to this event instance.",
-                "complex_type": true
+                "type": "ProductAddedEvent"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "@EventHandler\n    public void handle(ProductSaleableEvent event) {\n        LOG.debug(\"Instance:[{}] Event:{} Id:{}\", indexId, event.getClass().getSimpleName(), event.getId());\n    }\n",
-              "description": "\nThe method handle takes one argument (event), which is of type ProductSaleableEvent. When this method is called by the Axon framework with an instance of ProductSaleableEvent as its argument, it will log a debug message to the console using the SLF4J Logger class. The message includes information about the event, such as the event's class name and ID.\nThe value of indexId is set to the value of the spring.application.index variable in the application configuration file. This value is used to identify which instance of the application is logging the event."
-            },
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "At `@EventHandler` level logs the details of a `ProductAddedEvent` to the application log, including the instance ID, event class name, event ID, and event name.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductAddedEvent",
+                  "description": "`ProductAddedEvent` that triggered the function execution, providing its class name and ID number, as well as its name."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "c817863c-af8c-4dd4-9664-27aed6dd59fd",
+            "ancestors": [],
+            "type": "function",
             "name": "handle",
             "location": {
-              "start": 30,
+              "offset": " ",
+              "indent": 4,
               "insert": 30,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 30
             },
-            "item_type": "method",
-            "length": 4,
-            "docLength": null
-          },
-          {
-            "id": "1f35903d-ee94-a29f-1d45-89fdbef01984",
-            "ancestors": [
-              "80c24f72-60cd-dfa9-3541-efaa9c8c3121"
-            ],
-            "type": "function",
-            "description": "is called when an event indicating a product is unsaleable occurs. It logs information about the event, including the class name and ID.",
+            "returns": false,
             "params": [
               {
                 "name": "event",
-                "type_name": "ProductUnsaleableEvent",
-                "description": "ProductUnsaleableEvent that triggered the function execution.\n\n* `LOG`: This is an instance of a class that represents a log4j logger. It allows for logging messages to be sent to the console or other output streams.\n* `indexId`: This is an integer value representing the index of the event in question.\n* `event`: This is a deserialized object representing the `ProductUnsaleableEvent` class. Its properties can be accessed and used as needed.",
-                "complex_type": true
+                "type": "ProductSaleableEvent"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "@EventHandler\npublic void handle(ProductUnsaleableEvent event) {\n    LOG.debug(\"Instance:[{}] Event:{} Id:{}\", indexId, event.getClass().getSimpleName(), event.getId());\n}\n",
-              "description": "\nThis method would be called whenever a ProductUnsaleableEvent is sent to the application. When this happens, the method will be triggered and the LOG.debug message will be printed to the console, with the index ID, the name of the Event, and the ID of the event passed into the handle method."
-            },
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "At `@EventHandler` level logs information about an event of a class type and event ID using the `LOG` method in passive voice.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductSaleableEvent",
+                  "description": "ProductSaleableEvent object that is being handled by the function."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "67ca82d1-6b46-48bc-a644-d35af92185f3",
+            "ancestors": [],
+            "type": "function",
             "name": "handle",
             "location": {
-              "start": 35,
-              "insert": 35,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 35,
+              "start": 35
             },
-            "item_type": "method",
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductUnsaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
             "length": 4,
-            "docLength": null
+            "comment": {
+              "description": "At `@EventHandler` level logs details of a `ProductUnsaleableEvent`. It provides information about the event, including its class name and ID, using the `LOG.debug()` method.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductUnsaleableEvent",
+                  "description": "`ProductUnsaleableEvent` instance that triggered the event handler."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -3441,206 +2663,140 @@
     "path": "query-side/src/main/java/com/soagrowers/productquery/handlers/ProductViewEventHandler.java",
     "content": {
       "structured": {
-        "description": "an event handler class called ProductViewEventHandler that handles events related to products in a product query domain. The class is annotated with Spring's @Component and Axon Framework's @EventHandler annotations. It contains methods to handle three types of events: ProductAddedEvent, ProductSaleableEvent, and ProductUnsaleableEvent. These methods save the updated product information in the ProductRepository after handling each event. The class also implements the ReplayAware interface, which is used to clear the view before replaying the events.",
+        "description": "",
         "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productevents.events.ProductAddedEvent Pages: 1 -->\n<svg width=\"217pt\" height=\"159pt\"\n viewBox=\"0.00 0.00 217.00 159.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 155)\">\n<title>com.soagrowers.productevents.events.ProductAddedEvent</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"209,-30 0,-30 0,0 209,0 209,-30\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"104.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAddedEvent</text>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1AbstractEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"209,-96 0,-96 0,-66 209,-66 209,-96\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-84\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"104.5\" y=\"-73\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractEvent</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M104.5,-55.54C104.5,-46.96 104.5,-37.61 104.5,-30.16\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"101,-55.8 104.5,-65.8 108,-55.8 101,-55.8\"/>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"141.5,-151 67.5,-151 67.5,-132 141.5,-132 141.5,-151\"/>\n<text text-anchor=\"middle\" x=\"104.5\" y=\"-139\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Serializable</text>\n</a>\n</g>\n</g>\n<!-- Node3&#45;&gt;Node2 -->\n<g id=\"edge2_Node000002_Node000003\" class=\"edge\">\n<title>Node3&#45;&gt;Node2</title>\n<g id=\"a_edge2_Node000002_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M104.5,-121.65C104.5,-113.36 104.5,-103.78 104.5,-96.11\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"101,-121.87 104.5,-131.87 108,-121.87 101,-121.87\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
         "items": [
           {
-            "id": "92ff62d8-55e2-8899-2c46-6efd68ea8c74",
+            "id": "9ceb0705-e541-40c5-933e-72186cc5c4d8",
             "ancestors": [],
             "type": "function",
-            "description": "is responsible for handling various events related to products in a system. It listens to events such as product addition, saleability changes, and unSALEability changes, and updates the product repository accordingly. The class also provides methods for clearing the view before replaying events and logging information during event handling.",
-            "name": "ProductViewEventHandler",
-            "location": {
-              "start": 18,
-              "insert": 15,
-              "offset": " ",
-              "indent": 0,
-              "comment": {
-                "start": 14,
-                "end": 17
-              }
-            },
-            "item_type": "class",
-            "length": 51,
-            "docLength": 3
-          },
-          {
-            "id": "7f7495d7-08ec-8192-a249-ea95bda4ce4a",
-            "ancestors": [
-              "92ff62d8-55e2-8899-2c46-6efd68ea8c74"
-            ],
-            "type": "function",
-            "description": "is an EventHandler that processes a `ProductAddedEvent`. It saves the product to the repository with its ID and name.",
-            "params": [
-              {
-                "name": "event",
-                "type_name": "ProductAddedEvent",
-                "description": "`ProductAddedEvent` object that triggered the function, providing its ID and name as additional information.\n\n* `event.getId()`: The unique identifier of the event.\n* `event.getName()`: The name of the product added.\n* `event.getId()`: The ID of the product added.",
-                "complex_type": true
-              }
-            ],
-            "usage": {
-              "language": "java",
-              "code": "ProductAddedEvent event = new ProductAddedEvent();\nevent.setId(\"1234567890\");\nevent.setName(\"iPhone 13 Pro Max\");\nproductViewEventHandler.handle(event);\n",
-              "description": ""
-            },
             "name": "handle",
             "location": {
-              "start": 26,
+              "offset": " ",
+              "indent": 4,
               "insert": 26,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 26
             },
-            "item_type": "method",
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductAddedEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
             "length": 5,
-            "docLength": null
+            "comment": {
+              "description": "Listens for a `ProductAddedEvent` and saves the new product to the repository when triggered.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductAddedEvent",
+                  "description": "`ProductAddedEvent` object that contains information about the added product, including its ID and name."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "c3ce584e-bff0-22b7-564b-d19a122194ac",
-            "ancestors": [
-              "92ff62d8-55e2-8899-2c46-6efd68ea8c74"
-            ],
+            "id": "2ed88038-5735-4b68-b843-7a3d188ee54d",
+            "ancestors": [],
             "type": "function",
-            "description": "is triggered when a `ProductSaleableEvent` occurs and updates the `saleable` status of the related product in the repository, if it was not saleable before.",
-            "params": [
-              {
-                "name": "event",
-                "type_name": "ProductSaleableEvent",
-                "description": "ProductSaleableEvent object that contains information about the sale of a product, including its ID.\n\n* `event.getId()`: This property returns the unique identifier of the event.\n* `productRepository.exists(event.getId())`: This method checks if a product with the specified ID exists in the repository.\n* `product = productRepository.findOne(event.getId())`: This method retrieves the product associated with the specified ID from the repository.\n* `!product.isSaleable()`: This property indicates whether the product is saleable or not.\n* `product.setSaleable(true)`: This method sets the saleability of the product to true.\n* `productRepository.save(product)`: This method saves the modified product in the repository.",
-                "complex_type": true
-              }
-            ],
-            "usage": {
-              "language": "java",
-              "code": "@EventHandler\n    public void handle(ProductSaleableEvent event) {\n        LOG.info(\"ProductSaleableEvent: [{}]\", event.getId());\n        if (productRepository.exists(event.getId())) {\n            Product product = productRepository.findOne(event.getId());\n            if (!product.isSaleable()) {\n                product.setSaleable(true);\n                productRepository.save(product);\n            }\n        }\n    }\n",
-              "description": ""
-            },
             "name": "handle",
             "location": {
-              "start": 32,
+              "offset": " ",
+              "indent": 4,
               "insert": 32,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 32
             },
-            "item_type": "method",
-            "length": 11,
-            "docLength": null
-          },
-          {
-            "id": "8b9607be-75ff-6db1-c54a-816edadf5a04",
-            "ancestors": [
-              "92ff62d8-55e2-8899-2c46-6efd68ea8c74"
-            ],
-            "type": "function",
-            "description": "updates a product's saleability status based on an event, logging and saving changes to the repository if necessary.",
+            "returns": false,
             "params": [
               {
                 "name": "event",
-                "type_name": "ProductUnsaleableEvent",
-                "description": "\"ProductUnsaleableEvent\" object that contains information about an unsaleable product, which is used to determine if the product is still saleable and to update its saleability status in the database.\n\n* `event.getId()` returns the unique identifier of the event.\n* `productRepository.exists(event.getId())` checks if a product with the matching ID exists in the repository.\n* `product = productRepository.findOne(event.getId())` retrieves the product associated with the ID from the repository.\n* `if (product.isSaleable())` checks if the product is saleable, based on its current state.\n* `product.setSaleable(false)` updates the saleability status of the product to false.\n* `productRepository.save(product)` saves the updated product in the repository.",
-                "complex_type": true
+                "type": "ProductSaleableEvent"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "@EventHandler\n    public void handle(ProductUnsaleableEvent event) {\n        LOG.info(\"ProductUnsaleableEvent: [{}]\", event.getId());\n\n        if (productRepository.exists(event.getId())) {\n            Product product = productRepository.findOne(event.getId());\n            if (product.isSaleable()) {\n                product.setSaleable(false);\n                productRepository.save(product);\n            }\n        }\n    }\n",
-              "description": ""
-            },
+            "skip": false,
+            "docLength": null,
+            "length": 11,
+            "comment": {
+              "description": "Updates the saleability status of a product in the repository when a ProductSaleableEvent is triggered.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductSaleableEvent",
+                  "description": "ProductSaleableEvent object that contains information about a saleable event, such as the event ID and product ID."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "4d901402-ea69-4e9a-854b-99c6fa42d128",
+            "ancestors": [],
+            "type": "function",
             "name": "handle",
             "location": {
-              "start": 44,
+              "offset": " ",
+              "indent": 4,
               "insert": 44,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
+              "start": 44
             },
-            "item_type": "method",
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductUnsaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
             "length": 12,
-            "docLength": null
+            "comment": {
+              "description": "Is called when a product becomes unsaleable. It checks if the product exists, and if it's saleable. If it is, it sets the saleable field to false and saves it to the repository.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductUnsaleableEvent",
+                  "description": "ProductUnsaleableEvent object that contains information about an unsaleable product, which is used to determine whether the product is still saleable and to update its saleability status accordingly."
+                }
+              ],
+              "returns": null
+            }
           },
           {
-            "id": "a033c09f-707c-ba99-434c-d75a8997282a",
-            "ancestors": [
-              "92ff62d8-55e2-8899-2c46-6efd68ea8c74"
-            ],
+            "id": "b2d431c5-2e8b-49e7-9e39-34ecae0efde7",
+            "ancestors": [],
             "type": "function",
-            "description": "clears the view before starting an event replay.",
-            "params": [],
-            "usage": {
-              "language": "java",
-              "code": "ProductViewEventHandler eventHandler = new ProductViewEventHandler();\neventHandler.beforeReplay();\n// Replay events here\neventHandler.afterReplay();\n",
-              "description": ""
-            },
-            "name": "beforeReplay",
+            "name": "onReplayFailed",
             "location": {
-              "start": 57,
-              "insert": 57,
               "offset": " ",
               "indent": 4,
-              "comment": null
+              "insert": 65,
+              "start": 65
             },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "7fe38bd1-255e-66b8-4c48-bea3bc485e0c",
-            "ancestors": [
-              "92ff62d8-55e2-8899-2c46-6efd68ea8c74"
-            ],
-            "type": "function",
-            "description": "logs an event to the system log with the message \"Event Replay has FINISHED.\"",
-            "params": [],
-            "usage": {
-              "language": "java",
-              "code": "@Autowired\nprivate ProductViewEventHandler productViewEventHandler;\n\npublic void handleProductAddedEvent(ProductAddedEvent event) {\n    productViewEventHandler.handle(event);\n}\n",
-              "description": "\nIn this example, the `handleProductAddedEvent` method is responsible for handling a `ProductAddedEvent` and passing it to the `productViewEventHandler` for further processing. The `afterReplay()` method is called after the event replay has finished, allowing the system to perform any cleanup or other necessary tasks."
-            },
-            "name": "afterReplay",
-            "location": {
-              "start": 61,
-              "insert": 61,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
-            "length": 3,
-            "docLength": null
-          },
-          {
-            "id": "ed9fe9ce-b086-2f91-1148-ea5366e45f33",
-            "ancestors": [
-              "92ff62d8-55e2-8899-2c46-6efd68ea8c74"
-            ],
-            "type": "function",
-            "description": "logs an error message to the log when event replay fails.",
+            "returns": false,
             "params": [
               {
                 "name": "cause",
-                "type_name": "Throwable",
-                "description": "Throwable that caused the event replay to fail, providing additional information about the error.\n\n* The type of Throwable is specified as `Throwable`.\n* The cause of the failure is reported to the error log using the `LOG.error()` method with a message indicating that the event replay has failed.",
-                "complex_type": true
+                "type": "Throwable"
               }
             ],
-            "usage": {
-              "language": "java",
-              "code": "public class Main {\n    public static void main(String[] args) throws Exception {\n        ProductViewEventHandler eventHandler = new ProductViewEventHandler();\n        Throwable cause = new Exception(\"test\");\n        eventHandler.onReplayFailed(cause);\n    }\n}\n",
-              "description": ""
-            },
-            "name": "onReplayFailed",
-            "location": {
-              "start": 65,
-              "insert": 65,
-              "offset": " ",
-              "indent": 4,
-              "comment": null
-            },
-            "item_type": "method",
+            "skip": false,
+            "docLength": null,
             "length": 3,
-            "docLength": null
+            "comment": {
+              "description": "Logs an error message to the log when replaying an event fails.",
+              "params": [
+                {
+                  "name": "cause",
+                  "type": "Throwable",
+                  "description": "Throwable object that caused the replay to fail."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }
@@ -3673,6 +2829,116 @@
             "item_type": "interface",
             "length": 5,
             "docLength": 3
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "EventLoggingHandler.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/handlers/EventLoggingHandler.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "3afa9852-6db6-4ced-9055-a27ec6c52adf",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 22,
+              "start": 22
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductAddedEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Is called when a product is added to an inventory. It logs information about the event, including the instance ID, event type, and event ID, along with the name of the product.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductAddedEvent",
+                  "description": "`ProductAddedEvent` object that triggered the function execution, providing its class name and ID, as well as the event name."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "6206efe8-ff62-4bfd-86c1-234dfa10ca15",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 27,
+              "start": 27
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductSaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Logs a debug message with the instance ID, event type, and event ID when the `ProductSaleableEvent` occurs.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductSaleableEvent",
+                  "description": "ProductSaleableEvent object that contains information about a product sale, and provides the Event ID for logging purposes."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "ec3d6bb8-5f1e-4d0d-b950-ad8cea95e992",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 32,
+              "start": 32
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductUnsaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "At @EventHandler is triggered when a product becomes unsaleable. It logs information about the event, including the product ID and event type, to the system log using the `LOG.debug()` method.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductUnsaleableEvent",
+                  "description": "product unsaleable event that triggered the `handle()` method execution."
+                }
+              ],
+              "returns": null
+            }
           }
         ]
       }

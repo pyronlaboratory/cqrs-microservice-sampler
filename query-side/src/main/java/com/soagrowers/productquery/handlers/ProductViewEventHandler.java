@@ -13,11 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * is responsible for handling various events related to products in a system. It
- * listens to events such as product addition, saleability changes, and unSALEability
- * changes, and updates the product repository accordingly. The class also provides
- * methods for clearing the view before replaying events and logging information
- * during event handling.
+ * Created by Ben on 10/08/2015.
  */
 @Component
 public class ProductViewEventHandler implements ReplayAware {
@@ -28,15 +24,11 @@ public class ProductViewEventHandler implements ReplayAware {
     private ProductRepository productRepository;
 
     /**
-     * is an EventHandler that processes a `ProductAddedEvent`. It saves the product to
-     * the repository with its ID and name.
+     * Listens for a `ProductAddedEvent` and saves the new product to the repository when
+     * triggered.
      * 
-     * @param event `ProductAddedEvent` object that triggered the function, providing its
-     * ID and name as additional information.
-     * 
-     * 	- `event.getId()`: The unique identifier of the event.
-     * 	- `event.getName()`: The name of the product added.
-     * 	- `event.getId()`: The ID of the product added.
+     * @param event `ProductAddedEvent` object that contains information about the added
+     * product, including its ID and name.
      */
     @EventHandler
     public void handle(ProductAddedEvent event) {
@@ -45,23 +37,11 @@ public class ProductViewEventHandler implements ReplayAware {
     }
 
     /**
-     * is triggered when a `ProductSaleableEvent` occurs and updates the `saleable` status
-     * of the related product in the repository, if it was not saleable before.
+     * Updates the saleability status of a product in the repository when a ProductSaleableEvent
+     * is triggered.
      * 
-     * @param event ProductSaleableEvent object that contains information about the sale
-     * of a product, including its ID.
-     * 
-     * 	- `event.getId()`: This property returns the unique identifier of the event.
-     * 	- `productRepository.exists(event.getId())`: This method checks if a product with
-     * the specified ID exists in the repository.
-     * 	- `product = productRepository.findOne(event.getId())`: This method retrieves the
-     * product associated with the specified ID from the repository.
-     * 	- `!product.isSaleable()`: This property indicates whether the product is saleable
-     * or not.
-     * 	- `product.setSaleable(true)`: This method sets the saleability of the product
-     * to true.
-     * 	- `productRepository.save(product)`: This method saves the modified product in
-     * the repository.
+     * @param event ProductSaleableEvent object that contains information about a saleable
+     * event, such as the event ID and product ID.
      */
     @EventHandler
     public void handle(ProductSaleableEvent event) {
@@ -76,23 +56,13 @@ public class ProductViewEventHandler implements ReplayAware {
     }
 
     /**
-     * updates a product's saleability status based on an event, logging and saving changes
-     * to the repository if necessary.
+     * Is called when a product becomes unsaleable. It checks if the product exists, and
+     * if it's saleable. If it is, it sets the saleable field to false and saves it to
+     * the repository.
      * 
-     * @param event "ProductUnsaleableEvent" object that contains information about an
-     * unsaleable product, which is used to determine if the product is still saleable
-     * and to update its saleability status in the database.
-     * 
-     * 	- `event.getId()` returns the unique identifier of the event.
-     * 	- `productRepository.exists(event.getId())` checks if a product with the matching
-     * ID exists in the repository.
-     * 	- `product = productRepository.findOne(event.getId())` retrieves the product
-     * associated with the ID from the repository.
-     * 	- `if (product.isSaleable())` checks if the product is saleable, based on its
-     * current state.
-     * 	- `product.setSaleable(false)` updates the saleability status of the product to
-     * false.
-     * 	- `productRepository.save(product)` saves the updated product in the repository.
+     * @param event ProductUnsaleableEvent object that contains information about an
+     * unsaleable product, which is used to determine whether the product is still saleable
+     * and to update its saleability status accordingly.
      */
     @EventHandler
     public void handle(ProductUnsaleableEvent event) {
@@ -107,29 +77,18 @@ public class ProductViewEventHandler implements ReplayAware {
         }
     }
 
-    /**
-     * clears the view before starting an event replay.
-     */
     public void beforeReplay() {
         LOG.info("Event Replay is about to START. Clearing the View...");
     }
 
-    /**
-     * logs an event to the system log with the message "Event Replay has FINISHED."
-     */
     public void afterReplay() {
         LOG.info("Event Replay has FINISHED.");
     }
 
     /**
-     * logs an error message to the log when event replay fails.
+     * Logs an error message to the log when replaying an event fails.
      * 
-     * @param cause Throwable that caused the event replay to fail, providing additional
-     * information about the error.
-     * 
-     * 	- The type of Throwable is specified as `Throwable`.
-     * 	- The cause of the failure is reported to the error log using the `LOG.error()`
-     * method with a message indicating that the event replay has failed.
+     * @param cause Throwable object that caused the replay to fail.
      */
     public void onReplayFailed(Throwable cause) {
         LOG.error("Event Replay has FAILED.");

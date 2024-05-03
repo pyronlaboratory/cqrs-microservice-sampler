@@ -15,27 +15,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * is a Spring Boot application that enables Eureka client functionality and provides
- * a REST controller for service instances. The main method starts the application
- * context using SpringApplication.
+ * Created by ben on 19/01/16.
  */
 @EnableEurekaClient
 @SpringBootApplication
 public class Application {
 
     /**
-     * runs a SpringApplication and starts the application.
+     * Runs an application using the SpringApplication class, passing it the class name
+     * and command-line arguments as input.
+     * 
+     * @param args 0 or more command line arguments passed to the `SpringApplication.run()`
+     * method when invoking the application.
      */
     public static void main(String... args) {
         ApplicationContext context = SpringApplication.run(Application.class, args);
     }
 }
 
-/**
- * is a RESTful controller that provides access to service instances by application
- * name. It uses the DiscoveryClient to retrieve a list of service instances associated
- * with a given application name, and returns them in a List format.
- */
 @RestController
 class ServiceInstanceRestController {
 
@@ -45,17 +42,6 @@ class ServiceInstanceRestController {
     @Value("${spring.application.name}")
     private String appName;
 
-    /**
-     * retrieves a list of service instances associated with a given application name
-     * using the Discovery API provided by the `discoveryClient`.
-     * 
-     * @returns a list of Service Instances associated with the specified Application Name.
-     * 
-     * The function returns a list of ServiceInstance objects representing the instances
-     * of services associated with the given application name. Each instance is described
-     * by its ID, display name, and health status. The list provides information about
-     * the number of instances available and their current state.
-     */
     @RequestMapping("/instances")
     public List<ServiceInstance> serviceInstancesByApplicationName() {
         return this.discoveryClient.getInstances(appName);
@@ -63,11 +49,6 @@ class ServiceInstanceRestController {
 }
 
 
-/**
- * is a Spring Boot REST controller that provides a String message through a GET
- * request. The message is stored in a Spring property file and can be retrieved by
- * sending a request to the `/message` endpoint.
- */
 @RefreshScope
 @RestController
 class MessageRestController {
@@ -75,11 +56,6 @@ class MessageRestController {
     @Value("${message}")
     private String message;
 
-    /**
-     * retrieves and returns a predefined string message.
-     * 
-     * @returns a string containing the message value.
-     */
     @RequestMapping("/message")
     String getMessage() {
         return this.message;

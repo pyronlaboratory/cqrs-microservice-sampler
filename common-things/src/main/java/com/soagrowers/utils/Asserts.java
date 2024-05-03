@@ -30,11 +30,12 @@ public enum Asserts {
 
 
     /**
-     * checks if a given boolean value is true or false. If it's not true, an AssertionError
-     * is thrown with a message logged to the logger.
+     * Checks if a provided boolean value is true or false. If it's false, it logs a
+     * warning message and throws an `AssertionError`.
      * 
-     * @param trueism boolean value that is compared to `active` and `false` in the if
-     * statement, triggering the warning and error message when it is false.
+     * @param trueism boolean value that is being checked against the active state of the
+     * function, with an error message and throw of AssertionError occurring if it is not
+     * true.
      */
     public void isTrue(boolean trueism) {
         if (active && trueism == false) {
@@ -44,11 +45,11 @@ public enum Asserts {
     }
 
     /**
-     * checks whether a given boolean value is true or false. If the value is true, an
-     * error message is logged and an AssertionError is thrown.
+     * Checks whether a given boolean value is true or false, and raises an `AssertionError`
+     * if it is not false.
      * 
-     * @param falsehood boolean value that is being tested, with a specific focus on
-     * whether it is true or false.
+     * @param falsehood boolean value that is checked against the active status of the
+     * function, with any value other than `true` causing an AssertionError to be thrown.
      */
     public void isFalse(boolean falsehood) {
         if (active && falsehood == true) {
@@ -58,23 +59,11 @@ public enum Asserts {
     }
 
     /**
-     * checks if an object is not null and is not a list or a string that is empty. If
-     * it finds any issues, it logs an error message and throws an exception.
+     * Checks if an object is not null, not a list, and not the empty string. If any of
+     * these conditions are true, it logs an error message and throws an exception.
      * 
-     * @param object object that is being checked for certain properties, such as being
-     * non-null and having a class that is assignable to List or String.
-     * 
-     * 	- If `active` is true, then `object` represents an object that may be assigned
-     * to a List or String type.
-     * 	- The `Class` of `object` can be any subclass of Object, indicating its potential
-     * assignment to various types.
-     * 	- If `null != object`, then the input is not null and has a non-null value.
-     * 	- If `List.class.isAssignableFrom(object.getClass())`, then `object` is a List
-     * that may be assigned to the method.
-     * 	- If `String.class.isAssignableFrom(object.getClass())`, then `object` is a String
-     * that may be assigned to the method.
-     * 	- If `(String) object == EMPTY_STRING`, then `object` is a String with value equal
-     * to the `EMPTY_STRING` constant.
+     * @param object argument that is passed to the `isNotEmpty` method, which is used
+     * to check if it is not empty.
      */
     public void isNotEmpty(Object object) {
 
@@ -100,15 +89,10 @@ public enum Asserts {
     }
 
     /**
-     * checks whether a list of objects is not empty by iterating over its elements and
-     * calling a nested function `isNotEmpty` on each object.
+     * Verifies if a list of objects is not empty by iterating over its elements and
+     * calling the `isNotEmpty` function on each one.
      * 
-     * @param objects list of objects that are being checked for emptiness by the
-     * `areNotEmpty()` method.
-     * 
-     * The function takes a list of objects as an input, which can have any combination
-     * of attributes and methods. The list may contain duplicate elements or have other
-     * structural properties that can be important for the function's operation.
+     * @param objects List of objects to check for emptiness.
      */
     public void areNotEmpty(List<Object> objects) {
         if (active) {
@@ -118,21 +102,15 @@ public enum Asserts {
         }
     }
 
-    /**
-     * checks whether the `active` flag is set to `true`. If it is, the function returns
-     * `true`, otherwise it returns `false`.
-     * 
-     * @returns a boolean value indicating whether the `active` property is true.
-     */
     public boolean isAssertsOn() {
         return active;
     }
 
     /**
-     * sets the active status of the `Asserts` to the provided `boolean` value, affecting
-     * the output of any subsequent `assert` statements.
+     * Sets the value of `Asserts.active` to the inputted `asserts` parameter.
      * 
-     * @param asserts state of the active assertions in the code.
+     * @param asserts active state of the Asserts system, determining whether it should
+     * be enabled or disabled.
      */
     public void setAssertsTo(boolean asserts) {
         Asserts.active = asserts;

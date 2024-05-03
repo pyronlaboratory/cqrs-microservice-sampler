@@ -7,8 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * is an entity in Java, representing a product with an ID, name, and saleability
- * flag. The class has constructor and getter/setter methods for each field.
+ * Created by ben on 07/10/15.
  */
 @Entity
 public class Product {
@@ -28,60 +27,42 @@ public class Product {
         this.saleable = saleable;
     }
 
-    /**
-     * retrieves the `id` field value associated with an object instance and returns it
-     * as a string.
-     * 
-     * @returns a string representing the `id` variable.
-     */
     public String getId() {
         return id;
     }
 
     /**
-     * sets the `id` field of an object to a given `String` value.
+     * Sets the value of its class member variable `id`.
      * 
-     * @param id value that will be assigned to the `id` field of the class instance being
-     * modified by the function.
+     * @param id new value of the class instance variable `id`.
      */
     public void setId(String id) {
         this.id = id;
     }
 
-    /**
-     * returns a string representing the name of an object.
-     * 
-     * @returns a string representing the name of an object.
-     */
     public String getName() {
         return name;
     }
 
     /**
-     * sets the value of the class instance variable `name`.
+     * Sets the value of the class's `name` field to the input parameter passed by the caller.
      * 
-     * @param name new value of the `name` field for the object being modified by the
-     * `setName()` method.
+     * @param name new value of the object's `name` field.
      */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * evaluates to `true` if the object being passed as a parameter is `saleable`, and
-     * `false` otherwise.
-     * 
-     * @returns a boolean value indicating whether an item is saleable or not.
-     */
     public boolean isSaleable() {
         return saleable;
     }
 
     /**
-     * updates the `saleable` field of the current object by assigning a new boolean value.
+     * Sets the instance field `saleable` to the provided boolean value, ensuring the
+     * field's state is consistent with the passed argument.
      * 
-     * @param saleable Boolean value that determines whether an object is saleable or
-     * not, which is then stored in the `this.saleable` field.
+     * @param saleable boolean value of whether the object is saleable or not, and by
+     * setting it to `true`, the method marks the object as saleable.
      */
     public void setSaleable(boolean saleable) {
         this.saleable = saleable;
