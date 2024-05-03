@@ -14,7 +14,12 @@ import java.util.UUID;
 import static com.jayway.restassured.RestAssured.given;
 
 /**
- * Created by ben on 24/02/16.
+ * is a test class for verifying the health of various systems in a microservices
+ * architecture. It contains several tests that verify the status of different
+ * components such as the gateway, discovery, configuration, commands, and queries.
+ * These tests use Selenium WebDriver to make HTTP requests to the appropriate endpoints
+ * and check the response status code and body content to ensure that the system is
+ * healthy.
  */
 public class AssertSystemHealthTest {
 
@@ -23,11 +28,19 @@ public class AssertSystemHealthTest {
     private String productId = UUID.randomUUID().toString();
 
 
+    /**
+     * prints a message to the console indicating whether the system is in production
+     * mode based on the value of `Statics.PRODUCTION`.
+     */
     @Before
     public void setup(){
         System.out.println("PRODUCTION MODE: " + Statics.PRODUCTION);
     }
 
+    /**
+     * verifies that the gateway is healthy by checking the response status code and body
+     * content of two endpoints: `/health/` and `/routes/`.
+     */
     @Test
     public void assertGatewayHealth() {
         given().
@@ -47,6 +60,10 @@ public class AssertSystemHealthTest {
                 statusCode(HttpStatus.SC_OK);
     }
 
+    /**
+     * verifies that a discovery endpoint returns a status code of 200 OK, with specific
+     * body fields matching expected values related to the Hystrix and Discovery composites.
+     */
     @Test
     public void assertDiscoveryHealth() {
         given().
@@ -60,6 +77,11 @@ public class AssertSystemHealthTest {
                 body("hystrix.status", Matchers.is("UP"));
     }
 
+    /**
+     * verifies that the configuration server responds with an HTTP 200 status code and
+     * a body containing "UP" for both the configuration server and the integration test
+     * resource.
+     */
     @Test
     public void assertConfigHealth() {
         given().
@@ -80,6 +102,12 @@ public class AssertSystemHealthTest {
                 body("name", Matchers.is("integration-test"));
     }
 
+    /**
+     * verifies that the gateway's health check response is UP, and the message returned
+     * by the command configuration endpoint matches the expected value. It also checks
+     * that the instances of the command service are running and have the expected action
+     * type.
+     */
     @Test
     public void assertCommandSideHealth() {
 
@@ -119,6 +147,10 @@ public class AssertSystemHealthTest {
                 body("instanceInfo.actionType", Matchers.hasItems("ADDED"));
     }
 
+    /**
+     * verifies that the query service is up and running, checks the message config, and
+     * retrieves instance information to ensure that the query service is properly initialized.
+     */
     @Test
     public void assertQuerySideHealth() {
 

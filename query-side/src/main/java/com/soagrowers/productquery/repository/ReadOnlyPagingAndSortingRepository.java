@@ -7,8 +7,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 /**
- * extends PagingAndSortingRepository and adds save and delete methods with different
- * parameters, but only for read-only operations.
+ * offers save and delete methods for Product entities with restrictions on the
+ * capabilities offered through the use of exported = false annotations in the
+ * RestResource annotations.
  */
 @NoRepositoryBean
 public interface ReadOnlyPagingAndSortingRepository extends PagingAndSortingRepository<Product, String> {

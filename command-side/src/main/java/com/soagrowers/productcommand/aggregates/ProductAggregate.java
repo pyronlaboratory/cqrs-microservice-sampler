@@ -14,23 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * ProductAggregate is essentially a DDD AggregateRoot (from the DDD concept). In event-sourced
- * systems, Aggregates are often stored and retreived using a 'Repository'. In the
- * simplest terms, Aggregates are the sum of their applied 'Events'.
- * <p/>
- * The Repository stores the aggregate's Events in an 'Event Store'. When an Aggregate
- * is re-loaded by the repository, the Repository re-applies all the stored events
- * to the aggregate thereby re-creating the logical state of the Aggregate.
- * <p/>
- * The ProductAggregate Aggregate can handle and react to 'Commands', and when it reacts
- * to these com.soagrowers.product.commands it creates and 'applies' Events that represent the logical changes
- * to be made. These Events are also handled by the ProductAggregate.
- * <p/>
- * Axon takes care of much of this via the CommandBus, EventBus and Repository.
- * <p/>
- * Axon delivers com.soagrowers.product.commands placed on the bus to the Aggregate. Axon supports the 'applying' of
- * Events to the Aggregate, and the handling of those events by the aggregate or any other
- * configured EventHandlers.
+ * in Axon handles the management of products, including their unique identifier,
+ * name, and saleability status. The class has three constructors: one for the default
+ * instance, one for handling the AddProductCommand, and one for handling the
+ * MarkProductAsSaleableCommand and MarkProductAsUnsaleableCommand. Additionally,
+ * there are event handlers for ProductAddedEvent, ProductSaleableEvent, and
+ * ProductUnsaleableEvent to update the product's state based on events raised by the
+ * application.
  */
 public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
 
@@ -72,6 +62,17 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
         apply(new ProductAddedEvent(command.getId(), command.getName()));
     }
 
+    /**
+     * marks a product as saleable based on its current state. If the product is not
+     * saleable, it applies an event to make it saleable. Otherwise, it throws an exception
+     * indicating that the product is already saleable.
+     * 
+     * @param command MarkProductAsSaleableCommand object that triggered the function
+     * execution, providing the necessary context for the function to perform its actions.
+     * 
+     * The `MarkProductAsSaleableCommand` has an `id` field that represents the product
+     * ID.
+     */
     @CommandHandler
     public void markSaleable(MarkProductAsSaleableCommand command) {
         LOG.debug("Command: 'MarkProductAsSaleableCommand' received.");
@@ -82,6 +83,20 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
         }
     }
 
+    /**
+     * marks a product as unsaleable based on its saleability status, throwing an illegal
+     * state exception if it is already off-sale.
+     * 
+     * @param command `MarkProductAsUnsaleableCommand` message that triggers the function
+     * execution.
+     * 
+     * 	- The function first logs a message in the debug log stating that the
+     * `MarkProductAsUnsaleableCommand` command has been received.
+     * 	- If the product is saleable, a new `ProductUnsaleableEvent` object is created
+     * and applied to the product using the `apply()` method.
+     * 	- If the product is already off-sale, an `IllegalStateException` is thrown with
+     * the message "This ProductAggregate ( id ) is already off-sale."
+     */
     @CommandHandler
     public void markUnsaleable(MarkProductAsUnsaleableCommand command) {
         LOG.debug("Command: 'MarkProductAsUnsaleableCommand' received.");
@@ -93,12 +108,15 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
     }
 
     /**
-     * This method is marked as an EventSourcingHandler and is therefore used by the Axon framework to
-     * handle events of the specified type (ProductAddedEvent). The ProductAddedEvent can be
-     * raised either by the constructor during ProductAggregate(AddProductCommand) or by the
-     * Repository when 're-loading' the aggregate.
-     *
-     * @param event
+     * at `@EventSourcingHandler` processes a `ProductAddedEvent` by assigning the event's
+     * `id` and `name` to instance variables, then logs a debug message with the event's
+     * ID and name.
+     * 
+     * @param event `ProductAddedEvent` that triggered the event handler, providing the
+     * event's ID and name for further processing.
+     * 
+     * 	- `id`: A unique identifier for the event, represented by an integer value.
+     * 	- `name`: The name of the product added, represented by a string value.
      */
     @EventSourcingHandler
     public void on(ProductAddedEvent event) {
@@ -107,26 +125,60 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
         LOG.debug("Applied: 'ProductAddedEvent' [{}] '{}'", event.getId(), event.getName());
     }
 
+    /**
+     * updates the `isSaleable` field of an object and logs a message with the ID of the
+     * received `ProductSaleableEvent`.
+     * 
+     * @param event `ProductSaleableEvent` that triggered the event handler method.
+     * 
+     * 	- `isSaleable`: A boolean variable representing whether the product is saleable
+     * or not. It is set to `true` by this function.
+     */
     @EventSourcingHandler
     public void on(ProductSaleableEvent event) {
         this.isSaleable = true;
         LOG.debug("Applied: 'ProductSaleableEvent' [{}]", event.getId());
     }
 
+    /**
+     * updates the `isSaleable` field of the object to `false` when a `ProductUnsaleableEvent`
+     * occurs, and logs the event ID with a debug message.
+     * 
+     * @param event `ProductUnsaleableEvent` object that is being handled by the `on()`
+     * method.
+     * 
+     * 	- `isSaleable`: A boolean indicating whether the product is saleable or not.
+     * 	- `LOG`: An instance of the `Logger` class used for debugging purposes.
+     */
     @EventSourcingHandler
     public void on(ProductUnsaleableEvent event) {
         this.isSaleable = false;
         LOG.debug("Applied: 'ProductUnsaleableEvent' [{}]", event.getId());
     }
 
+    /**
+     * returns the `id` field of an object.
+     * 
+     * @returns a string representing the value of the `id` field.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * retrieves a string representing the name of an object.
+     * 
+     * @returns a string representing the name of the object.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * determines if an item is saleable based on a predefined condition.
+     * 
+     * @returns a boolean value indicating whether the item is saleable or not.
+     */
     public boolean isSaleable() {
         return isSaleable;
     }

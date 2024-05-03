@@ -5,24 +5,26 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
- * is marked with several annotations: `@EnableEurekaServer`, `@SpringBootApplication`,
- * and `public static void main(String[] args)`. These annotations indicate that the
- * class is a Spring Boot application that enables Eureka server functionality and
- * serves as the primary entry point for the application.
+ * is an Spring Boot application that enables Eureka server functionality and provides
+ * the main entry point for the application.
  */
 @EnableEurekaServer
 @SpringBootApplication
 public class DiscoveryServiceApplication {
 
 	/**
-	 * runs a SpringApplication instance for the `DiscoveryServiceApplication` class,
-	 * passing the `args` array as an argument.
+	 * starts the discovery service application by running the `SpringApplication.run()`
+	 * method with the `DiscoveryServiceApplication` class as its argument and the `args`
+	 * array as its parameter.
 	 * 
-	 * @param args 0 or more command-line arguments passed to the `SpringApplication.run()`
+	 * @param args 1 or more command line arguments passed to the `SpringApplication.run()`
 	 * method when invoking the `main()` function.
 	 * 
-	 * 	- The type of the array is String[].
-	 * 	- The length of the array is provided by the variable `args'.
+	 * 	- It is an array of strings representing command-line arguments passed to the application.
+	 * 	- The length of the array `args` can vary depending on the number and types of
+	 * arguments provided by the user.
+	 * 	- Each element in the array can hold a different value, such as a command-line
+	 * option or parameter.
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DiscoveryServiceApplication.class, args);
