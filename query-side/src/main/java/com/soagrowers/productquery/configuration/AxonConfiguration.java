@@ -67,6 +67,16 @@ class AxonConfiguration {
     }
 
 
+    /**
+     * Creates a new `SimpleCluster` instance with a unique queue name and sets the AMQP
+     * configuration property using the provided `SpringAMQPConsumerConfiguration`.
+     * 
+     * @param springAMQPConsumerConfiguration AMQP consumer configuration for the
+     * SimpleCluster instance created by the `simpleCluster()` method.
+     * 
+     * @returns a Simple Cluster object with the specified queue name and AMQP configuration
+     * properties.
+     */
     @Bean
     SimpleCluster simpleCluster(SpringAMQPConsumerConfiguration springAMQPConsumerConfiguration) {
         SimpleCluster simpleCluster = new SimpleCluster(uniqueQueueName);
@@ -87,6 +97,14 @@ class AxonConfiguration {
         return terminal;
     }
 
+    /**
+     * Generates a clustering event bus for passing events between services in a microservices
+     * architecture, based on a specified cluster selector and terminal state.
+     * 
+     * @param simpleCluster cluster configuration for which event bus instances are generated.
+     * 
+     * @returns a clustering event bus instance.
+     */
     @Bean
     EventBus eventBus(SimpleCluster simpleCluster) {
         return new ClusteringEventBus(new DefaultClusterSelector(simpleCluster), terminal());

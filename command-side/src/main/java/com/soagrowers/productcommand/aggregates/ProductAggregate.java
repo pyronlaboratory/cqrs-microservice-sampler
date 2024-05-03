@@ -72,6 +72,13 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
         apply(new ProductAddedEvent(command.getId(), command.getName()));
     }
 
+    /**
+     * Determines if a product can be marked as saleable and applies the appropriate event
+     * based on the product's current state.
+     * 
+     * @param command `MarkProductAsSaleableCommand`, which triggers the function to
+     * either make the product saleable or report an error if the product is already saleable.
+     */
     @CommandHandler
     public void markSaleable(MarkProductAsSaleableCommand command) {
         LOG.debug("Command: 'MarkProductAsSaleableCommand' received.");
@@ -82,6 +89,15 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
         }
     }
 
+    /**
+     * Takes a `MarkProductAsUnsaleableCommand` object as input and marks a product as
+     * unsaleable if it is currently saleable, or throws an illegal state exception if
+     * it is already off-sale.
+     * 
+     * @param command `MarkProductAsUnsaleableCommand` that triggers the function to mark
+     * a product as unsaleable if it is currently saleable, or raise an illegal state
+     * exception if it is already off-sale.
+     */
     @CommandHandler
     public void markUnsaleable(MarkProductAsUnsaleableCommand command) {
         LOG.debug("Command: 'MarkProductAsUnsaleableCommand' received.");
@@ -93,12 +109,12 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
     }
 
     /**
-     * This method is marked as an EventSourcingHandler and is therefore used by the Axon framework to
-     * handle events of the specified type (ProductAddedEvent). The ProductAddedEvent can be
-     * raised either by the constructor during ProductAggregate(AddProductCommand) or by the
-     * Repository when 're-loading' the aggregate.
-     *
-     * @param event
+     * At `@EventSourcingHandler` takes a `ProductAddedEvent` object and updates the
+     * fields `id` and `name` based on the values in the event, then logs a debug message
+     * indicating the event type and updated field values.
+     * 
+     * @param event `ProductAddedEvent` object passed to the handler, and its fields (`id`
+     * and `name`) are assigned the corresponding values from the event object.
      */
     @EventSourcingHandler
     public void on(ProductAddedEvent event) {
@@ -107,12 +123,25 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
         LOG.debug("Applied: 'ProductAddedEvent' [{}] '{}'", event.getId(), event.getName());
     }
 
+    /**
+     * Updates a component's `isSaleable` property to `true` after receiving a
+     * `ProductSaleableEvent`. It also logs the event ID using `LOG.debug()`.
+     * 
+     * @param event `ProductSaleableEvent` event object passed to the function, allowing
+     * the function to access and process its data.
+     */
     @EventSourcingHandler
     public void on(ProductSaleableEvent event) {
         this.isSaleable = true;
         LOG.debug("Applied: 'ProductSaleableEvent' [{}]", event.getId());
     }
 
+    /**
+     * For `@EventSourcingHandler` sets the value of `isSaleable` to `false` when it
+     * receives a `ProductUnsaleableEvent`.
+     * 
+     * @param event ProductUnsaleableEvent object that triggered the function.
+     */
     @EventSourcingHandler
     public void on(ProductUnsaleableEvent event) {
         this.isSaleable = false;

@@ -31,6 +31,11 @@ public class Product {
         return id;
     }
 
+    /**
+     * Sets the value of its class member variable `id`.
+     * 
+     * @param id new value of the class instance variable `id`.
+     */
     public void setId(String id) {
         this.id = id;
     }
@@ -39,6 +44,11 @@ public class Product {
         return name;
     }
 
+    /**
+     * Sets the value of the class's `name` field to the input parameter passed by the caller.
+     * 
+     * @param name new value of the object's `name` field.
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -47,6 +57,13 @@ public class Product {
         return saleable;
     }
 
+    /**
+     * Sets the instance field `saleable` to the provided boolean value, ensuring the
+     * field's state is consistent with the passed argument.
+     * 
+     * @param saleable boolean value of whether the object is saleable or not, and by
+     * setting it to `true`, the method marks the object as saleable.
+     */
     public void setSaleable(boolean saleable) {
         this.saleable = saleable;
     }

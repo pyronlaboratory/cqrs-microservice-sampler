@@ -3,7 +3,10 @@ package com.soagrowers.productcommand.commands;
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 
 /**
- * Created by Ben on 07/08/2015.
+ * is a Java class that enables Axon to identify the appropriate aggregate to mark
+ * as completed based on the Id field annotated with the TargetAggregateIdentifier
+ * annotation. The class has a constructor and a getId() method for retrieving the
+ * Id value.
  */
 public class MarkProductAsSaleableCommand {
 
@@ -25,6 +28,12 @@ public class MarkProductAsSaleableCommand {
         this.id = id;
     }
 
+    /**
+     * returns the `id` field of a class, providing an easy way to access and retrieve
+     * the value of this instance variable.
+     * 
+     * @returns a string representing the value of the `id` field.
+     */
     public String getId() {
         return id;
     }

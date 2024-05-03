@@ -21,6 +21,13 @@ import java.util.List;
 @SpringBootApplication
 public class Application {
 
+    /**
+     * Runs an application using the SpringApplication class, passing it the class name
+     * and command-line arguments as input.
+     * 
+     * @param args 0 or more command line arguments passed to the `SpringApplication.run()`
+     * method when invoking the application.
+     */
     public static void main(String... args) {
         ApplicationContext context = SpringApplication.run(Application.class, args);
     }

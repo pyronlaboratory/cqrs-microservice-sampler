@@ -18,7 +18,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by ben on 02/03/16.
+ * tests various scenarios for adding products to the system, including successful
+ * requests with valid data and failed requests due to AssertionError or
+ * CommandExecutionException. The class also verifies that bad request parameters
+ * result in a BAD_REQUEST status code.
  */
 public class ProductRestControllerParamValidityTest {
 
@@ -28,6 +31,11 @@ public class ProductRestControllerParamValidityTest {
     @Mock
     CommandGateway gateway;
 
+    /**
+     * initializes various components and sets up mock objects for testing purposes,
+     * including the `ProductRestController`, `MockHttpServletResponse`, and enables
+     * assertions for testing.
+     */
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -36,6 +44,10 @@ public class ProductRestControllerParamValidityTest {
         mockHttpServletResponse = new MockHttpServletResponse();
     }
 
+    /**
+     * tests the `add` method of a controller by providing valid parameters and verifying
+     * that the expected HTTP status code is returned.
+     */
     @Test
     public void testAddWithGoodRequestParams() {
         // Arrange
@@ -50,6 +62,11 @@ public class ProductRestControllerParamValidityTest {
         assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_CREATED);
     }
 
+    /**
+     * tests the controller's `add` method by mocking the gateway's `sendAndWait` method
+     * to throw an AssertionError. The function verifies that the response status code
+     * is 400 Bad Request when the add operation fails.
+     */
     @Test
     public void testFailedAddWithAssertionError() {
         // Arrange
@@ -64,6 +81,11 @@ public class ProductRestControllerParamValidityTest {
         assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);
     }
 
+    /**
+     * tests the `add` method of a controller by throwing a `CommandExecutionException`
+     * when sending the command to the gateway, and verifying that the response status
+     * code is `HttpServletResponse.SC_BAD_REQUEST`.
+     */
     @Test
     public void testFailedAddWithCommandExecutionException() {
         // Arrange
@@ -78,6 +100,10 @@ public class ProductRestControllerParamValidityTest {
         assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);
     }
 
+    /**
+     * tests the add method of a controller by providing invalid input parameters, ensuring
+     * that the method returns a BAD_REQUEST status response.
+     */
     @Test
     public void testAddWithBadRequestParams() {
 

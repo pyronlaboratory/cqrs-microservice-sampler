@@ -25,6 +25,20 @@ public class ProductRestController {
     @Autowired
     CommandGateway commandGateway;
 
+    /**
+     * Handles a POST request to the `/add/{id}` endpoint, adds a product with the given
+     * ID and name using the `AddProductCommand`, and sends a response indicating whether
+     * the addition was successful or not.
+     * 
+     * @param id unique identifier for the product to be added, which is used to check
+     * for duplicates and update the database accordingly.
+     * 
+     * @param name name of the product being added, which is mandatory and will be sent
+     * to the command gateway for processing.
+     * 
+     * @param response HTTP response object, which is updated with the appropriate status
+     * code and message to notify the client of the result of the add product request.
+     */
     @RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
     public void add(@PathVariable(value = "id") String id,
                     @RequestParam(value = "name", required = true) String name,

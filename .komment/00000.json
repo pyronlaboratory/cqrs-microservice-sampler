@@ -1,0 +1,2947 @@
+[
+  {
+    "name": "ProductRestControllerParamValidityTest.java",
+    "path": "command-side/src/test/java/com/soagrowers/productcommand/ProductRestControllerParamValidityTest.java",
+    "content": {
+      "structured": {
+        "description": "A ProductRestController class with multiple test methods for testing its add method. The controller uses Axon Framework's CommandGateway to send a product addition command to a mock HTTP server. The tests verify that the add method correctly handles good request parameters, assertion errors, and bad request parameters. The tests also check that the add method sends the command to the gateway and returns the appropriate HTTP status code.",
+        "items": [
+          {
+            "id": "ee12794f-39d9-dabe-ba43-82f50793f119",
+            "ancestors": [],
+            "type": "function",
+            "description": "tests various scenarios for adding products to the system, including successful requests with valid data and failed requests due to AssertionError or CommandExecutionException. The class also verifies that bad request parameters result in a BAD_REQUEST status code.",
+            "name": "ProductRestControllerParamValidityTest",
+            "location": {
+              "start": 23,
+              "insert": 20,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 19,
+                "end": 22
+              }
+            },
+            "item_type": "class",
+            "length": 75,
+            "docLength": 3
+          },
+          {
+            "id": "be1e19da-7327-a3a7-7741-1f997330006f",
+            "ancestors": [
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
+            ],
+            "type": "function",
+            "description": "initializes various components and sets up mock objects for testing purposes, including the `ProductRestController`, `MockHttpServletResponse`, and enables assertions for testing.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Before\n    public void setup() {\n        MockitoAnnotations.initMocks(this);\n        Asserts.INSTANCE.setAssertsTo(true);\n        controller = new ProductRestController();\n        mockHttpServletResponse = new MockHttpServletResponse();\n    }\n",
+              "description": ""
+            },
+            "name": "setup",
+            "location": {
+              "start": 31,
+              "insert": 31,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 7,
+            "docLength": null
+          },
+          {
+            "id": "538e8ed0-02fa-de80-344e-99364c23ef17",
+            "ancestors": [
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
+            ],
+            "type": "function",
+            "description": "tests the `add` method of a controller by providing valid parameters and verifying that the expected HTTP status code is returned.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\npublic void testAddWithGoodRequestParams() {\n    // Arrange\n    controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n    when(gateway.sendAndWait(any())).thenReturn(null);\n\n    //Act\n    controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n    //Assert\n    verify(gateway).sendAndWait(any());\n    assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_CREATED);\n}\n",
+              "description": ""
+            },
+            "name": "testAddWithGoodRequestParams",
+            "location": {
+              "start": 39,
+              "insert": 39,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 13,
+            "docLength": null
+          },
+          {
+            "id": "de4fa86f-bdb1-d983-2c4a-c93920e72418",
+            "ancestors": [
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
+            ],
+            "type": "function",
+            "description": "tests the controller's `add` method by mocking the gateway's `sendAndWait` method to throw an AssertionError. The function verifies that the response status code is 400 Bad Request when the add operation fails.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testFailedAddWithAssertionError() {\n        // Arrange\n        controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n        when(gateway.sendAndWait(any())).thenThrow(AssertionError.class);\n\n        //Act\n        controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n        //Assert\n        verify(gateway).sendAndWait(any());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n    }\n",
+              "description": ""
+            },
+            "name": "testFailedAddWithAssertionError",
+            "location": {
+              "start": 53,
+              "insert": 53,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 13,
+            "docLength": null
+          },
+          {
+            "id": "f0795d83-88c4-b487-2c43-961395be1562",
+            "ancestors": [
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
+            ],
+            "type": "function",
+            "description": "tests the `add` method of a controller by throwing a `CommandExecutionException` when sending the command to the gateway, and verifying that the response status code is `HttpServletResponse.SC_BAD_REQUEST`.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\npublic void testFailedAddWithCommandExecutionException() {\n    // Arrange\n    controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n    when(gateway.sendAndWait(any())).thenThrow(CommandExecutionException.class);\n\n    //Act\n    controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n    //Assert\n    verify(gateway).sendAndWait(any());\n    assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n}\n",
+              "description": "\nThis test would check if the method add throws a CommandExecutionException and if so, set the status of the response to 400 bad request."
+            },
+            "name": "testFailedAddWithCommandExecutionException",
+            "location": {
+              "start": 67,
+              "insert": 67,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 13,
+            "docLength": null
+          },
+          {
+            "id": "73e45ae7-9edd-379f-8f47-7be870aed1ef",
+            "ancestors": [
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
+            ],
+            "type": "function",
+            "description": "tests the add method of a controller by providing invalid input parameters, ensuring that the method returns a BAD_REQUEST status response.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testAddWithBadRequestParams() {\n\n        controller.add(null, null, mockHttpServletResponse);\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        controller.add(UUID.randomUUID().toString(), null, new MockHttpServletResponse());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        controller.add(UUID.randomUUID().toString(), \"\", new MockHttpServletResponse());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        controller.add(\"\", \"\", new MockHttpServletResponse());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n    }\n",
+              "description": "\nThe testAddWithBadRequestParams method is a unit test that checks whether the add method responds with status code 400 (bad request) when given bad parameters (e.g., null or empty string). The test first calls the add method with null and null as input, then with a random UUID and null as input, then with a random UUID and an empty string as input, and finally with two empty strings as input. For each of these calls, it checks whether the response status is 400 using assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST)."
+            },
+            "name": "testAddWithBadRequestParams",
+            "location": {
+              "start": 81,
+              "insert": 81,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 16,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "DiscoveryServiceApplication.java",
+    "path": "discovery-service/src/main/java/com/soagrowers/DiscoveryServiceApplication.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "61fbd2e4-39ba-45a5-90e7-4851e824fdaa",
+            "ancestors": [],
+            "type": "function",
+            "name": "main",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 11,
+              "start": 11
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "args",
+                "type": "String[]"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Runs the `DiscoveryServiceApplication` and starts its execution.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String[]",
+                  "description": "1 or more command-line arguments passed to the `SpringApplication.run()` method when executing the `DiscoveryServiceApplication`."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ReadOnlyPagingAndSortingRepository.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/repository/ReadOnlyPagingAndSortingRepository.java",
+    "content": {
+      "structured": {
+        "description": "An interface for a read-only paging and sorting repository, which extends the functionality of Spring Data's PagingAndSortingRepository interface. The interface provides methods for saving and deleting entities of type Product, with the delete method taking either a string or an entity parameter. Additionally, the interface marks some of its methods as @RestResource(exported = false) to restrict their availability.",
+        "items": [
+          {
+            "id": "a5dabf04-9709-a895-9347-86ceb7e999d3",
+            "ancestors": [],
+            "type": "function",
+            "description": "offers save and delete methods for Product entities with restrictions on the capabilities offered through the use of exported = false annotations in the RestResource annotations.",
+            "name": "ReadOnlyPagingAndSortingRepository",
+            "location": {
+              "start": 12,
+              "insert": 9,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 8,
+                "end": 11
+              }
+            },
+            "item_type": "interface",
+            "length": 16,
+            "docLength": 3
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Application.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/Application.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "c2af88a0-4e1c-4e60-a5b9-954030d3d700",
+            "ancestors": [],
+            "type": "function",
+            "name": "main",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 24,
+              "start": 24
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "args",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Runs an application using the SpringApplication class, passing it the class name and command-line arguments as input.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String",
+                  "description": "0 or more command line arguments passed to the `SpringApplication.run()` method when invoking the application."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ProductRestController.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/ProductRestController.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "0a93e72e-a1a7-4ab6-add4-904a6ceda418",
+            "ancestors": [],
+            "type": "function",
+            "name": "add",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 28,
+              "start": 28
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "id",
+                "type": "String"
+              },
+              {
+                "name": "name",
+                "type": "String"
+              },
+              {
+                "name": "response",
+                "type": "HttpServletResponse"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 30,
+            "comment": {
+              "description": "Handles a POST request to the `/add/{id}` endpoint, adds a product with the given ID and name using the `AddProductCommand`, and sends a response indicating whether the addition was successful or not.",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "String",
+                  "description": "unique identifier for the product to be added, which is used to check for duplicates and update the database accordingly."
+                },
+                {
+                  "name": "name",
+                  "type": "String",
+                  "description": "name of the product being added, which is mandatory and will be sent to the command gateway for processing."
+                },
+                {
+                  "name": "response",
+                  "type": "HttpServletResponse",
+                  "description": "HTTP response object, which is updated with the appropriate status code and message to notify the client of the result of the add product request."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ProductAggregate.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/aggregates/ProductAggregate.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productcommand.aggregates.ProductAggregate Pages: 1 -->\n<svg width=\"254pt\" height=\"93pt\"\n viewBox=\"0.00 0.00 254.00 93.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 89)\">\n<title>com.soagrowers.productcommand.aggregates.ProductAggregate</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"246,-30 0,-30 0,0 246,0 246,-30\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productcommand.aggregates.</text>\n<text text-anchor=\"middle\" x=\"123\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAggregate</text>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"213,-85 33,-85 33,-66 213,-66 213,-85\"/>\n<text text-anchor=\"middle\" x=\"123\" y=\"-73\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractAnnotatedAggregateRoot</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M123,-55.65C123,-47.36 123,-37.78 123,-30.11\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"119.5,-55.87 123,-65.87 126.5,-55.87 119.5,-55.87\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "c43106a6-8647-43ac-8610-1e81a80d2fae",
+            "ancestors": [],
+            "type": "function",
+            "name": "markSaleable",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 75,
+              "start": 75
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "command",
+                "type": "MarkProductAsSaleableCommand"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 9,
+            "comment": {
+              "description": "Determines if a product can be marked as saleable and applies the appropriate event based on the product's current state.",
+              "params": [
+                {
+                  "name": "command",
+                  "type": "MarkProductAsSaleableCommand",
+                  "description": "`MarkProductAsSaleableCommand`, which triggers the function to either make the product saleable or report an error if the product is already saleable."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "aef3428d-d820-422b-8037-aea42c7f4d5a",
+            "ancestors": [],
+            "type": "function",
+            "name": "markUnsaleable",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 85,
+              "start": 85
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "command",
+                "type": "MarkProductAsUnsaleableCommand"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 9,
+            "comment": {
+              "description": "Takes a `MarkProductAsUnsaleableCommand` object as input and marks a product as unsaleable if it is currently saleable, or throws an illegal state exception if it is already off-sale.",
+              "params": [
+                {
+                  "name": "command",
+                  "type": "MarkProductAsUnsaleableCommand",
+                  "description": "`MarkProductAsUnsaleableCommand` that triggers the function to mark a product as unsaleable if it is currently saleable, or raise an illegal state exception if it is already off-sale."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "b8159917-1f31-45e9-bef0-aa95cf7f59f5",
+            "ancestors": [],
+            "type": "function",
+            "name": "on",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 95,
+              "start": 103
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductAddedEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": 8,
+            "length": 6,
+            "comment": {
+              "description": "At `@EventSourcingHandler` takes a `ProductAddedEvent` object and updates the fields `id` and `name` based on the values in the event, then logs a debug message indicating the event type and updated field values.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductAddedEvent",
+                  "description": "`ProductAddedEvent` object passed to the handler, and its fields (`id` and `name`) are assigned the corresponding values from the event object."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "fd5c34c1-5c31-44ef-8876-545ac1085f00",
+            "ancestors": [],
+            "type": "function",
+            "name": "on",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 110,
+              "start": 110
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductSaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 5,
+            "comment": {
+              "description": "Updates a component's `isSaleable` property to `true` after receiving a `ProductSaleableEvent`. It also logs the event ID using `LOG.debug()`.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductSaleableEvent",
+                  "description": "`ProductSaleableEvent` event object passed to the function, allowing the function to access and process its data."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "66552a77-e1da-426d-bfb4-6c7b0f9cb285",
+            "ancestors": [],
+            "type": "function",
+            "name": "on",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 116,
+              "start": 116
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductUnsaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 5,
+            "comment": {
+              "description": "For `@EventSourcingHandler` sets the value of `isSaleable` to `false` when it receives a `ProductUnsaleableEvent`.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductUnsaleableEvent",
+                  "description": "ProductUnsaleableEvent object that triggered the function."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "AddProductCommand.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/commands/AddProductCommand.java",
+    "content": {
+      "structured": {
+        "description": "An `AddProductCommand` class that represents a command for adding a product to an aggregate root. The class has two fields: `id` and `name`, which are used to identify and label the product respectively. The class also includes methods for getting the `id` and `name` of the product.",
+        "items": [
+          {
+            "id": "c81fb5b7-f2bd-b98b-4846-33b59fb0d0b7",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a Java class that represents an instruction to add a product to an aggregate entity. The class has two instance fields: `id` and `name`, which represent the unique identifier and name of the product, respectively. The class also has two methods: `getId()` and `getName()`, which return the value of the `id` and `name` fields, respectively.",
+            "name": "AddProductCommand",
+            "location": {
+              "start": 8,
+              "insert": 5,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 4,
+                "end": 7
+              }
+            },
+            "item_type": "class",
+            "length": 19,
+            "docLength": 3
+          },
+          {
+            "id": "10857c50-3c05-2fa6-1c48-f5cc3b33f724",
+            "ancestors": [
+              "c81fb5b7-f2bd-b98b-4846-33b59fb0d0b7"
+            ],
+            "type": "function",
+            "description": "returns the `id` field of an object.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the value of the `id` variable.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "AddProductCommand command = new AddProductCommand(\"1234\", \"product name\");\nString id = command.getId(); // returns \"1234\"\n",
+              "description": ""
+            },
+            "name": "getId",
+            "location": {
+              "start": 19,
+              "insert": 19,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "8a4ba4dd-ca88-e88b-4a48-5a5f1a635dea",
+            "ancestors": [
+              "c81fb5b7-f2bd-b98b-4846-33b59fb0d0b7"
+            ],
+            "type": "function",
+            "description": "retrieves the name of an object and returns it as a string.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representation of the variable `name`.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "public class Product{\n  private String id;\n  private String name;\n  \n  public Product(String id, String name) {\n    this.id = id;\n    this.name = name;\n  }\n  \n  public void setName(String name) {\n    this.name = name;\n  }\n  \n  public String getName() {\n    return name;\n  }\n}\n",
+              "description": "\nThe code above shows a class named Product with two fields, id and name. The class also has a constructor that takes in two parameters, which are used to set the values of the two fields. Additionally, it has a method called setName which sets the value of the field name, and getName which returns the current value of the field name.\nThe example below shows how the method getName can be used:\n"
+            },
+            "name": "getName",
+            "location": {
+              "start": 23,
+              "insert": 23,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "MarkProductAsSaleableCommand.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/commands/MarkProductAsSaleableCommand.java",
+    "content": {
+      "structured": {
+        "description": "A class called `MarkProductAsSaleableCommand` that handles marking a product as saleable. The class has a constructor that takes in an `id` field, which is used by Axon to identify the correct aggregate to update. The `getId()` method returns the value of the `id` field.",
+        "items": [
+          {
+            "id": "781576dc-99f7-5f81-9b4c-b78400e90ee4",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a Java class that enables Axon to identify the appropriate aggregate to mark as completed based on the Id field annotated with the TargetAggregateIdentifier annotation. The class has a constructor and a getId() method for retrieving the Id value.",
+            "name": "MarkProductAsSaleableCommand",
+            "location": {
+              "start": 8,
+              "insert": 5,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 4,
+                "end": 7
+              }
+            },
+            "item_type": "class",
+            "length": 24,
+            "docLength": 3
+          },
+          {
+            "id": "d98c51e8-f53e-6abb-354b-a2b775c042a7",
+            "ancestors": [
+              "781576dc-99f7-5f81-9b4c-b78400e90ee4"
+            ],
+            "type": "function",
+            "description": "returns the `id` field of a class, providing an easy way to access and retrieve the value of this instance variable.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the value of the `id` field.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "import com.soagrowers.productcommand.commands.MarkProductAsSaleableCommand;\n\n// Creating a command object\nMarkProductAsSaleableCommand myCommand = new MarkProductAsSaleableCommand(\"12345\");\n\n// Accessing the ID of the product to be marked as saleable\nString id = myCommand.getId(); // returns \"12345\"\n",
+              "description": ""
+            },
+            "name": "getId",
+            "location": {
+              "start": 28,
+              "insert": 28,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "MarkProductAsUnsaleableCommand.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/commands/MarkProductAsUnsaleableCommand.java",
+    "content": {
+      "structured": {
+        "description": "A `MarkProductAsUnsaleableCommand` class with a constructor and a getter method for an `id` field. The command sets the `id` field of an aggregate to indicate that the product is un saleable. The `TargetAggregateIdentifier` annotation specifies the aggregate identifier for which the command is intended.",
+        "items": [
+          {
+            "id": "d11422f4-75d5-1288-4249-02629cbf18e1",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a Axon Framework command that sets an aggregate identifier, allowing it to target a specific aggregation root. The class has a constructor that takes an id parameter and a method to retrieve the id.",
+            "name": "MarkProductAsUnsaleableCommand",
+            "location": {
+              "start": 10,
+              "insert": 5,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 4,
+                "end": 9
+              }
+            },
+            "item_type": "class",
+            "length": 19,
+            "docLength": 5
+          },
+          {
+            "id": "fe0c55d6-f5a9-439c-7c4b-5b84d51f2c7a",
+            "ancestors": [
+              "d11422f4-75d5-1288-4249-02629cbf18e1"
+            ],
+            "type": "function",
+            "description": "retrieves the value of a variable `id`.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the value of the `id` variable.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "String productId = \"12345\";\nMarkProductAsUnsaleableCommand markProductAsUnsaleableCommand = new MarkProductAsUnsaleableCommand(productId);\n// get id from command \nString productIdFromCommand = markProductAsUnsaleableCommand.getId();\n",
+              "description": "\nThe code above creates a new instance of the `MarkProductAsUnsaleableCommand` class and sets its Id field to a string with the value \"12345\". It then retrieves the value of the id field from the command using the `getId()` method."
+            },
+            "name": "getId",
+            "location": {
+              "start": 25,
+              "insert": 25,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "WebCreateTodoCommand.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/commands/WebCreateTodoCommand.java",
+    "content": {
+      "structured": {
+        "description": "A class `WebCreateTodoCommand` that represents a command for creating a new todo item on a web application. The class has two instance fields: `id` and `description`, which hold the identifier and text of the todo item respectively. The class also provides getters for each field.",
+        "items": [
+          {
+            "id": "cb763ce4-da28-39a5-f043-c4bd348fd895",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a Java object that represents a command for creating a new todo item. It has two instance variables: id and description, which are used to store the unique identifier and textual description of the item, respectively. The class also includes a constructor and two method implementations for retrieving the id and description of the todo item.",
+            "name": "WebCreateTodoCommand",
+            "location": {
+              "start": 6,
+              "insert": 3,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 2,
+                "end": 5
+              }
+            },
+            "item_type": "class",
+            "length": 18,
+            "docLength": 3
+          },
+          {
+            "id": "020bc81a-09b8-3faa-1f42-4f20e9889a81",
+            "ancestors": [
+              "cb763ce4-da28-39a5-f043-c4bd348fd895"
+            ],
+            "type": "function",
+            "description": "retrieves the value of a field named 'id'.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the value of the `id` field.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "public static void main(String[] args) {\n    WebCreateTodoCommand command = new WebCreateTodoCommand(\"id\", \"description\");\n    String id = command.getId();\n    System.out.println(id);\n}\n",
+              "description": ""
+            },
+            "name": "getId",
+            "location": {
+              "start": 16,
+              "insert": 16,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "7837186c-15e9-d2bf-5740-77a2790a86c7",
+            "ancestors": [
+              "cb763ce4-da28-39a5-f043-c4bd348fd895"
+            ],
+            "type": "function",
+            "description": "retrieves a string representing a description associated with an object.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string containing the value of the `description` field.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "WebCreateTodoCommand command = new WebCreateTodoCommand(\"id\", \"description\");\nString description = command.getDescription(); \n",
+              "description": ""
+            },
+            "name": "getDescription",
+            "location": {
+              "start": 20,
+              "insert": 20,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "AbstractEvent.java",
+    "path": "common-things/src/main/java/com/soagrowers/productevents/events/AbstractEvent.java",
+    "content": {
+      "structured": {
+        "description": "An abstract class named AbstractEvent that serves as a base class for events. The class has a constructor and a getter method for accessing the event ID, which is stored in a private field called id.",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productevents.events.AbstractEvent Pages: 1 -->\n<svg width=\"572pt\" height=\"134pt\"\n viewBox=\"0.00 0.00 572.00 134.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 130)\">\n<title>com.soagrowers.productevents.events.AbstractEvent</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"319,-78 110,-78 110,-48 319,-48 319,-78\"/>\n<text text-anchor=\"start\" x=\"118\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"214.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractEvent</text>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductAddedEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-126 355,-126 355,-96 564,-96 564,-126\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-114\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-103\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAddedEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node3 -->\n<g id=\"edge2_Node000001_Node000003\" class=\"edge\">\n<title>Node1&#45;&gt;Node3</title>\n<g id=\"a_edge2_Node000001_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-80.03C328.09,-85.24 356.9,-90.93 382.55,-96\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"302.21,-76.56 291.72,-78.06 300.85,-83.43 302.21,-76.56\"/>\n</a>\n</g>\n</g>\n<!-- Node4 -->\n<g id=\"Node000004\" class=\"node\">\n<title>Node4</title>\n<g id=\"a_Node000004\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductSaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-78 355,-78 355,-48 564,-48 564,-78\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductSaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node4 -->\n<g id=\"edge3_Node000001_Node000004\" class=\"edge\">\n<title>Node1&#45;&gt;Node4</title>\n<g id=\"a_edge3_Node000001_Node000004\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M329.48,-63C337.9,-63 346.36,-63 354.7,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"329.26,-59.5 319.26,-63 329.26,-66.5 329.26,-59.5\"/>\n</a>\n</g>\n</g>\n<!-- Node5 -->\n<g id=\"Node000005\" class=\"node\">\n<title>Node5</title>\n<g id=\"a_Node000005\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductUnsaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-30 355,-30 355,0 564,0 564,-30\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductUnsaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node5 -->\n<g id=\"edge4_Node000001_Node000005\" class=\"edge\">\n<title>Node1&#45;&gt;Node5</title>\n<g id=\"a_edge4_Node000001_Node000005\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-45.97C328.09,-40.76 356.9,-35.07 382.55,-30\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"300.85,-42.57 291.72,-47.94 302.21,-49.44 300.85,-42.57\"/>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"74,-72.5 0,-72.5 0,-53.5 74,-53.5 74,-72.5\"/>\n<text text-anchor=\"middle\" x=\"37\" y=\"-60.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Serializable</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M84.49,-63C92.48,-63 101.06,-63 109.86,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"84.36,-59.5 74.36,-63 84.36,-66.5 84.36,-59.5\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "6b5d07bf-15f6-85a9-a44b-e3d7bc44c9cb",
+            "ancestors": [],
+            "type": "function",
+            "description": "is an abstract class that serves as a base for other events in the product events package. It provides an identifier (id) field and a getId() method for retrieving the identifier. The class also has a constructor that takes an id parameter for customizing the event instance.",
+            "name": "AbstractEvent",
+            "location": {
+              "start": 5,
+              "insert": 5,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 14,
+            "docLength": null
+          },
+          {
+            "id": "599566c4-69d0-209d-1a49-662339c83c68",
+            "ancestors": [
+              "6b5d07bf-15f6-85a9-a44b-e3d7bc44c9cb"
+            ],
+            "type": "function",
+            "description": "returns the `id` field value associated with a given object instance.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the value of the `id` variable.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "AbstractEvent event = new AbstractEvent(\"ID\");\nString eventId = event.getId();\nSystem.out.println(eventId);\n",
+              "description": "\nThis code creates a new instance of the abstract class and assigns it to the variable \"event\". It then uses the getId() method to retrieve the id of the event and stores it in the string \"eventId\". Finally, it prints the value of \"eventId\" to the console."
+            },
+            "name": "getId",
+            "location": {
+              "start": 15,
+              "insert": 15,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ProductAddedEvent.java",
+    "path": "common-things/src/main/java/com/soagrowers/productevents/events/ProductAddedEvent.java",
+    "content": {
+      "structured": {
+        "description": "A `ProductAddedEvent` class that extends an abstract event class. The `ProductAddedEvent` class has a constructor that takes a unique identifier and the name of the product as parameters. It also provides a getter method for the name of the product.",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productevents.events.AbstractEvent Pages: 1 -->\n<svg width=\"572pt\" height=\"134pt\"\n viewBox=\"0.00 0.00 572.00 134.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 130)\">\n<title>com.soagrowers.productevents.events.AbstractEvent</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"319,-78 110,-78 110,-48 319,-48 319,-78\"/>\n<text text-anchor=\"start\" x=\"118\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"214.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractEvent</text>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductAddedEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-126 355,-126 355,-96 564,-96 564,-126\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-114\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-103\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAddedEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node3 -->\n<g id=\"edge2_Node000001_Node000003\" class=\"edge\">\n<title>Node1&#45;&gt;Node3</title>\n<g id=\"a_edge2_Node000001_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-80.03C328.09,-85.24 356.9,-90.93 382.55,-96\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"302.21,-76.56 291.72,-78.06 300.85,-83.43 302.21,-76.56\"/>\n</a>\n</g>\n</g>\n<!-- Node4 -->\n<g id=\"Node000004\" class=\"node\">\n<title>Node4</title>\n<g id=\"a_Node000004\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductSaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-78 355,-78 355,-48 564,-48 564,-78\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductSaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node4 -->\n<g id=\"edge3_Node000001_Node000004\" class=\"edge\">\n<title>Node1&#45;&gt;Node4</title>\n<g id=\"a_edge3_Node000001_Node000004\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M329.48,-63C337.9,-63 346.36,-63 354.7,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"329.26,-59.5 319.26,-63 329.26,-66.5 329.26,-59.5\"/>\n</a>\n</g>\n</g>\n<!-- Node5 -->\n<g id=\"Node000005\" class=\"node\">\n<title>Node5</title>\n<g id=\"a_Node000005\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductUnsaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-30 355,-30 355,0 564,0 564,-30\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductUnsaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node5 -->\n<g id=\"edge4_Node000001_Node000005\" class=\"edge\">\n<title>Node1&#45;&gt;Node5</title>\n<g id=\"a_edge4_Node000001_Node000005\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-45.97C328.09,-40.76 356.9,-35.07 382.55,-30\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"300.85,-42.57 291.72,-47.94 302.21,-49.44 300.85,-42.57\"/>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"74,-72.5 0,-72.5 0,-53.5 74,-53.5 74,-72.5\"/>\n<text text-anchor=\"middle\" x=\"37\" y=\"-60.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Serializable</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M84.49,-63C92.48,-63 101.06,-63 109.86,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"84.36,-59.5 74.36,-63 84.36,-66.5 84.36,-59.5\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "d16be346-60df-57b3-7346-3cb46071778d",
+            "ancestors": [],
+            "type": "function",
+            "description": "is an extension of the AbstractEvent class and represents an event related to the addition of a product. The class has a name field that stores the product's name.",
+            "name": "ProductAddedEvent",
+            "location": {
+              "start": 4,
+              "insert": 4,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 17,
+            "docLength": null
+          },
+          {
+            "id": "23005ab9-81ae-268c-7845-e0a48bc4f38d",
+            "ancestors": [
+              "d16be346-60df-57b3-7346-3cb46071778d"
+            ],
+            "type": "function",
+            "description": "retrieves the value of the `name` field of a class instance and returns it as a string.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the value of the `name` variable.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "ProductAddedEvent product = new ProductAddedEvent(\"1234\", \"name\");\nString name = product.getName();\nSystem.out.println(name);\n",
+              "description": ""
+            },
+            "name": "getName",
+            "location": {
+              "start": 17,
+              "insert": 17,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ProductSaleableEvent.java",
+    "path": "common-things/src/main/java/com/soagrowers/productevents/events/ProductSaleableEvent.java",
+    "content": {
+      "structured": {
+        "description": "An abstract class named ProductSaleableEvent that extends AbstractEvent. The class has a constructor that takes a string parameter and initializes a super() call for setting the event ID.",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productevents.events.AbstractEvent Pages: 1 -->\n<svg width=\"572pt\" height=\"134pt\"\n viewBox=\"0.00 0.00 572.00 134.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 130)\">\n<title>com.soagrowers.productevents.events.AbstractEvent</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"319,-78 110,-78 110,-48 319,-48 319,-78\"/>\n<text text-anchor=\"start\" x=\"118\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"214.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractEvent</text>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductAddedEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-126 355,-126 355,-96 564,-96 564,-126\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-114\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-103\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAddedEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node3 -->\n<g id=\"edge2_Node000001_Node000003\" class=\"edge\">\n<title>Node1&#45;&gt;Node3</title>\n<g id=\"a_edge2_Node000001_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-80.03C328.09,-85.24 356.9,-90.93 382.55,-96\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"302.21,-76.56 291.72,-78.06 300.85,-83.43 302.21,-76.56\"/>\n</a>\n</g>\n</g>\n<!-- Node4 -->\n<g id=\"Node000004\" class=\"node\">\n<title>Node4</title>\n<g id=\"a_Node000004\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductSaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-78 355,-78 355,-48 564,-48 564,-78\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductSaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node4 -->\n<g id=\"edge3_Node000001_Node000004\" class=\"edge\">\n<title>Node1&#45;&gt;Node4</title>\n<g id=\"a_edge3_Node000001_Node000004\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M329.48,-63C337.9,-63 346.36,-63 354.7,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"329.26,-59.5 319.26,-63 329.26,-66.5 329.26,-59.5\"/>\n</a>\n</g>\n</g>\n<!-- Node5 -->\n<g id=\"Node000005\" class=\"node\">\n<title>Node5</title>\n<g id=\"a_Node000005\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductUnsaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-30 355,-30 355,0 564,0 564,-30\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductUnsaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node5 -->\n<g id=\"edge4_Node000001_Node000005\" class=\"edge\">\n<title>Node1&#45;&gt;Node5</title>\n<g id=\"a_edge4_Node000001_Node000005\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-45.97C328.09,-40.76 356.9,-35.07 382.55,-30\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"300.85,-42.57 291.72,-47.94 302.21,-49.44 300.85,-42.57\"/>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"74,-72.5 0,-72.5 0,-53.5 74,-53.5 74,-72.5\"/>\n<text text-anchor=\"middle\" x=\"37\" y=\"-60.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Serializable</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M84.49,-63C92.48,-63 101.06,-63 109.86,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"84.36,-59.5 74.36,-63 84.36,-66.5 84.36,-59.5\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "4afad042-cfc6-fc95-c24b-d6487fa7027f",
+            "ancestors": [],
+            "type": "function",
+            "description": "extends AbstractEvent and provides a way to create an event object with either no ID or a specific ID during its constructor, following the same pattern as the superclass AbstractEvent.\n",
+            "fields": [],
+            "name": "ProductSaleableEvent",
+            "location": {
+              "start": 4,
+              "insert": 4,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 9,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ProductUnsaleableEvent.java",
+    "path": "common-things/src/main/java/com/soagrowers/productevents/events/ProductUnsaleableEvent.java",
+    "content": {
+      "structured": {
+        "description": "A class named ProductUnsaleableEvent that extends AbstractEvent. The class has a constructor that takes an ID string as input and another constructor that inherits the ID from the superclass.",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productevents.events.AbstractEvent Pages: 1 -->\n<svg width=\"572pt\" height=\"134pt\"\n viewBox=\"0.00 0.00 572.00 134.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 130)\">\n<title>com.soagrowers.productevents.events.AbstractEvent</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"319,-78 110,-78 110,-48 319,-48 319,-78\"/>\n<text text-anchor=\"start\" x=\"118\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"214.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractEvent</text>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductAddedEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-126 355,-126 355,-96 564,-96 564,-126\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-114\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-103\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAddedEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node3 -->\n<g id=\"edge2_Node000001_Node000003\" class=\"edge\">\n<title>Node1&#45;&gt;Node3</title>\n<g id=\"a_edge2_Node000001_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-80.03C328.09,-85.24 356.9,-90.93 382.55,-96\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"302.21,-76.56 291.72,-78.06 300.85,-83.43 302.21,-76.56\"/>\n</a>\n</g>\n</g>\n<!-- Node4 -->\n<g id=\"Node000004\" class=\"node\">\n<title>Node4</title>\n<g id=\"a_Node000004\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductSaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-78 355,-78 355,-48 564,-48 564,-78\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductSaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node4 -->\n<g id=\"edge3_Node000001_Node000004\" class=\"edge\">\n<title>Node1&#45;&gt;Node4</title>\n<g id=\"a_edge3_Node000001_Node000004\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M329.48,-63C337.9,-63 346.36,-63 354.7,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"329.26,-59.5 319.26,-63 329.26,-66.5 329.26,-59.5\"/>\n</a>\n</g>\n</g>\n<!-- Node5 -->\n<g id=\"Node000005\" class=\"node\">\n<title>Node5</title>\n<g id=\"a_Node000005\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductUnsaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-30 355,-30 355,0 564,0 564,-30\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductUnsaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node5 -->\n<g id=\"edge4_Node000001_Node000005\" class=\"edge\">\n<title>Node1&#45;&gt;Node5</title>\n<g id=\"a_edge4_Node000001_Node000005\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-45.97C328.09,-40.76 356.9,-35.07 382.55,-30\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"300.85,-42.57 291.72,-47.94 302.21,-49.44 300.85,-42.57\"/>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"74,-72.5 0,-72.5 0,-53.5 74,-53.5 74,-72.5\"/>\n<text text-anchor=\"middle\" x=\"37\" y=\"-60.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Serializable</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M84.49,-63C92.48,-63 101.06,-63 109.86,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"84.36,-59.5 74.36,-63 84.36,-66.5 84.36,-59.5\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "7a65d51d-13bd-42a5-0e41-b5d875de1b87",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a subclass of AbstractEvent with no fields and two constructors: a default constructor and a constructor that takes a String ID as a parameter.\n",
+            "fields": [],
+            "name": "ProductUnsaleableEvent",
+            "location": {
+              "start": 4,
+              "insert": 4,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 9,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Asserts.java",
+    "path": "common-things/src/main/java/com/soagrowers/utils/Asserts.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "782e531e-60a6-408d-9c84-e3a237885261",
+            "ancestors": [],
+            "type": "function",
+            "name": "isTrue",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 32,
+              "start": 32
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "trueism",
+                "type": "boolean"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 6,
+            "comment": {
+              "description": "Checks if a provided boolean value is true or false. If it's false, it logs a warning message and throws an `AssertionError`.",
+              "params": [
+                {
+                  "name": "trueism",
+                  "type": "boolean",
+                  "description": "boolean value that is being checked against the active state of the function, with an error message and throw of AssertionError occurring if it is not true."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "bb1eb442-93c2-46b2-a975-b9e4e9801f53",
+            "ancestors": [],
+            "type": "function",
+            "name": "isFalse",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 39,
+              "start": 39
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "falsehood",
+                "type": "boolean"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 6,
+            "comment": {
+              "description": "Checks whether a given boolean value is true or false, and raises an `AssertionError` if it is not false.",
+              "params": [
+                {
+                  "name": "falsehood",
+                  "type": "boolean",
+                  "description": "boolean value that is checked against the active status of the function, with any value other than `true` causing an AssertionError to be thrown."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "17ed4517-6986-4588-a4df-09c8c9ab1a85",
+            "ancestors": [],
+            "type": "function",
+            "name": "isNotEmpty",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 46,
+              "start": 46
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "object",
+                "type": "Object"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 22,
+            "comment": {
+              "description": "Checks if an object is not null, not a list, and not the empty string. If any of these conditions are true, it logs an error message and throws an exception.",
+              "params": [
+                {
+                  "name": "object",
+                  "type": "Object",
+                  "description": "argument that is passed to the `isNotEmpty` method, which is used to check if it is not empty."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "602565ab-345a-48f0-8fb3-e4da5fc551d6",
+            "ancestors": [],
+            "type": "function",
+            "name": "areNotEmpty",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 69,
+              "start": 69
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "objects",
+                "type": "List<Object>"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 7,
+            "comment": {
+              "description": "Verifies if a list of objects is not empty by iterating over its elements and calling the `isNotEmpty` function on each one.",
+              "params": [
+                {
+                  "name": "objects",
+                  "type": "List<Object>",
+                  "description": "List of objects to check for emptiness."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "21cb1677-dc96-4eaa-83cc-c05d66f7a86e",
+            "ancestors": [],
+            "type": "function",
+            "name": "setAssertsTo",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 81,
+              "start": 81
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "asserts",
+                "type": "boolean"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Sets the value of `Asserts.active` to the inputted `asserts` parameter.",
+              "params": [
+                {
+                  "name": "asserts",
+                  "type": "boolean",
+                  "description": "active state of the Asserts system, determining whether it should be enabled or disabled."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "AssertsTest.java",
+    "path": "common-things/src/test/java/com/soagrowers/utils/AssertsTest.java",
+    "content": {
+      "structured": {
+        "description": "A test class called AssertsTest with several test methods that test various aspects of the Asserts class, including setting and checking the value of the `isAssertsOn` field, testing whether a list is not empty, and verifying that a method throws an expected exception. The code uses Java's assertions framework and packages such as org.junit and java.util.",
+        "items": [
+          {
+            "id": "a0c1928d-4982-0baa-0848-00cb1b16d886",
+            "ancestors": [],
+            "type": "function",
+            "description": "in the provided Java file contains several tests for the `Asserts` class, including testing the `setAssertsTo()` method, `isNotEmpty()`, and `areNotEmpty()` methods. These tests verify that the `Asserts` instance is properly configured and that its methods behave as expected when given different inputs.",
+            "name": "AssertsTest",
+            "location": {
+              "start": 14,
+              "insert": 11,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 10,
+                "end": 13
+              }
+            },
+            "item_type": "class",
+            "length": 74,
+            "docLength": 3
+          },
+          {
+            "id": "6058ebdf-14f0-8baf-ed49-3fa549fc3c14",
+            "ancestors": [
+              "a0c1928d-4982-0baa-0848-00cb1b16d886"
+            ],
+            "type": "function",
+            "description": "sets the Asserts instance to true, enabling assertion checks throughout the code.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "import org.junit.Before;\nimport org.junit.Test;\n\nimport java.util.Arrays;\nimport java.util.UUID;\n\npublic class AssertsTest {\n\n    @Before\n    public void setup(){\n        Asserts.INSTANCE.setAssertsTo(true);\n    }\n\n    @Test\n    public void testSetAsserts(){\n\n        Asserts.INSTANCE.setAssertsTo(true);\n        assertTrue(Asserts.INSTANCE.isAssertsOn());\n\n        Asserts.INSTANCE.setAssertsTo(false);\n        assertFalse(Asserts.INSTANCE.isAssertsOn());\n    }\n}\n",
+              "description": ""
+            },
+            "name": "setup",
+            "location": {
+              "start": 16,
+              "insert": 16,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "1503c8ba-e9d0-ad80-8c4e-d1fcbdfa5cab",
+            "ancestors": [
+              "a0c1928d-4982-0baa-0848-00cb1b16d886"
+            ],
+            "type": "function",
+            "description": "sets and verifies the state of the `Asserts.INSTANCE.setAssertsTo()` method, which enables or disables asserts on a Java application.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testSetAsserts(){\n\n        Asserts.INSTANCE.setAssertsTo(true);\n        assertTrue(Asserts.INSTANCE.isAssertsOn());\n\n        Asserts.INSTANCE.setAssertsTo(false);\n        assertFalse(Asserts.INSTANCE.isAssertsOn());\n    }\n",
+              "description": "\nThis method is testing the setAsserts() method by first setting it to true and then false. It uses the assertTrue() and assertFalse() methods provided by JUnit to test if the setAsserts() method successfully sets the value of the assertsTo variable to true or false. The method is used to ensure that the setAsserts() method works correctly when it is given a boolean argument."
+            },
+            "name": "testSetAsserts",
+            "location": {
+              "start": 21,
+              "insert": 21,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 9,
+            "docLength": null
+          },
+          {
+            "id": "c186988f-4784-7ca3-1a4b-2d5d3fed6069",
+            "ancestors": [
+              "a0c1928d-4982-0baa-0848-00cb1b16d886"
+            ],
+            "type": "function",
+            "description": "tests whether a given string is not empty using the `Asserts.INSTANCE.isNotEmpty()` method. It throws an `AssertionError` if the argument is null or empty.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testIsNotEmpty(){\n\n        Asserts.INSTANCE.isNotEmpty(new String(\"test\"));\n\n        try {\n            Asserts.INSTANCE.isNotEmpty(null);\n            assertTrue(false);\n        } catch (AssertionError ae){\n            assertEquals(Asserts.INSTANCE.UNEXPECTED_NULL, ae.getMessage());\n        }\n\n        try {\n            Asserts.INSTANCE.isNotEmpty(Asserts.EMPTY_STRING);\n            assertTrue(false);\n        } catch (AssertionError ae){\n            assertEquals(Asserts.INSTANCE.UNEXPECTED_EMPTY_STRING, ae.getMessage());\n        }\n    }\n",
+              "description": ""
+            },
+            "name": "testIsNotEmpty",
+            "location": {
+              "start": 31,
+              "insert": 31,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 19,
+            "docLength": null
+          },
+          {
+            "id": "540cdfac-7cd1-09ae-f947-a6d368f65e74",
+            "ancestors": [
+              "a0c1928d-4982-0baa-0848-00cb1b16d886"
+            ],
+            "type": "function",
+            "description": "tests if an array list is not empty by verifying that it contains at least one non-empty element. If the list is empty, it throws an `AssertionError`.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "public void test(){\n        String id = UUID.randomUUID().toString();\n        String name = \"test\";\n\n        Asserts.INSTANCE.areNotEmpty(Arrays.asList(id, name));\n\n        try {\n            String id = null;\n            String name = Asserts.EMPTY_STRING;\n            Asserts.INSTANCE.areNotEmpty(Arrays.asList(id, name));\n            assertTrue(false);\n        } catch (AssertionError ae){\n            assertEquals(ae.getMessage(), Asserts.UNEXPECTED_NULL);\n        }\n    }\n",
+              "description": "\nThe method testAreNotEmpty is used by calling the areNotEmpty method on the instance of the class, passing in an array list as an argument. If any element in the array list is null or empty, the method will throw an AssertionError with a message indicating that the element is unexpectedly empty or null."
+            },
+            "name": "testAreNotEmpty",
+            "location": {
+              "start": 51,
+              "insert": 51,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 23,
+            "docLength": null
+          },
+          {
+            "id": "eac02ee1-0e70-1fa5-524e-58607dad3f6f",
+            "ancestors": [
+              "a0c1928d-4982-0baa-0848-00cb1b16d886"
+            ],
+            "type": "function",
+            "description": "tests whether a list is empty using the `Asserts.isNotEmpty()` method. It throws an `IllegalArgumentException` if the list is empty and passes otherwise.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\npublic void testIsNotEmptyWithAList(){\n    String id = UUID.randomUUID().toString();\n    String name = Asserts.EMPTY_STRING;\n    \n    try {\n        Asserts.INSTANCE.isNotEmpty(Arrays.asList(id, name));\n        assertTrue(false);\n    } catch (IllegalArgumentException ia){\n        assertTrue(true);\n    }\n}\n",
+              "description": ""
+            },
+            "name": "testIsNotEmptyWithAList",
+            "location": {
+              "start": 75,
+              "insert": 75,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 12,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ConfigServiceApplication.java",
+    "path": "config-service/src/main/java/com/soagrowers/ConfigServiceApplication.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "8612baae-f273-4a54-a726-98863d3266d0",
+            "ancestors": [],
+            "type": "function",
+            "name": "main",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 11,
+              "start": 11
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "args",
+                "type": "String[]"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Starts the configuration service application by running it using the `SpringApplication.run()` method, passing the class and command-line arguments as arguments.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String[]",
+                  "description": "command-line arguments passed to the SpringApplication when it is run."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "GatewayServiceApplication.java",
+    "path": "gateway-service/src/main/java/com/soagrowers/GatewayServiceApplication.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "bf3c931c-104c-4d9a-bcaf-26021b679bbb",
+            "ancestors": [],
+            "type": "function",
+            "name": "main",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 18,
+              "start": 18
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "args",
+                "type": "String[]"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Initializes and runs a Spring application instance for the `GatewayServiceApplication`.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String[]",
+                  "description": "1 or more command line arguments passed to the `SpringApplication.run()` method when executing the `GatewayServiceApplication`."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "SimpleLoggingPreFilter.java",
+    "path": "gateway-service/src/main/java/com/soagrowers/prefilters/SimpleLoggingPreFilter.java",
+    "content": {
+      "structured": {
+        "description": "A pre-filter in Zuul called \"SimpleLoggingPreFilter\". It logs the request method and URL using the slf4j logger. The filter type is set to \"pre\", the filter order is 1, and the should filter method is set to true. The run method logs the request and returns null.",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.prefilters.SimpleLoggingPreFilter Pages: 1 -->\n<svg width=\"154pt\" height=\"93pt\"\n viewBox=\"0.00 0.00 154.00 93.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 89)\">\n<title>com.soagrowers.prefilters.SimpleLoggingPreFilter</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"146,-30 0,-30 0,0 146,0 146,-30\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.prefilters.</text>\n<text text-anchor=\"middle\" x=\"73\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">SimpleLoggingPreFilter</text>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"104.5,-85 41.5,-85 41.5,-66 104.5,-66 104.5,-85\"/>\n<text text-anchor=\"middle\" x=\"73\" y=\"-73\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ZuulFilter</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M73,-55.65C73,-47.36 73,-37.78 73,-30.11\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"69.5,-55.87 73,-65.87 76.5,-55.87 69.5,-55.87\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "c4ba3b39-7fb1-4f9e-7045-bf87949b2d22",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a custom Zuul filter that logs incoming HTTP requests with a debug level message. The filter has a single method, `run()`, which retrieves the current request context and logs the request details using the `log.debug()` method from the SLF4J logging framework.",
+            "name": "SimpleLoggingPreFilter",
+            "location": {
+              "start": 13,
+              "insert": 10,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 9,
+                "end": 12
+              }
+            },
+            "item_type": "class",
+            "length": 27,
+            "docLength": 3
+          },
+          {
+            "id": "6832db79-220a-4985-1946-55bed007fef8",
+            "ancestors": [
+              "c4ba3b39-7fb1-4f9e-7045-bf87949b2d22"
+            ],
+            "type": "function",
+            "description": "returns the string `\"pre\"`.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "the string \"pre\".",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "@Override\n    public String filterType() {\n        return \"pre\";\n    }\n}\n",
+              "description": ""
+            },
+            "name": "filterType",
+            "location": {
+              "start": 17,
+              "insert": 17,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "9004d2bd-7213-84a1-fc47-a22c489e4b59",
+            "ancestors": [
+              "c4ba3b39-7fb1-4f9e-7045-bf87949b2d22"
+            ],
+            "type": "function",
+            "description": "returns an integer value of 1, indicating that it filters the input data based on a specific order.",
+            "params": [],
+            "returns": {
+              "type_name": "int",
+              "description": "an integer value of 1.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "@Override\npublic int filterOrder() {\n    return 1;\n}\n",
+              "description": "\nThis method defines the order in which filters are executed within a ZuulFilter class. In this case, the order returned is \"1\"."
+            },
+            "name": "filterOrder",
+            "location": {
+              "start": 22,
+              "insert": 22,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "f5663d81-114a-a8bb-e04f-172060a5294a",
+            "ancestors": [
+              "c4ba3b39-7fb1-4f9e-7045-bf87949b2d22"
+            ],
+            "type": "function",
+            "description": "determines whether filtering is necessary based on a predefined condition and returns `true` if filtering is required.",
+            "params": [],
+            "returns": {
+              "type_name": "boolean",
+              "description": "a boolean value indicating that filtering is required.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "@Override\npublic boolean shouldFilter() {\n    return true; // True, the filter will be executed\n}\n",
+              "description": ""
+            },
+            "name": "shouldFilter",
+            "location": {
+              "start": 27,
+              "insert": 27,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "eebeaf35-85f8-f2a0-984c-27f41b02feda",
+            "ancestors": [
+              "c4ba3b39-7fb1-4f9e-7045-bf87949b2d22"
+            ],
+            "type": "function",
+            "description": "logs a message to the debug log of the current context, indicating the HTTP method and URL of the incoming request.",
+            "params": [],
+            "returns": {
+              "type_name": "Object",
+              "description": "a debug message regarding the HTTP request method and URL.\n\n* The output is an Object of type null.\n* The `RequestContext` object `ctx` contains information about the current request context, including the request itself and various other attributes.\n* The `HttpServletRequest` object `request` is a subclass of `ServletRequest` that provides access to information about the HTTP request, such as the method, URL, and headers.",
+              "complex_type": true
+            },
+            "usage": {
+              "language": "java",
+              "code": "RequestContext ctx = RequestContext.getCurrentContext();\nHttpServletRequest request = ctx.getRequest();\nlog.debug(\"{} request to {}\", request.getMethod(), request.getRequestURL().toString());\n",
+              "description": ""
+            },
+            "name": "run",
+            "location": {
+              "start": 32,
+              "insert": 32,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 7,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "AddDuplicateProductTest.java",
+    "path": "integration-test/src/integration-test/java/com/soagrowers/productintegrationtests/AddDuplicateProductTest.java",
+    "content": {
+      "structured": {
+        "description": "A class `AddDuplicateProductTest` that tests the addition of duplicate products through different scenarios using RestAssured library. The class uses the `@FixMethodOrder` annotation to specify the method order, and the `@BeforeClass` and `@After` annotations to perform setup and teardown actions respectively. The `testAddOfDuplicatesFailsPartA` and `testAddOfDuplicatesFailsPartB` methods are the main tests, where the former succeeds with a created response status code of 201, while the latter fails with a conflict status code of 409.",
+        "items": [
+          {
+            "id": "c205e105-ee9c-b9a2-3242-b6f8a47933f1",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a JUnit test class that tests the addition of duplicate products through the API. The class has two tests, one that successfully adds a product with a unique ID and name, and another that attempts to add a duplicate product and receives a conflict status code.",
+            "name": "AddDuplicateProductTest",
+            "location": {
+              "start": 21,
+              "insert": 18,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 17,
+                "end": 20
+              }
+            },
+            "item_type": "class",
+            "length": 38,
+            "docLength": 3
+          },
+          {
+            "id": "07947ced-55ed-388e-7548-67b356a75b61",
+            "ancestors": [
+              "c205e105-ee9c-b9a2-3242-b6f8a47933f1"
+            ],
+            "type": "function",
+            "description": "generates a unique identifier and sets a product name based on the identifier, both initialized as strings.",
+            "params": [],
+            "name": "setupClass",
+            "location": {
+              "start": 28,
+              "insert": 28,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 5,
+            "docLength": null
+          },
+          {
+            "id": "f826a4e3-e5b4-e898-ee41-816affe7342b",
+            "ancestors": [
+              "c205e105-ee9c-b9a2-3242-b6f8a47933f1"
+            ],
+            "type": "function",
+            "description": "delays the execution of the subsequent test by 2 seconds using `TimeUnit.SECONDS.sleep()` method.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@After\n    public void afterEach() throws InterruptedException {\n        TimeUnit.SECONDS.sleep(2l);\n    }\n",
+              "description": "\nThis example will cause a delay of 2 seconds between each test case in the class. The delay is necessary to ensure that the system has time to process the previous request before executing the next one."
+            },
+            "name": "afterEach",
+            "location": {
+              "start": 34,
+              "insert": 34,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "bceab328-f780-519e-c548-4a3128c04b0e",
+            "ancestors": [
+              "c205e105-ee9c-b9a2-3242-b6f8a47933f1"
+            ],
+            "type": "function",
+            "description": "tests whether adding a product with an existing ID fails with a `HttpStatus.SC_CONFLICT` status code.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testAddOfDuplicatesFailsPartA() {\n        given().\n                port(PORT_FOR_GATEWAY).\n                when().\n                post(PRODUCTS_CMD_BASE_PATH + CMD_PRODUCT_ADD + \"/{id}?name={name}\", id, name).\n                then().\n                statusCode(HttpStatus.SC_CREATED);\n    }\n",
+              "description": ""
+            },
+            "name": "testAddOfDuplicatesFailsPartA",
+            "location": {
+              "start": 39,
+              "insert": 39,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 9,
+            "docLength": null
+          },
+          {
+            "id": "68f6f16b-9376-8daf-7444-a51d8a857035",
+            "ancestors": [
+              "c205e105-ee9c-b9a2-3242-b6f8a47933f1"
+            ],
+            "type": "function",
+            "description": "tests whether adding a product with an already existing ID fails and returns a conflict status code (409).",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testAddOfDuplicatesFailsPartB() {\n        given()\n                .port(PORT_FOR_GATEWAY)\n                .when()\n                .post(PRODUCTS_CMD_BASE_PATH + CMD_PRODUCT_ADD + \"/{id}?name={name}\", id, name)\n                .then()\n                .statusCode(HttpStatus.SC_CONFLICT);\n    }\n",
+              "description": ""
+            },
+            "name": "testAddOfDuplicatesFailsPartB",
+            "location": {
+              "start": 49,
+              "insert": 49,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 9,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "AssertSystemHealthTest.java",
+    "path": "integration-test/src/integration-test/java/com/soagrowers/productintegrationtests/AssertSystemHealthTest.java",
+    "content": {
+      "structured": {
+        "description": "Several unit tests for a system that integrates various services and systems. The tests include checking the health of different components such as the gateway, discovery, configuration, command side, and query side. Each test method uses the `RestAssured` library to make HTTP requests to the appropriate endpoints and verify the response status code and body content.",
+        "items": [
+          {
+            "id": "9b8b8ceb-b978-8d89-e64e-7851c26ee6f4",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a test class for verifying the health of various systems in a microservices architecture. It contains several tests that verify the status of different components such as the gateway, discovery, configuration, commands, and queries. These tests use Selenium WebDriver to make HTTP requests to the appropriate endpoints and check the response status code and body content to ensure that the system is healthy.",
+            "name": "AssertSystemHealthTest",
+            "location": {
+              "start": 19,
+              "insert": 16,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 15,
+                "end": 18
+              }
+            },
+            "item_type": "class",
+            "length": 143,
+            "docLength": 3
+          },
+          {
+            "id": "6ec3f2b3-3fa6-3887-ff40-63a7feda3c31",
+            "ancestors": [
+              "9b8b8ceb-b978-8d89-e64e-7851c26ee6f4"
+            ],
+            "type": "function",
+            "description": "prints a message to the console indicating whether the system is in production mode based on the value of `Statics.PRODUCTION`.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "import com.soagrowers.utils.Statics;\nimport org.junit.Before;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\n\npublic class AssertSystemHealthTest {\n    private static final Logger LOG = LoggerFactory.getLogger(AssertSystemHealthTest.class);\n\n    @Before\n    public void setup(){\n        System.out.println(\"PRODUCTION MODE: \" + Statics.PRODUCTION);\n    }\n}\n",
+              "description": ""
+            },
+            "name": "setup",
+            "location": {
+              "start": 26,
+              "insert": 26,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "6a3ee82a-f459-939d-9245-7e302941a4cd",
+            "ancestors": [
+              "9b8b8ceb-b978-8d89-e64e-7851c26ee6f4"
+            ],
+            "type": "function",
+            "description": "verifies that the gateway is healthy by checking the response status code and body content of two endpoints: `/health/` and `/routes/`.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void assertGatewayHealth() {\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n                when().\n                get(\"/health/\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"status\", Matchers.is(\"UP\")).\n                body(\"hystrix.status\", Matchers.is(\"UP\"));\n\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n                when().\n                get(\"/routes/\").\n                then().\n                statusCode(HttpStatus.SC_OK);\n    }\n",
+              "description": "\nThe above code is an example of how the assertGatewayHealth method would be used to test the health of the gateway service, by making two separate API calls to /health/ and /routes/. The first call retrieves the status of the Hystrix circuit breaker, while the second call retrieves a list of all routes that are currently defined in the system. Both API calls are expected to return an HTTP status code of 200 (OK) and a JSON payload with specific values, which are then verified using Hamcrest matchers."
+            },
+            "name": "assertGatewayHealth",
+            "location": {
+              "start": 31,
+              "insert": 31,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 18,
+            "docLength": null
+          },
+          {
+            "id": "f87c600f-ae6f-7f90-8f4a-c228e46088c5",
+            "ancestors": [
+              "9b8b8ceb-b978-8d89-e64e-7851c26ee6f4"
+            ],
+            "type": "function",
+            "description": "verifies that a discovery endpoint returns a status code of 200 OK, with specific body fields matching expected values related to the Hystrix and Discovery composites.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void assertDiscoveryHealth() {\n        given().\n                port(Statics.PORT_FOR_DISCOVERY).\n                when().\n                get(\"/health/\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"status\", Matchers.is(\"UP\")).\n                body(\"discoveryComposite.status\", Matchers.is(\"UP\")).\n                body(\"hystrix.status\", Matchers.is(\"UP\"));\n    }\n",
+              "description": ""
+            },
+            "name": "assertDiscoveryHealth",
+            "location": {
+              "start": 50,
+              "insert": 50,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 12,
+            "docLength": null
+          },
+          {
+            "id": "07563284-105a-0d94-f348-e6916164afc4",
+            "ancestors": [
+              "9b8b8ceb-b978-8d89-e64e-7851c26ee6f4"
+            ],
+            "type": "function",
+            "description": "verifies that the configuration server responds with an HTTP 200 status code and a body containing \"UP\" for both the configuration server and the integration test resource.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void assertConfigHealth() {\n        given().\n                port(Statics.PORT_FOR_CONFIG).\n                when().\n                get(\"/health/\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"status\", Matchers.is(\"UP\")).\n                body(\"configServer.status\", Matchers.is(\"UP\"));\n\n        given().\n                port(Statics.PORT_FOR_CONFIG).\n                when().\n                get(\"/integration-test/default/master\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"name\", Matchers.is(\"integration-test\"));\n    }\n",
+              "description": ""
+            },
+            "name": "assertConfigHealth",
+            "location": {
+              "start": 63,
+              "insert": 63,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 19,
+            "docLength": null
+          },
+          {
+            "id": "349074f4-6eda-7585-7446-160aaea0205c",
+            "ancestors": [
+              "9b8b8ceb-b978-8d89-e64e-7851c26ee6f4"
+            ],
+            "type": "function",
+            "description": "verifies that the gateway's health check response is UP, and the message returned by the command configuration endpoint matches the expected value. It also checks that the instances of the command service are running and have the expected action type.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void assertCommandSideHealth() {\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n                when().\n                get(\"/commands/health/\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"status\", Matchers.is(\"UP\")).\n                body(\"rabbit.status\", Matchers.is(\"UP\")).\n                body(\"mongo.status\", Matchers.is(\"UP\"));\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n                when().\n                get(\"/commands/message\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(Matchers.is(cmdConfigMessage));\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n                when().\n                get(\"/commands/instances\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"serviceId\", Matchers.hasItems(Statics.CMD_SERVICE_ID)).\n                body(\"instanceInfo.actionType\", Matchers.hasItems(\"ADDED\"));\n    }\n",
+              "description": ""
+            },
+            "name": "assertCommandSideHealth",
+            "location": {
+              "start": 83,
+              "insert": 83,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 38,
+            "docLength": null
+          },
+          {
+            "id": "b963afb3-4ff7-e2a2-a749-f10d6667abb5",
+            "ancestors": [
+              "9b8b8ceb-b978-8d89-e64e-7851c26ee6f4"
+            ],
+            "type": "function",
+            "description": "verifies that the query service is up and running, checks the message config, and retrieves instance information to ensure that the query service is properly initialized.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void assertQuerySideHealth() {\n        String qryConfigMessage;\n        if(!Statics.PRODUCTION){\n            qryConfigMessage = Statics.LOCAL_QRY_MESSAGE;\n        } else {\n            qryConfigMessage = Statics.PROD_QRY_MESSAGE;\n        }\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n                when().\n                get(\"/queries/health/\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"status\", Matchers.is(\"UP\")).\n                body(\"db.status\", Matchers.is(\"UP\")).\n                body(\"rabbit.status\", Matchers.is(\"UP\")).\n                body(\"db.database\", Matchers.is(\"H2\"));\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n                when().\n                get(\"/queries/message\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(Matchers.is(qryConfigMessage));\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n                when().\n                get(\"/queries/instances\").\n                then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"serviceId\", Matchers.hasItems(Statics.QRY_SERVICE_ID)).\n                body(\"instanceInfo.actionType\", Matchers.hasItems(\"ADDED\"));\n    }\n",
+              "description": ""
+            },
+            "name": "assertQuerySideHealth",
+            "location": {
+              "start": 122,
+              "insert": 122,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 39,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "EndToEndProductTest.java",
+    "path": "integration-test/src/integration-test/java/com/soagrowers/productintegrationtests/EndToEndProductTest.java",
+    "content": {
+      "structured": {
+        "description": "An EndToEndProductTest class that sets up a test suite for product integration testing. The class uses the RestAssured framework to send HTTP requests to the command-side and query-side gateways. The tests include one command test to create a new product and another test to check that the new product created event has arrived on the query-side and been made available for clients to view.",
+        "items": [
+          {
+            "id": "c5eda495-8a67-d287-ea48-2286d3b7aca1",
+            "ancestors": [],
+            "type": "function",
+            "description": "is a JUnit test class that tests the end-to-end integration of a product creation and retrieval functionality through REST API calls. The class sets up a mock command-side environment, creates a new product, and then checks that the new product has arrived on the query-side and been made available for clients to view.",
+            "name": "EndToEndProductTest",
+            "location": {
+              "start": 25,
+              "insert": 22,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 21,
+                "end": 24
+              }
+            },
+            "item_type": "class",
+            "length": 49,
+            "docLength": 3
+          },
+          {
+            "id": "0ff8184e-7849-219d-4742-f7fff039ff5c",
+            "ancestors": [
+              "c5eda495-8a67-d287-ea48-2286d3b7aca1"
+            ],
+            "type": "function",
+            "description": "generates a unique identifier and assigns it to a variable named `id`. It also creates a string variable named `name` that combines the identifier with additional text.",
+            "params": [],
+            "name": "setupClass",
+            "location": {
+              "start": 32,
+              "insert": 32,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 5,
+            "docLength": null
+          },
+          {
+            "id": "b6c2b2d6-ed24-5ca2-0540-4c49671781b4",
+            "ancestors": [
+              "c5eda495-8a67-d287-ea48-2286d3b7aca1"
+            ],
+            "type": "function",
+            "description": "pauses for 2 seconds before executing the next test in a test suite.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@After\npublic void afterEach() throws InterruptedException {\n    TimeUnit.SECONDS.sleep(2l);\n}\n",
+              "description": "\nThis method is a Junit annotation that creates a hook to be called after each test method has finished executing. It takes an exception as input and is used to pause the execution of the method for a certain amount of time, which can help to reduce the number of requests made to the system during testing."
+            },
+            "name": "afterEach",
+            "location": {
+              "start": 38,
+              "insert": 38,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "e2b3d3ae-a242-1793-124c-800d96e97291",
+            "ancestors": [
+              "c5eda495-8a67-d287-ea48-2286d3b7aca1"
+            ],
+            "type": "function",
+            "description": "posts a product to the gateway with an ID and name, returning a HTTP Status Code 201 Created if successful.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\npublic void testA_PostAProduct() {\n\n    given().\n            port(PORT_FOR_GATEWAY).\n    when().\n            post(PRODUCTS_CMD_BASE_PATH + CMD_PRODUCT_ADD + \"/{id}?name={name}\", id, name).\n    then().\n            statusCode(HttpStatus.SC_CREATED);\n\n}\n",
+              "description": "\nThis code is a unit test method that uses the given() method from the RestAssured library to send a POST request to the command-side of the API gateway. The request includes the path to the endpoint for creating a new product, as well as the ID and name of the new product being created. The when() method specifies the port number for the API gateway and the then() method checks that the response code from the server is HTTP status 201 (Created)."
+            },
+            "name": "testA_PostAProduct",
+            "location": {
+              "start": 46,
+              "insert": 43,
+              "offset": " ",
+              "indent": 4,
+              "comment": {
+                "start": 42,
+                "end": 45
+              }
+            },
+            "item_type": "method",
+            "length": 11,
+            "docLength": 3
+          },
+          {
+            "id": "8ceff99f-0019-b289-eb41-6f887a845d0a",
+            "ancestors": [
+              "c5eda495-8a67-d287-ea48-2286d3b7aca1"
+            ],
+            "type": "function",
+            "description": "tests the `get()` method on a product resource, given its ID, and asserts that the response status code is `HttpStatus.SC_OK` and the name of the product in the body of the response matches a given value.",
+            "params": [],
+            "usage": {
+              "language": "java",
+              "code": "@Test\n    public void testB_GetAProduct(){\n        //given a product id\n        String id = \"1234\";\n        given().\n                port(Statics.PORT_FOR_GATEWAY).\n        when().\n                get(PRODUCTS_QRY_BASE_PATH + \"/{id}\", id).\n        then().\n                statusCode(HttpStatus.SC_OK).\n                body(\"name\", Matchers.is(\"End2End Test Product\"));\n    }\n",
+              "description": ""
+            },
+            "name": "testB_GetAProduct",
+            "location": {
+              "start": 62,
+              "insert": 57,
+              "offset": " ",
+              "indent": 4,
+              "comment": {
+                "start": 56,
+                "end": 60
+              }
+            },
+            "item_type": "method",
+            "length": 11,
+            "docLength": 4
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Statics.java",
+    "path": "integration-test/src/integration-test/java/com/soagrowers/utils/Statics.java",
+    "content": {
+      "structured": {
+        "description": "Various constants and variables related to API endpoints, service IDs, and product information. It also sets production-related environment variables and provides messages for use in microservices.",
+        "items": [
+          {
+            "id": "34e07d38-112e-ea86-c142-0104e319c489",
+            "ancestors": [],
+            "type": "function",
+            "description": "provides static values and constants for various ports, service IDs, API versions, and message strings used by other classes in the package.\nFields:\n\t- PORT_FOR_GATEWAY (int): represents the default port number used by the gateway microservice to receive incoming requests.\n\t- PORT_FOR_COMMANDS (int): is set to 9000 in the Statics class.\n\t- PORT_FOR_QUERIES (int): represents the port number used by the Statics class for query requests.\n\t- PORT_FOR_DISCOVERY (int): represents the port number used for the discovery service in the given Java code.\n\t- PORT_FOR_CONFIG (int): in the Statics class represents the port number used by the configuration microservice.\n\t- QRY_SERVICE_ID (String): represents a unique identifier for the product query side of a microservice architecture.\n\t- CMD_SERVICE_ID (String): represents the identifier for the command-side microservice in the given Java code.\n\t- API (String): in the Statics class defines a set of endpoints for different services, including PRODUCTS_CMD_BASE_PATH and PRODUCTS_QRY_BASE_PATH for product-related commands and queries, respectively.\n\t- VERSION (String): in the Statics class represents an unknown value.\n\t- CMD_ROUTE (String): represents the path for product commands within the Statics class in Java.\n\t- QRY_ROUTE (String): represents the route for query endpoints in the Statics class.\n\t- PRODUCTS_CMD_BASE_PATH (String): represents the base path for accessing products-related commands in the microservice.\n\t- PRODUCTS_QRY_BASE_PATH (String): represents the base path for querying products in the application.\n\t- CMD_PRODUCT_ADD (String): represents the URL path for adding products in the PRODUCTION microservice configuration.\n\t- PROD_CMD_MESSAGE (String): contains a greeting message from the PRODUCT-COMMAND-SIDE microservice using the PRODUCTION config.\n\t- PROD_QRY_MESSAGE (String): in the Statics class is a message indicating greetings from the PRODUCT-QUERY-SIDE microservice using the PRODUCTION config.\n\t- LOCAL_CMD_MESSAGE (String): is \"Greetings from the PRODUCT-COMMAND-SIDE microservice [using the LOCALHOST config].\"\n\t- LOCAL_QRY_MESSAGE (String): contains a message indicating greetings from the PRODUCT-QUERY-SIDE microservice using the LOCALHOST config.\n\t- PRODUCTION (boolean): in Java's Statics class indicates whether the microservices are running in production mode or not, which is determined by the value of a system property set using System.getProperty(\"production\").\n\n",
+            "fields": [
+              {
+                "name": "PORT_FOR_GATEWAY",
+                "type_name": "int",
+                "value": "8080",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the default port number used by the gateway microservice to receive incoming requests."
+              },
+              {
+                "name": "PORT_FOR_COMMANDS",
+                "type_name": "int",
+                "value": "9000",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "is set to 9000 in the Statics class."
+              },
+              {
+                "name": "PORT_FOR_QUERIES",
+                "type_name": "int",
+                "value": "9001",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the port number used by the Statics class for query requests."
+              },
+              {
+                "name": "PORT_FOR_DISCOVERY",
+                "type_name": "int",
+                "value": "8761",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the port number used for the discovery service in the given Java code."
+              },
+              {
+                "name": "PORT_FOR_CONFIG",
+                "type_name": "int",
+                "value": "8888",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "in the Statics class represents the port number used by the configuration microservice."
+              },
+              {
+                "name": "QRY_SERVICE_ID",
+                "type_name": "String",
+                "value": "\"PRODUCT-QUERY-SIDE\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents a unique identifier for the product query side of a microservice architecture."
+              },
+              {
+                "name": "CMD_SERVICE_ID",
+                "type_name": "String",
+                "value": "\"PRODUCT-COMMAND-SIDE\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the identifier for the command-side microservice in the given Java code."
+              },
+              {
+                "name": "API",
+                "type_name": "String",
+                "value": "\"\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "in the Statics class defines a set of endpoints for different services, including PRODUCTS_CMD_BASE_PATH and PRODUCTS_QRY_BASE_PATH for product-related commands and queries, respectively."
+              },
+              {
+                "name": "VERSION",
+                "type_name": "String",
+                "value": "\"\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "in the Statics class represents an unknown value."
+              },
+              {
+                "name": "CMD_ROUTE",
+                "type_name": "String",
+                "value": "\"/commands\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the path for product commands within the Statics class in Java."
+              },
+              {
+                "name": "QRY_ROUTE",
+                "type_name": "String",
+                "value": "\"/queries\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the route for query endpoints in the Statics class."
+              },
+              {
+                "name": "PRODUCTS_CMD_BASE_PATH",
+                "type_name": "String",
+                "value": "API + VERSION + CMD_ROUTE + \"/products\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the base path for accessing products-related commands in the microservice."
+              },
+              {
+                "name": "PRODUCTS_QRY_BASE_PATH",
+                "type_name": "String",
+                "value": "API + VERSION + QRY_ROUTE + \"/products\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the base path for querying products in the application."
+              },
+              {
+                "name": "CMD_PRODUCT_ADD",
+                "type_name": "String",
+                "value": "\"/add\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "represents the URL path for adding products in the PRODUCTION microservice configuration."
+              },
+              {
+                "name": "PROD_CMD_MESSAGE",
+                "type_name": "String",
+                "value": "\"Greetings from the PRODUCT-COMMAND-SIDE microservice [using the PRODUCTION config].\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "contains a greeting message from the PRODUCT-COMMAND-SIDE microservice using the PRODUCTION config."
+              },
+              {
+                "name": "PROD_QRY_MESSAGE",
+                "type_name": "String",
+                "value": "\"Greetings from the PRODUCT-QUERY-SIDE microservice [using the PRODUCTION config].\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "in the Statics class is a message indicating greetings from the PRODUCT-QUERY-SIDE microservice using the PRODUCTION config."
+              },
+              {
+                "name": "LOCAL_CMD_MESSAGE",
+                "type_name": "String",
+                "value": "\"Greetings from the PRODUCT-COMMAND-SIDE microservice [using the LOCALHOST config].\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "is \"Greetings from the PRODUCT-COMMAND-SIDE microservice [using the LOCALHOST config].\""
+              },
+              {
+                "name": "LOCAL_QRY_MESSAGE",
+                "type_name": "String",
+                "value": "\"Greetings from the PRODUCT-QUERY-SIDE microservice [using the LOCALHOST config].\"",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "contains a message indicating greetings from the PRODUCT-QUERY-SIDE microservice using the LOCALHOST config."
+              },
+              {
+                "name": "PRODUCTION",
+                "type_name": "boolean",
+                "value": "Boolean.valueOf(System.getProperty(\"production\", \"true\"))",
+                "constant": true,
+                "class_name": "Statics",
+                "description": "in Java's Statics class indicates whether the microservices are running in production mode or not, which is determined by the value of a system property set using System.getProperty(\"production\")."
+              }
+            ],
+            "name": "Statics",
+            "location": {
+              "start": 6,
+              "insert": 3,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 2,
+                "end": 5
+              }
+            },
+            "item_type": "class",
+            "length": 28,
+            "docLength": 3
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Application.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/Application.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "b2736ebb-966f-4f56-a61d-db8be1aabc40",
+            "ancestors": [],
+            "type": "function",
+            "name": "main",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 27,
+              "start": 27
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "args",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Runs an application using the Spring Application runner, passing the class `Application` and any command-line arguments to it.",
+              "params": [
+                {
+                  "name": "args",
+                  "type": "String",
+                  "description": "0 or more command line arguments passed to the `SpringApplication.run()` method when invoking the application."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "AxonConfiguration.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/configuration/AxonConfiguration.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "b4d38012-a147-47e1-a210-d894a5ca48d3",
+            "ancestors": [],
+            "type": "function",
+            "name": "simpleCluster",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 70,
+              "start": 70
+            },
+            "returns": "SimpleCluster",
+            "params": [
+              {
+                "name": "springAMQPConsumerConfiguration",
+                "type": "SpringAMQPConsumerConfiguration"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 6,
+            "comment": {
+              "description": "Creates a new `SimpleCluster` instance with a unique queue name and sets the AMQP configuration property using the provided `SpringAMQPConsumerConfiguration`.",
+              "params": [
+                {
+                  "name": "springAMQPConsumerConfiguration",
+                  "type": "SpringAMQPConsumerConfiguration",
+                  "description": "AMQP consumer configuration for the SimpleCluster instance created by the `simpleCluster()` method."
+                }
+              ],
+              "returns": {
+                "type": "SimpleCluster",
+                "description": "a Simple Cluster object with the specified queue name and AMQP configuration properties."
+              }
+            }
+          },
+          {
+            "id": "c3594cea-ad49-4eb1-80b3-6c8c03df800a",
+            "ancestors": [],
+            "type": "function",
+            "name": "eventBus",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 90,
+              "start": 90
+            },
+            "returns": "EventBus",
+            "params": [
+              {
+                "name": "simpleCluster",
+                "type": "SimpleCluster"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Generates a clustering event bus for passing events between services in a microservices architecture, based on a specified cluster selector and terminal state.",
+              "params": [
+                {
+                  "name": "simpleCluster",
+                  "type": "SimpleCluster",
+                  "description": "cluster configuration for which event bus instances are generated."
+                }
+              ],
+              "returns": {
+                "type": "EventBus",
+                "description": "a clustering event bus instance."
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "RabbitConfiguration.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/configuration/RabbitConfiguration.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "57e60f9e-b0b6-4fe7-a5a3-a6e5c3cde44c",
+            "ancestors": [],
+            "type": "function",
+            "name": "eventStream",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 45,
+              "start": 45
+            },
+            "returns": "Queue",
+            "params": [
+              {
+                "name": "uniqueQueueName",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Creates a new queue named based on a given string and configures its properties for a non-durable and non-transitive store, with an auto-acknowledge mechanism for messages.",
+              "params": [
+                {
+                  "name": "uniqueQueueName",
+                  "type": "String",
+                  "description": "name of the queue that is to be created."
+                }
+              ],
+              "returns": {
+                "type": "Queue",
+                "description": "a queue with the specified name."
+              }
+            }
+          },
+          {
+            "id": "f96a1a43-c46d-4b4e-bace-9dfcfea9ffdd",
+            "ancestors": [],
+            "type": "function",
+            "name": "binding",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 55,
+              "start": 55
+            },
+            "returns": "Binding",
+            "params": [
+              {
+                "name": "uniqueQueueName",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Creates a binding that directs messages from any exchange to a queue with the specified name.",
+              "params": [
+                {
+                  "name": "uniqueQueueName",
+                  "type": "String",
+                  "description": "name of the queue to which the binding will be created."
+                }
+              ],
+              "returns": {
+                "type": "Binding",
+                "description": "a binding definition for a queue with the given name."
+              }
+            }
+          },
+          {
+            "id": "2ea7854a-1d1a-45bc-8a19-df2663c88154",
+            "ancestors": [],
+            "type": "function",
+            "name": "rabbitAdmin",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 68,
+              "start": 68
+            },
+            "returns": "RabbitAdmin",
+            "params": [
+              {
+                "name": "uniqueQueueName",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 10,
+            "comment": {
+              "description": "Creates a new instance of RabbitAdmin, sets its auto-startup to true, declares an exchange and two queues using the unique queue name, and returns the instance.",
+              "params": [
+                {
+                  "name": "uniqueQueueName",
+                  "type": "String",
+                  "description": "name of a queue that is being declared and used by the `RabbitAdmin`."
+                }
+              ],
+              "returns": {
+                "type": "RabbitAdmin",
+                "description": "a RabbitAdmin object with the declared exchanges, queues, and bindings."
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Product.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/domain/Product.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "d707eaea-c147-4559-bb9c-c55579ae0e87",
+            "ancestors": [],
+            "type": "function",
+            "name": "setId",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 34,
+              "start": 34
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "id",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Sets the value of its class member variable `id`.",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "String",
+                  "description": "new value of the class instance variable `id`."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "da567194-40bd-487c-8eae-f5daa3939485",
+            "ancestors": [],
+            "type": "function",
+            "name": "setName",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 42,
+              "start": 42
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "name",
+                "type": "String"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Sets the value of the class's `name` field to the input parameter passed by the caller.",
+              "params": [
+                {
+                  "name": "name",
+                  "type": "String",
+                  "description": "new value of the object's `name` field."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "bbd47381-f490-48da-9b25-ab2f132323ca",
+            "ancestors": [],
+            "type": "function",
+            "name": "setSaleable",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 50,
+              "start": 50
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "saleable",
+                "type": "boolean"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Sets the instance field `saleable` to the provided boolean value, ensuring the field's state is consistent with the passed argument.",
+              "params": [
+                {
+                  "name": "saleable",
+                  "type": "boolean",
+                  "description": "boolean value of whether the object is saleable or not, and by setting it to `true`, the method marks the object as saleable."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "EventLoggingHandler.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/handlers/EventLoggingHandler.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productevents.events.AbstractEvent Pages: 1 -->\n<svg width=\"572pt\" height=\"134pt\"\n viewBox=\"0.00 0.00 572.00 134.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 130)\">\n<title>com.soagrowers.productevents.events.AbstractEvent</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"319,-78 110,-78 110,-48 319,-48 319,-78\"/>\n<text text-anchor=\"start\" x=\"118\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"214.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractEvent</text>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductAddedEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-126 355,-126 355,-96 564,-96 564,-126\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-114\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-103\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAddedEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node3 -->\n<g id=\"edge2_Node000001_Node000003\" class=\"edge\">\n<title>Node1&#45;&gt;Node3</title>\n<g id=\"a_edge2_Node000001_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-80.03C328.09,-85.24 356.9,-90.93 382.55,-96\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"302.21,-76.56 291.72,-78.06 300.85,-83.43 302.21,-76.56\"/>\n</a>\n</g>\n</g>\n<!-- Node4 -->\n<g id=\"Node000004\" class=\"node\">\n<title>Node4</title>\n<g id=\"a_Node000004\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductSaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-78 355,-78 355,-48 564,-48 564,-78\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-66\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-55\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductSaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node4 -->\n<g id=\"edge3_Node000001_Node000004\" class=\"edge\">\n<title>Node1&#45;&gt;Node4</title>\n<g id=\"a_edge3_Node000001_Node000004\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M329.48,-63C337.9,-63 346.36,-63 354.7,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"329.26,-59.5 319.26,-63 329.26,-66.5 329.26,-59.5\"/>\n</a>\n</g>\n</g>\n<!-- Node5 -->\n<g id=\"Node000005\" class=\"node\">\n<title>Node5</title>\n<g id=\"a_Node000005\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1ProductUnsaleableEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"564,-30 355,-30 355,0 564,0 564,-30\"/>\n<text text-anchor=\"start\" x=\"363\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"459.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductUnsaleableEvent</text>\n</a>\n</g>\n</g>\n<!-- Node1&#45;&gt;Node5 -->\n<g id=\"edge4_Node000001_Node000005\" class=\"edge\">\n<title>Node1&#45;&gt;Node5</title>\n<g id=\"a_edge4_Node000001_Node000005\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M301.7,-45.97C328.09,-40.76 356.9,-35.07 382.55,-30\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"300.85,-42.57 291.72,-47.94 302.21,-49.44 300.85,-42.57\"/>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"74,-72.5 0,-72.5 0,-53.5 74,-53.5 74,-72.5\"/>\n<text text-anchor=\"middle\" x=\"37\" y=\"-60.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Serializable</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M84.49,-63C92.48,-63 101.06,-63 109.86,-63\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"84.36,-59.5 74.36,-63 84.36,-66.5 84.36,-59.5\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "5f990fe6-0788-4ae2-a192-c0f42ec7b905",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 25,
+              "start": 25
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductAddedEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "At `@EventHandler` level logs the details of a `ProductAddedEvent` to the application log, including the instance ID, event class name, event ID, and event name.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductAddedEvent",
+                  "description": "`ProductAddedEvent` that triggered the function execution, providing its class name and ID number, as well as its name."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "c817863c-af8c-4dd4-9664-27aed6dd59fd",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 30,
+              "start": 30
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductSaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "At `@EventHandler` level logs information about an event of a class type and event ID using the `LOG` method in passive voice.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductSaleableEvent",
+                  "description": "ProductSaleableEvent object that is being handled by the function."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "67ca82d1-6b46-48bc-a644-d35af92185f3",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 35,
+              "start": 35
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductUnsaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "At `@EventHandler` level logs details of a `ProductUnsaleableEvent`. It provides information about the event, including its class name and ID, using the `LOG.debug()` method.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductUnsaleableEvent",
+                  "description": "`ProductUnsaleableEvent` instance that triggered the event handler."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ProductViewEventHandler.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/handlers/ProductViewEventHandler.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productevents.events.ProductAddedEvent Pages: 1 -->\n<svg width=\"217pt\" height=\"159pt\"\n viewBox=\"0.00 0.00 217.00 159.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 155)\">\n<title>com.soagrowers.productevents.events.ProductAddedEvent</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"209,-30 0,-30 0,0 209,0 209,-30\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"104.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductAddedEvent</text>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:href=\"classcom_1_1soagrowers_1_1productevents_1_1events_1_1AbstractEvent.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"209,-96 0,-96 0,-66 209,-66 209,-96\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-84\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productevents.events.</text>\n<text text-anchor=\"middle\" x=\"104.5\" y=\"-73\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">AbstractEvent</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M104.5,-55.54C104.5,-46.96 104.5,-37.61 104.5,-30.16\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"101,-55.8 104.5,-65.8 108,-55.8 101,-55.8\"/>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"141.5,-151 67.5,-151 67.5,-132 141.5,-132 141.5,-151\"/>\n<text text-anchor=\"middle\" x=\"104.5\" y=\"-139\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Serializable</text>\n</a>\n</g>\n</g>\n<!-- Node3&#45;&gt;Node2 -->\n<g id=\"edge2_Node000002_Node000003\" class=\"edge\">\n<title>Node3&#45;&gt;Node2</title>\n<g id=\"a_edge2_Node000002_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M104.5,-121.65C104.5,-113.36 104.5,-103.78 104.5,-96.11\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"101,-121.87 104.5,-131.87 108,-121.87 101,-121.87\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "9ceb0705-e541-40c5-933e-72186cc5c4d8",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 26,
+              "start": 26
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductAddedEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 5,
+            "comment": {
+              "description": "Listens for a `ProductAddedEvent` and saves the new product to the repository when triggered.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductAddedEvent",
+                  "description": "`ProductAddedEvent` object that contains information about the added product, including its ID and name."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "2ed88038-5735-4b68-b843-7a3d188ee54d",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 32,
+              "start": 32
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductSaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 11,
+            "comment": {
+              "description": "Updates the saleability status of a product in the repository when a ProductSaleableEvent is triggered.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductSaleableEvent",
+                  "description": "ProductSaleableEvent object that contains information about a saleable event, such as the event ID and product ID."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "4d901402-ea69-4e9a-854b-99c6fa42d128",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 44,
+              "start": 44
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductUnsaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 12,
+            "comment": {
+              "description": "Is called when a product becomes unsaleable. It checks if the product exists, and if it's saleable. If it is, it sets the saleable field to false and saves it to the repository.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductUnsaleableEvent",
+                  "description": "ProductUnsaleableEvent object that contains information about an unsaleable product, which is used to determine whether the product is still saleable and to update its saleability status accordingly."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "b2d431c5-2e8b-49e7-9e39-34ecae0efde7",
+            "ancestors": [],
+            "type": "function",
+            "name": "onReplayFailed",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 65,
+              "start": 65
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "cause",
+                "type": "Throwable"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 3,
+            "comment": {
+              "description": "Logs an error message to the log when replaying an event fails.",
+              "params": [
+                {
+                  "name": "cause",
+                  "type": "Throwable",
+                  "description": "Throwable object that caused the replay to fail."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ProductRepository.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/repository/ProductRepository.java",
+    "content": {
+      "structured": {
+        "description": "An interface ProductRepository, which is a Spring Data repository for the Product entity. The interface provides a method findBySaleable() that takes a boolean parameter saleable and returns a list of products that are saleable.",
+        "image": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: com.soagrowers.productquery.repository.ProductRepository Pages: 1 -->\n<svg width=\"225pt\" height=\"170pt\"\n viewBox=\"0.00 0.00 225.00 170.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 166)\">\n<title>com.soagrowers.productquery.repository.ProductRepository</title>\n<!-- Node1 -->\n<g id=\"Node000001\" class=\"node\">\n<title>Node1</title>\n<g id=\"a_Node000001\"><a xlink:title=\" \">\n<polygon fill=\"#999999\" stroke=\"#666666\" points=\"217,-30 0,-30 0,0 217,0 217,-30\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-18\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productquery.repository.</text>\n<text text-anchor=\"middle\" x=\"108.5\" y=\"-7\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ProductRepository</text>\n</a>\n</g>\n</g>\n<!-- Node2 -->\n<g id=\"Node000002\" class=\"node\">\n<title>Node2</title>\n<g id=\"a_Node000002\"><a xlink:href=\"interfacecom_1_1soagrowers_1_1productquery_1_1repository_1_1ReadOnlyPagingAndSortingRepository.html\" target=\"_top\" xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"217,-96 0,-96 0,-66 217,-66 217,-96\"/>\n<text text-anchor=\"start\" x=\"8\" y=\"-84\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">com.soagrowers.productquery.repository.</text>\n<text text-anchor=\"middle\" x=\"108.5\" y=\"-73\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">ReadOnlyPagingAndSortingRepository</text>\n</a>\n</g>\n</g>\n<!-- Node2&#45;&gt;Node1 -->\n<g id=\"edge1_Node000001_Node000002\" class=\"edge\">\n<title>Node2&#45;&gt;Node1</title>\n<g id=\"a_edge1_Node000001_Node000002\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M108.5,-55.54C108.5,-46.96 108.5,-37.61 108.5,-30.16\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"105,-55.8 108.5,-65.8 112,-55.8 105,-55.8\"/>\n</a>\n</g>\n</g>\n<!-- Node3 -->\n<g id=\"Node000003\" class=\"node\">\n<title>Node3</title>\n<g id=\"a_Node000003\"><a xlink:title=\" \">\n<polygon fill=\"white\" stroke=\"#666666\" points=\"186,-162 31,-162 31,-132 186,-132 186,-162\"/>\n<text text-anchor=\"start\" x=\"39\" y=\"-150\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">PagingAndSortingRepository</text>\n<text text-anchor=\"middle\" x=\"108.5\" y=\"-139\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">&lt; Product, String &gt;</text>\n</a>\n</g>\n</g>\n<!-- Node3&#45;&gt;Node2 -->\n<g id=\"edge2_Node000002_Node000003\" class=\"edge\">\n<title>Node3&#45;&gt;Node2</title>\n<g id=\"a_edge2_Node000002_Node000003\"><a xlink:title=\" \">\n<path fill=\"none\" stroke=\"#63b8ff\" d=\"M108.5,-121.54C108.5,-112.96 108.5,-103.61 108.5,-96.16\"/>\n<polygon fill=\"#63b8ff\" stroke=\"#63b8ff\" points=\"105,-121.8 108.5,-131.8 112,-121.8 105,-121.8\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n",
+        "items": [
+          {
+            "id": "216b0070-bc0b-aebb-d043-6d31bf98d8bd",
+            "ancestors": [],
+            "type": "function",
+            "description": "extends ReadOnlyPagingAndSortingRepository and provides a method to find products based on their saleability status.",
+            "name": "ProductRepository",
+            "location": {
+              "start": 13,
+              "insert": 10,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 9,
+                "end": 12
+              }
+            },
+            "item_type": "interface",
+            "length": 5,
+            "docLength": 3
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "EventLoggingHandler.java",
+    "path": "command-side/src/main/java/com/soagrowers/productcommand/handlers/EventLoggingHandler.java",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "3afa9852-6db6-4ced-9055-a27ec6c52adf",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 22,
+              "start": 22
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductAddedEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Is called when a product is added to an inventory. It logs information about the event, including the instance ID, event type, and event ID, along with the name of the product.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductAddedEvent",
+                  "description": "`ProductAddedEvent` object that triggered the function execution, providing its class name and ID, as well as the event name."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "6206efe8-ff62-4bfd-86c1-234dfa10ca15",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 27,
+              "start": 27
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductSaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "Logs a debug message with the instance ID, event type, and event ID when the `ProductSaleableEvent` occurs.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductSaleableEvent",
+                  "description": "ProductSaleableEvent object that contains information about a product sale, and provides the Event ID for logging purposes."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "ec3d6bb8-5f1e-4d0d-b950-ad8cea95e992",
+            "ancestors": [],
+            "type": "function",
+            "name": "handle",
+            "location": {
+              "offset": " ",
+              "indent": 4,
+              "insert": 32,
+              "start": 32
+            },
+            "returns": false,
+            "params": [
+              {
+                "name": "event",
+                "type": "ProductUnsaleableEvent"
+              }
+            ],
+            "skip": false,
+            "docLength": null,
+            "length": 4,
+            "comment": {
+              "description": "At @EventHandler is triggered when a product becomes unsaleable. It logs information about the event, including the product ID and event type, to the system log using the `LOG.debug()` method.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "ProductUnsaleableEvent",
+                  "description": "product unsaleable event that triggered the `handle()` method execution."
+                }
+              ],
+              "returns": null
+            }
+          }
+        ]
+      }
+    }
+  }
+]

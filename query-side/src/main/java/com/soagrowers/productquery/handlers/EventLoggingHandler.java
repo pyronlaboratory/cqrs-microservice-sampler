@@ -22,16 +22,36 @@ public class EventLoggingHandler {
     @Value("${spring.application.index}")
     private Integer indexId;
 
+    /**
+     * At `@EventHandler` level logs the details of a `ProductAddedEvent` to the application
+     * log, including the instance ID, event class name, event ID, and event name.
+     * 
+     * @param event `ProductAddedEvent` that triggered the function execution, providing
+     * its class name and ID number, as well as its name.
+     */
     @EventHandler
     public void handle(ProductAddedEvent event) {
         LOG.debug("Instance:[{}] Event:{} Id:{} Name:'{}'", indexId, event.getClass().getSimpleName(), event.getId(), event.getName());
     }
 
+    /**
+     * At `@EventHandler` level logs information about an event of a class type and event
+     * ID using the `LOG` method in passive voice.
+     * 
+     * @param event ProductSaleableEvent object that is being handled by the function.
+     */
     @EventHandler
     public void handle(ProductSaleableEvent event) {
         LOG.debug("Instance:[{}] Event:{} Id:{}", indexId, event.getClass().getSimpleName(), event.getId());
     }
 
+    /**
+     * At `@EventHandler` level logs details of a `ProductUnsaleableEvent`. It provides
+     * information about the event, including its class name and ID, using the `LOG.debug()`
+     * method.
+     * 
+     * @param event `ProductUnsaleableEvent` instance that triggered the event handler.
+     */
     @EventHandler
     public void handle(ProductUnsaleableEvent event) {
         LOG.debug("Instance:[{}] Event:{} Id:{}", indexId, event.getClass().getSimpleName(), event.getId());

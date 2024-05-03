@@ -42,6 +42,15 @@ public class RabbitConfiguration {
         return queueName + "." + index;
     }
 
+    /**
+     * Creates a new queue named based on a given string and configures its properties
+     * for a non-durable and non-transitive store, with an auto-acknowledge mechanism for
+     * messages.
+     * 
+     * @param uniqueQueueName name of the queue that is to be created.
+     * 
+     * @returns a queue with the specified name.
+     */
     @Bean
     Queue eventStream(String uniqueQueueName) {
         return new Queue(uniqueQueueName, false, false, true);
@@ -52,6 +61,14 @@ public class RabbitConfiguration {
         return new FanoutExchange(exchangeName, true, false);
     }
 
+    /**
+     * Creates a binding that directs messages from any exchange to a queue with the
+     * specified name.
+     * 
+     * @param uniqueQueueName name of the queue to which the binding will be created.
+     * 
+     * @returns a binding definition for a queue with the given name.
+     */
     @Bean
     Binding binding(String uniqueQueueName) {
         return new Binding(uniqueQueueName, Binding.DestinationType.QUEUE, exchangeName, "*.*", null);
@@ -65,6 +82,14 @@ public class RabbitConfiguration {
         return connectionFactory;
     }
 
+    /**
+     * Creates a new instance of RabbitAdmin, sets its auto-startup to true, declares an
+     * exchange and two queues using the unique queue name, and returns the instance.
+     * 
+     * @param uniqueQueueName name of a queue that is being declared and used by the `RabbitAdmin`.
+     * 
+     * @returns a RabbitAdmin object with the declared exchanges, queues, and bindings.
+     */
     @Bean
     @Required
     RabbitAdmin rabbitAdmin(String uniqueQueueName) {

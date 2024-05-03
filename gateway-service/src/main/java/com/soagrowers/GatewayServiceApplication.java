@@ -15,6 +15,12 @@ public class GatewayServiceApplication {
         return new SimpleLoggingPreFilter();
     }
 
+    /**
+     * Initializes and runs a Spring application instance for the `GatewayServiceApplication`.
+     * 
+     * @param args 1 or more command line arguments passed to the `SpringApplication.run()`
+     * method when executing the `GatewayServiceApplication`.
+     */
     public static void main(String[] args) {
         SpringApplication.run(GatewayServiceApplication.class, args);
     }

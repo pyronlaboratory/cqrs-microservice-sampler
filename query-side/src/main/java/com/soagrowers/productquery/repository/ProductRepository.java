@@ -8,7 +8,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 /**
- * Created by ben on 07/10/15.
+ * extends ReadOnlyPagingAndSortingRepository and provides a method to find products
+ * based on their saleability status.
  */
 @SuppressWarnings("unchecked")
 @RepositoryRestResource(collectionResourceRel = "products", path = "products")

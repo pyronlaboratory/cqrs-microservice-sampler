@@ -24,6 +24,13 @@ import java.util.List;
 @EntityScan("com.soagrowers.productquery.domain")
 public class Application {
 
+    /**
+     * Runs an application using the Spring Application runner, passing the class
+     * `Application` and any command-line arguments to it.
+     * 
+     * @param args 0 or more command line arguments passed to the `SpringApplication.run()`
+     * method when invoking the application.
+     */
     public static void main(String... args) {
         SpringApplication.run(Application.class, args);
     }
