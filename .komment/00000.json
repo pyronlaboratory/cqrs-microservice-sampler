@@ -155,5 +155,60 @@
         ]
       }
     }
+  },
+  {
+    "name": "DiscoveryServiceApplication.java",
+    "path": "discovery-service/src/main/java/com/soagrowers/DiscoveryServiceApplication.java",
+    "content": {
+      "structured": {
+        "description": "A Spring Boot application that enables the Eureka server and starts the application using `SpringApplication.run()`. The application class is annotated with `@SpringBootApplication` and `@EnableEurekaServer`, indicating its functionality as an Eureka server.",
+        "items": [
+          {
+            "id": "bb89125b-ea58-4ea4-a840-ee8c849dff2a",
+            "ancestors": [],
+            "type": "function",
+            "description": "is marked with several annotations: `@EnableEurekaServer`, `@SpringBootApplication`, and `public static void main(String[] args)`. These annotations indicate that the class is a Spring Boot application that enables Eureka server functionality and serves as the primary entry point for the application.",
+            "name": "DiscoveryServiceApplication",
+            "location": {
+              "start": 7,
+              "insert": 7,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 8,
+            "docLength": null
+          },
+          {
+            "id": "83468217-bbdc-6e84-634b-69378119b38d",
+            "ancestors": [
+              "bb89125b-ea58-4ea4-a840-ee8c849dff2a"
+            ],
+            "type": "function",
+            "description": "runs a SpringApplication instance for the `DiscoveryServiceApplication` class, passing the `args` array as an argument.",
+            "params": [
+              {
+                "name": "args",
+                "type_name": "String[]",
+                "description": "0 or more command-line arguments passed to the `SpringApplication.run()` method when invoking the `main()` function.\n\n* The type of the array is String[]. \n* The length of the array is provided by the variable `args'.",
+                "complex_type": true
+              }
+            ],
+            "name": "main",
+            "location": {
+              "start": 11,
+              "insert": 11,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
   }
 ]
