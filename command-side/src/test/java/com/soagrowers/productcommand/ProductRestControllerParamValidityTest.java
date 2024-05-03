@@ -18,10 +18,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * tests various scenarios for adding products to the server. It includes tests for
- * good request parameters, assertion errors, and bad request parameters. The class
- * sets up mock dependencies using Mockito Annotations and verifies the responses of
- * the CommandGateway interface using verify() method.
+ * tests various scenarios for adding products to the system, including successful
+ * requests with valid data and failed requests due to AssertionError or
+ * CommandExecutionException. The class also verifies that bad request parameters
+ * result in a BAD_REQUEST status code.
  */
 public class ProductRestControllerParamValidityTest {
 
@@ -32,9 +32,9 @@ public class ProductRestControllerParamValidityTest {
     CommandGateway gateway;
 
     /**
-     * sets up various components and configurations for testing purposes, including
-     * initializing MockitoAnnotations and setting Asserts to true, creating a new instance
-     * of `ProductRestController`, and providing a mock instance of `MockHttpServletResponse`.
+     * initializes various components and sets up mock objects for testing purposes,
+     * including the `ProductRestController`, `MockHttpServletResponse`, and enables
+     * assertions for testing.
      */
     @Before
     public void setup() {
@@ -45,8 +45,8 @@ public class ProductRestControllerParamValidityTest {
     }
 
     /**
-     * tests the `add` method of a controller by providing valid request parameters and
-     * verifying that the expected response is returned.
+     * tests the `add` method of a controller by providing valid parameters and verifying
+     * that the expected HTTP status code is returned.
      */
     @Test
     public void testAddWithGoodRequestParams() {
@@ -63,10 +63,9 @@ public class ProductRestControllerParamValidityTest {
     }
 
     /**
-     * tests the `add` method of a controller by mocking the gateway's `sendAndWait`
-     * method to throw an `AssertionError`. The method verifies that the gateway's
-     * `sendAndWait` was called with the correct arguments and asserts that the response
-     * status code is `HttpServletResponse.SC_BAD_REQUEST`.
+     * tests the controller's `add` method by mocking the gateway's `sendAndWait` method
+     * to throw an AssertionError. The function verifies that the response status code
+     * is 400 Bad Request when the add operation fails.
      */
     @Test
     public void testFailedAddWithAssertionError() {
@@ -83,8 +82,9 @@ public class ProductRestControllerParamValidityTest {
     }
 
     /**
-     * tests the Add Product endpoint of a controller by throwing a `CommandExecutionException`
-     * when sending a request to the gateway.
+     * tests the `add` method of a controller by throwing a `CommandExecutionException`
+     * when sending the command to the gateway, and verifying that the response status
+     * code is `HttpServletResponse.SC_BAD_REQUEST`.
      */
     @Test
     public void testFailedAddWithCommandExecutionException() {
@@ -101,8 +101,8 @@ public class ProductRestControllerParamValidityTest {
     }
 
     /**
-     * tests the `add` method of a controller by providing invalid input parameters and
-     * verifying the resulting HTTP status code is `SC_BAD_REQUEST`.
+     * tests the add method of a controller by providing invalid input parameters, ensuring
+     * that the method returns a BAD_REQUEST status response.
      */
     @Test
     public void testAddWithBadRequestParams() {

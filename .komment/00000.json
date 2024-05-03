@@ -4,14 +4,13 @@
     "path": "command-side/src/test/java/com/soagrowers/productcommand/ProductRestControllerParamValidityTest.java",
     "content": {
       "structured": {
-        "description": "A ProductRestController class that handles product-related requests in an axon framework. It includes tests for successful and failed add product requests, as well as bad request parameters. The controller uses the Axon Framework's CommandGateway to send commands to the application and receives responses from it.",
-        "diagram": "digraph G {\n    label=\"com.soagrowers.productcommand.ProductRestControllerParamValidityTest\"\n    bgcolor=\"#151719\"\n    fontcolor=\"#ECEDED\"\n    splines=ortho\n    fontname=\"Courier New\"\n    edge [color=\"#26de81\"]\n    node [style=filled,color=\"#717D86\", shape=rectangle, fontname=\"Courier New\"];\n    \n}\n",
+        "description": "A ProductRestController class with multiple test methods for testing its add method. The controller uses Axon Framework's CommandGateway to send a product addition command to a mock HTTP server. The tests verify that the add method correctly handles good request parameters, assertion errors, and bad request parameters. The tests also check that the add method sends the command to the gateway and returns the appropriate HTTP status code.",
         "items": [
           {
-            "id": "5c89eb93-894c-6a8d-fd46-b6a2446ddf18",
+            "id": "ee12794f-39d9-dabe-ba43-82f50793f119",
             "ancestors": [],
             "type": "function",
-            "description": "tests various scenarios for adding products to the server. It includes tests for good request parameters, assertion errors, and bad request parameters. The class sets up mock dependencies using Mockito Annotations and verifies the responses of the CommandGateway interface using verify() method.",
+            "description": "tests various scenarios for adding products to the system, including successful requests with valid data and failed requests due to AssertionError or CommandExecutionException. The class also verifies that bad request parameters result in a BAD_REQUEST status code.",
             "name": "ProductRestControllerParamValidityTest",
             "location": {
               "start": 23,
@@ -28,16 +27,16 @@
             "docLength": 3
           },
           {
-            "id": "79371627-06cc-5995-a243-cc475619deab",
+            "id": "be1e19da-7327-a3a7-7741-1f997330006f",
             "ancestors": [
-              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
             ],
             "type": "function",
-            "description": "sets up various components and configurations for testing purposes, including initializing MockitoAnnotations and setting Asserts to true, creating a new instance of `ProductRestController`, and providing a mock instance of `MockHttpServletResponse`.",
+            "description": "initializes various components and sets up mock objects for testing purposes, including the `ProductRestController`, `MockHttpServletResponse`, and enables assertions for testing.",
             "params": [],
             "usage": {
               "language": "java",
-              "code": "@Before\npublic void setup() {\n    MockitoAnnotations.initMocks(this);\n    Asserts.INSTANCE.setAssertsTo(true);\n    controller = new ProductRestController();\n    mockHttpServletResponse = new MockHttpServletResponse();\n}\n",
+              "code": "@Before\n    public void setup() {\n        MockitoAnnotations.initMocks(this);\n        Asserts.INSTANCE.setAssertsTo(true);\n        controller = new ProductRestController();\n        mockHttpServletResponse = new MockHttpServletResponse();\n    }\n",
               "description": ""
             },
             "name": "setup",
@@ -53,16 +52,16 @@
             "docLength": null
           },
           {
-            "id": "2ee2918d-82bc-ba9e-b540-a6a04fda33ca",
+            "id": "538e8ed0-02fa-de80-344e-99364c23ef17",
             "ancestors": [
-              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
             ],
             "type": "function",
-            "description": "tests the `add` method of a controller by providing valid request parameters and verifying that the expected response is returned.",
+            "description": "tests the `add` method of a controller by providing valid parameters and verifying that the expected HTTP status code is returned.",
             "params": [],
             "usage": {
               "language": "java",
-              "code": "@Test\n    public void testAddWithGoodRequestParams() {\n        // Arrange\n        controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n        when(gateway.sendAndWait(any())).thenReturn(null);\n\n        //Act\n        controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n        //Assert\n        verify(gateway).sendAndWait(any());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_CREATED);\n    }\n",
+              "code": "@Test\npublic void testAddWithGoodRequestParams() {\n    // Arrange\n    controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n    when(gateway.sendAndWait(any())).thenReturn(null);\n\n    //Act\n    controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n    //Assert\n    verify(gateway).sendAndWait(any());\n    assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_CREATED);\n}\n",
               "description": ""
             },
             "name": "testAddWithGoodRequestParams",
@@ -78,17 +77,17 @@
             "docLength": null
           },
           {
-            "id": "4bb4868d-93e9-11a1-2f44-a0040b8d199d",
+            "id": "de4fa86f-bdb1-d983-2c4a-c93920e72418",
             "ancestors": [
-              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
             ],
             "type": "function",
-            "description": "tests the `add` method of a controller by mocking the gateway's `sendAndWait` method to throw an `AssertionError`. The method verifies that the gateway's `sendAndWait` was called with the correct arguments and asserts that the response status code is `HttpServletResponse.SC_BAD_REQUEST`.",
+            "description": "tests the controller's `add` method by mocking the gateway's `sendAndWait` method to throw an AssertionError. The function verifies that the response status code is 400 Bad Request when the add operation fails.",
             "params": [],
             "usage": {
               "language": "java",
               "code": "@Test\n    public void testFailedAddWithAssertionError() {\n        // Arrange\n        controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n        when(gateway.sendAndWait(any())).thenThrow(AssertionError.class);\n\n        //Act\n        controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n        //Assert\n        verify(gateway).sendAndWait(any());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n    }\n",
-              "description": "\nThis test method creates a controller with a mocked commandGateway, and sets up the mock to throw an AssertionError when sendAndWait is called. It then calls add on the controller with some random parameters, and verifies that the gateway's sendAndWait method was indeed called. Finally, it asserts that the response status code is 400 (Bad Request)."
+              "description": ""
             },
             "name": "testFailedAddWithAssertionError",
             "location": {
@@ -103,17 +102,17 @@
             "docLength": null
           },
           {
-            "id": "8b107181-30f8-47a5-f744-4060b4ca0a7c",
+            "id": "f0795d83-88c4-b487-2c43-961395be1562",
             "ancestors": [
-              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
             ],
             "type": "function",
-            "description": "tests the Add Product endpoint of a controller by throwing a `CommandExecutionException` when sending a request to the gateway.",
+            "description": "tests the `add` method of a controller by throwing a `CommandExecutionException` when sending the command to the gateway, and verifying that the response status code is `HttpServletResponse.SC_BAD_REQUEST`.",
             "params": [],
             "usage": {
               "language": "java",
-              "code": "@Test\n    public void testFailedAddWithCommandExecutionException() {\n        // Arrange\n        controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n        when(gateway.sendAndWait(any())).thenThrow(CommandExecutionException.class);\n\n        //Act\n        controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n        //Assert\n        verify(gateway).sendAndWait(any());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n    }\n",
-              "description": "\nThe test is testing that when the command execution exception is thrown, it is caught by the try-catch block and the response status will be set to bad request."
+              "code": "@Test\npublic void testFailedAddWithCommandExecutionException() {\n    // Arrange\n    controller.commandGateway = gateway; //cheating a bit here, but mocking all the axon framework's beans is a pain.\n    when(gateway.sendAndWait(any())).thenThrow(CommandExecutionException.class);\n\n    //Act\n    controller.add(UUID.randomUUID().toString(), \"Test Add Product\", mockHttpServletResponse);\n\n    //Assert\n    verify(gateway).sendAndWait(any());\n    assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n}\n",
+              "description": "\nThis test would check if the method add throws a CommandExecutionException and if so, set the status of the response to 400 bad request."
             },
             "name": "testFailedAddWithCommandExecutionException",
             "location": {
@@ -128,17 +127,17 @@
             "docLength": null
           },
           {
-            "id": "c753c011-ceb8-2f84-714f-9b8da211a3ea",
+            "id": "73e45ae7-9edd-379f-8f47-7be870aed1ef",
             "ancestors": [
-              "5c89eb93-894c-6a8d-fd46-b6a2446ddf18"
+              "ee12794f-39d9-dabe-ba43-82f50793f119"
             ],
             "type": "function",
-            "description": "tests the `add` method of a controller by providing invalid input parameters and verifying the resulting HTTP status code is `SC_BAD_REQUEST`.",
+            "description": "tests the add method of a controller by providing invalid input parameters, ensuring that the method returns a BAD_REQUEST status response.",
             "params": [],
             "usage": {
               "language": "java",
-              "code": "@Test\n    public void testAddWithBadRequestParams() {\n        // Arrange\n        UUID id = UUID.randomUUID();\n\n        // Act\n        controller.add(null, null, mockHttpServletResponse);\n\n        // Assert\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        // Arrange\n        String name = \"Test Add Product\";\n\n        // Act\n        controller.add(id, null, mockHttpServletResponse);\n\n        // Assert\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        // Arrange\n        String name = \"\";\n\n        // Act\n        controller.add(id, name, mockHttpServletResponse);\n\n        // Assert\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        // Arrange\n        id = \"\";\n        String name = \"Test Add Product\";\n\n        // Act\n        controller.add(id, name, mockHttpServletResponse);\n\n        // Assert\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n    }\n}\n",
-              "description": ""
+              "code": "@Test\n    public void testAddWithBadRequestParams() {\n\n        controller.add(null, null, mockHttpServletResponse);\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        controller.add(UUID.randomUUID().toString(), null, new MockHttpServletResponse());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        controller.add(UUID.randomUUID().toString(), \"\", new MockHttpServletResponse());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n        controller.add(\"\", \"\", new MockHttpServletResponse());\n        assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);\n\n    }\n",
+              "description": "\nThe testAddWithBadRequestParams method is a unit test that checks whether the add method responds with status code 400 (bad request) when given bad parameters (e.g., null or empty string). The test first calls the add method with null and null as input, then with a random UUID and null as input, then with a random UUID and an empty string as input, and finally with two empty strings as input. For each of these calls, it checks whether the response status is 400 using assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST)."
             },
             "name": "testAddWithBadRequestParams",
             "location": {
