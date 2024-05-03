@@ -209,5 +209,37 @@
         ]
       }
     }
+  },
+  {
+    "name": "ReadOnlyPagingAndSortingRepository.java",
+    "path": "query-side/src/main/java/com/soagrowers/productquery/repository/ReadOnlyPagingAndSortingRepository.java",
+    "content": {
+      "structured": {
+        "description": "An interface for a read-only paging and sorting repository, which extends the functionality of Spring Data's `PagingAndSortingRepository`. The interface provides save, delete, and delete methods for managing products, with the delete methods having different parameter lists depending on whether they are called with a string or a Product entity.",
+        "diagram": "digraph G {\n    bgcolor=\"#151719\"\n    fontcolor=\"#ECEDED\"\n    splines=ortho\n    fontname=\"Courier New\"\n    edge [color=\"#26de81\"]\n    node [style=filled,color=\"#717D86\", shape=rectangle, fontname=\"Courier New\"];\n    \n    subgraph cluster_0 {\n        label=\"repository\"\n        color=\"#33363A\"\n        subgraph cluster_main {\n            // style=filled;\n            color=\"#00000000\"; \n            ReadOnlyPagingAndSortingRepository [style=filled,color=\"#26de81\",shape=rectangle, fontname=\"Courier New\"];\n            label = \"\"\n        }\n    }\n    subgraph cluster_1 {\n        label=\"domain\"\n        color=\"#33363A\"\n        Product\n    }\n    ReadOnlyPagingAndSortingRepository -> Product \n    Product -> ReadOnlyPagingAndSortingRepository \n}\n",
+        "items": [
+          {
+            "id": "f13a0b81-31da-45a9-4f40-64b5abdd60ff",
+            "ancestors": [],
+            "type": "function",
+            "description": "extends PagingAndSortingRepository and adds save and delete methods with different parameters, but only for read-only operations.",
+            "name": "ReadOnlyPagingAndSortingRepository",
+            "location": {
+              "start": 12,
+              "insert": 9,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 8,
+                "end": 11
+              }
+            },
+            "item_type": "interface",
+            "length": 16,
+            "docLength": 3
+          }
+        ]
+      }
+    }
   }
 ]

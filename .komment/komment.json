@@ -1,14 +1,15 @@
 {
   "meta": {
     "version": "1",
-    "updated_at": "2024-05-03T13:02:06.352Z",
+    "updated_at": "2024-05-03T14:03:06.799Z",
     "created_at": "2024-04-30T15:20:02.432Z",
     "pipelines": []
   },
   "lookup": [
     [
       "command-side/src/test/java/com/soagrowers/productcommand/ProductRestControllerParamValidityTest.java",
-      "discovery-service/src/main/java/com/soagrowers/DiscoveryServiceApplication.java"
+      "discovery-service/src/main/java/com/soagrowers/DiscoveryServiceApplication.java",
+      "query-side/src/main/java/com/soagrowers/productquery/repository/ReadOnlyPagingAndSortingRepository.java"
     ]
   ]
 }
