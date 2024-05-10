@@ -3,7 +3,6 @@ package com.soagrowers.productevents.events;
 
 public class ProductAddedEvent extends AbstractEvent {
 
-
     private String name;
 
     public ProductAddedEvent() {
